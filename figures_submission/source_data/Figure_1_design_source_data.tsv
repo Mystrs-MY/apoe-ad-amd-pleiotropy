@@ -1,0 +1,31 @@
+layer	x0	x1	color	light	heading	method	evidence_1	evidence_2	evidence_3	inference	figure_conclusion
+1	2	23	#39758C	#EDF5F7	Clinical anchor	Systematic review
++ meta-analysis	10 cohorts | 10.66 million
+participants	AMD to subsequent AD
+Pooled relative effect 1.20	95% CI 1.04-1.38
+High heterogeneity	Clinical association
+not causal proof	APOE isoform antagonism is the dominant detectable genetic anchor; currently measurable circulating proteins define a limited mediation boundary.
+2	27	48	#4E7297	#EFF3F8	Pleiotropic
+architecture	MiXeR | LDSC | HDL
+LAVA | HyPrColoc	Subtype-dependent
+polygenic overlap	Near-zero global
+genetic correlation	Local opposing and
+concordant effects	APOE is the strongest
+decomposable local anchor	APOE isoform antagonism is the dominant detectable genetic anchor; currently measurable circulating proteins define a limited mediation boundary.
+3	52	73	#7A5C91	#F5F0F7	APOE isoform-
+defining variants	Variant-resolved effects
++ bidirectional MR	rs429358-C
+APOE epsilon 4	AD risk higher
+AMD risk lower	rs7412-T / APOE epsilon 2
+AD risk lower
+AMD risk higher	Reciprocal variant effects
+anchor brain-eye divergence	APOE isoform antagonism is the dominant detectable genetic anchor; currently measurable circulating proteins define a limited mediation boundary.
+4	77	98	#B45E5B	#FAF0EF	Circulating-protein
+boundary	Literature-prioritized
+two-step MR	25 assay-level proteins
+200 mediation paths	No path survived
+multiple testing	Aggregate estimates changed
+with mapping and assumed
+error correlation	Current systemic mediation
+is limited and
+assumption-sensitive	APOE isoform antagonism is the dominant detectable genetic anchor; currently measurable circulating proteins define a limited mediation boundary.

@@ -1,0 +1,11 @@
+botocore
+numpy
+openpyxl
+pandas
+Pillow
+pyliftover
+pypdf
+PyYAML
+requests
+scipy
+synapseclient

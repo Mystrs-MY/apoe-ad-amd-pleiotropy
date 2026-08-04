@@ -1,0 +1,6 @@
+gene_symbol	Ensembl_gene_ID	chromosome	gene_start_grch37	gene_end_grch37	strand	cis_window_bp	source_url	verification_date	mapping_status
+CTF1	ENSG00000150281	16	30907928	30914881	1	1000000	https://grch37.rest.ensembl.org/lookup/symbol/homo_sapiens/CTF1?content-type=application/json	2026-07-17	verified_ensembl_grch37
+HBQ1	ENSG00000086506	16	230452	231180	1	1000000	https://grch37.rest.ensembl.org/lookup/symbol/homo_sapiens/HBQ1?content-type=application/json	2026-07-17	verified_ensembl_grch37
+LRRN1	ENSG00000175928	3	3841121	3889387	1	1000000	https://grch37.rest.ensembl.org/lookup/symbol/homo_sapiens/LRRN1?content-type=application/json	2026-07-17	verified_ensembl_grch37
+S100A13	ENSG00000189171	1	153591263	153606568	-1	1000000	https://grch37.rest.ensembl.org/lookup/symbol/homo_sapiens/S100A13?content-type=application/json	2026-07-17	verified_ensembl_grch37
+TBCA	ENSG00000171530	5	76986991	77164604	-1	1000000	https://grch37.rest.ensembl.org/lookup/symbol/homo_sapiens/TBCA?content-type=application/json	2026-07-17	verified_ensembl_grch37

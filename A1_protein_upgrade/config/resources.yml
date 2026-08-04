@@ -1,0 +1,21 @@
+version: 1.0
+project_root: .
+upgrade_root: A1_protein_upgrade
+external_resource_root: data/external
+
+paths:
+  gwas_dir: data/external/GWAS
+  ukb_ppp_tar_dir: data/external/ukbppp_proteins
+  ukb_ppp_tar_dirs:
+    - data/external/ukbppp_proteins
+    - data/external/UKB-PPP/syn51365303_European_discovery
+  ukb_ppp_merged_dir: data/external/ukbppp_proteins/ukbppp_merged
+  rsid_map_dir: data/external/ukbppp_proteins/rsid_maps
+  ld_reference: data/external/EUR/EUR
+  plink_binary: plink
+
+write_policy:
+  external_resources: read_only
+  synapse_selected_download_cache: append_resume_then_immutable_after_md5
+  legacy_A1_modules: read_only
+  upgrade_outputs: writable

@@ -1,0 +1,27 @@
+extension_id: submission_validity_20260717
+primary_panel_status: frozen
+word_manuscript_update: false
+kunkle_ad:
+  source: Kunkle_et_al_2019_stage1
+  genome_build: GRCh37
+  required_apoe_variants:
+    - rs429358
+    - rs7412
+  full_analysis_min_proteins: 20
+  full_analysis_min_instrument_coverage: 0.80
+  partial_only_min_instrument_coverage: 0.60
+pav_epitope:
+  ld_threshold_r2: 0.80
+  do_not_treat_all_pavs_as_invalid: true
+  high_confidence_epitope_risk_requires:
+    - target_gene_pav_or_high_ld_proxy
+    - no_supporting_target_gene_cis_eqtl
+  unresolved_epitope_action: retain_and_label_unresolved
+lu_2026:
+  analysis_label: externally_defined_post_publication_candidate_sensitivity
+  min_source_dataset_outcome_cells: 2
+  min_independent_source_datasets: 2
+  min_exact_assay_linkable_candidates: 5
+  allow_gene_symbol_only_mapping: false
+  modifies_primary_panel: false
+random_seed: 20260717

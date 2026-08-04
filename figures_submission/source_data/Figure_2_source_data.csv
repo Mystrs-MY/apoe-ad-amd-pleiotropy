@@ -1,0 +1,11 @@
+"study","country","effect_metric","relative_effect","ci_lower","ci_upper","n_amd","n_ctrl","nos","weight_pct"
+"Keenan 2014","United Kingdom","Rate Ratio",0.86,0.67,1.08,65894,7700963,5,9.51105403150252
+"Lishinsky-Fischer 2025","Multi-national","HR",1.02,0.89,1.16,56035,56035,8,12.9402827508287
+"Shang 2021","United Kingdom","HR",1.08,0.8,1.44,3671,87602,6,7.94263510276406
+"Son 2025","South Korea","HR",1.09,1.05,1.13,21384,1662319,8,15.1904326595674
+"Lee CS 2019","United States","HR",1.2,1.02,1.4,1036,2284,9,12.1078691148084
+"Wen 2021","China (Taiwan)","aHR",1.23,1.04,1.46,10578,10578,8,11.7366965575483
+"Tsai 2015","China (Taiwan)","HR",1.44,1.26,1.64,4993,24965,7,12.9617237220637
+"Choi 2020","South Korea","aHR",1.48,1.25,1.74,2213,306127,9,11.8764749048196
+"Klaver 1999","Netherlands","RR",1.5,0.6,3.5,113,811,8,1.62803121519265
+"Hwang PH 2021","United States","HR",1.87,1.13,3.09,668,2707,9,4.10479994090481

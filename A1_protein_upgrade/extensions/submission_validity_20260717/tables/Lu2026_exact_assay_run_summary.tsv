@@ -1,0 +1,3 @@
+analysis_set	planned_genes	estimable_beta_tests	planned_beta_tests	beta_FDR_signals	beta_Bonferroni_signals	direct_alpha_rows	mediation_tests	planned_mediation_tests	mediation_FDR_signals	mediation_Bonferroni_signals	primary_panel_modified
+"genome_wide_instruments"	5	20	20	0	0	10	40	40	0	0	FALSE
+"cis_only"	5	20	20	0	0	10	40	40	0	0	FALSE

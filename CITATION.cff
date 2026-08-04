@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the accompanying manuscript and this software release."
+title: "Code and source data for APOE isoform-defining variant analyses of AD-AMD opposing pleiotropy"
+type: software
+version: 0.1.0
+date-released: 2026-08-04
+authors:
+  - family-names: Yang
+    given-names: Zhenglin
+  - family-names: Chen
+    given-names: Jinlei
+repository-code: "https://github.com/Mystrs-MY/apoe-ad-amd-pleiotropy"
+license: MIT
+keywords:
+  - APOE
+  - Alzheimer disease
+  - age-related macular degeneration
+  - Mendelian randomization
+  - proteomics
+  - genetic epidemiology

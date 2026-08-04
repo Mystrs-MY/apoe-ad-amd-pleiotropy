@@ -1,0 +1,81 @@
+version: 1.0
+panel_name: literature_prioritized_circulating_protein_panel
+
+primary_study_requirements:
+  proteome_scale:
+    accepted:
+      - proteome_wide
+      - large_scale_proteomic_mr
+  outcomes:
+    accepted:
+      - AD
+      - any_AMD
+      - dry_AMD
+      - geographic_atrophy
+      - wet_AMD
+      - neovascular_AMD
+  biospecimen:
+    accepted:
+      - plasma
+      - serum
+      - circulating
+  genetic_method:
+    accepted:
+      - MR
+      - SMR_HEIDI
+      - genetically_predicted_protein_analysis
+  publication_status:
+    preferred: peer_reviewed
+    preprint_policy: record_but_default_tier2_or_exclude_from_primary
+  effect_reporting:
+    require_corrected_significance: true
+    require_direction: true
+    require_traceable_protein_mapping: true
+
+evidence_tiering:
+  tier1:
+    require_multiple_testing_corrected: true
+    prefer_cis_pqtl: true
+    require_mapping_confidence:
+      - high
+    supportive_features:
+      - colocalization
+      - HEIDI_not_rejected
+      - independent_replication
+  tier2_reasons:
+    - single_platform_only
+    - no_colocalization
+    - mixed_cis_trans
+    - trans_only
+    - replication_insufficient
+    - FDR_or_broader_study_threshold_only
+    - outcome_definition_mismatch
+    - partial_data_traceability
+
+exclude_or_background_only:
+  - observational_protein_association_only
+  - biomarker_prediction_or_machine_learning_only
+  - no_genetic_causal_analysis
+  - nominal_P_only
+  - protein_mapping_unresolved
+  - duplicate_without_new_validation
+  - complex_locus_without_LD_or_colocalization_handling
+  - full_text_or_key_supplement_unavailable
+  - CSF_or_tissue_only_without_circulating_layer
+
+mediation_eligibility:
+  require_alpha: true
+  require_beta: true
+  alpha_variants:
+    - rs429358
+    - rs7412
+  apoe_protein_default_exclusion: true
+  reject_unresolved_alleles: true
+  reject_incompatible_units: true
+  reject_unresolved_assay_mapping: true
+
+missing_value_policy:
+  numeric: NA
+  text: not_reported
+  mapping: mapping_unresolved
+  unavailable_supplement: full_text_or_supplement_unavailable

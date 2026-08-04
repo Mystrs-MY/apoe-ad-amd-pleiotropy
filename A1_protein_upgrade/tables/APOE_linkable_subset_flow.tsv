@@ -1,0 +1,13 @@
+stage	n	denominator	notes
+primary_high_confidence_target_entries	41	target entries	Literature target entries retain distinct reported protein forms.
+primary_high_confidence_unique_genes	33	unique genes	Gene-level deduplication does not imply exact originating-assay replication.
+name_matched_unique_genes	27	unique genes	High- and moderate-confidence approved-name/gene-symbol mappings are included.
+name_matched_unique_Olink_assays	27	unique assays	One selected Olink assay per included gene; one-to-many mappings are not auto-selected.
+genes_with_rs429358_alpha	27	unique genes	Direct rs429358-C alpha; no proxy.
+genes_with_rs7412_alpha	27	unique genes	Direct rs7412-T alpha; no proxy.
+genes_with_both_alpha	27	unique genes	Both direct APOE alpha estimates are required for the eight-path design.
+genes_with_at_least_one_estimable_beta	25	unique genes	At least one current-A1 outcome beta is estimable.
+genes_with_four_outcome_beta	25	unique genes	All four current-A1 outcome betas are estimable.
+final_mediation_genes	25	unique genes	Same-assay alpha and beta with both APOE variants and all four outcomes.
+final_mediation_assays	25	unique assays	Unique assays represented by final mediation genes.
+mediation_path_count	200	protein-variant-outcome paths	Asserted as final genes x 2 APOE variants x 4 outcomes.

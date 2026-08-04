@@ -1,0 +1,10 @@
+UniProt	OlinkID	SeqId	Gene	Targeted_Olink	Targeted_Soma	cis_pQTL_soma	PAV_soma	eQTL_soma	location	N_platforms_tested	N_platforms_with_cis_pQTL	confidence_tier
+P04004	NA	13125_45	VTN	N	Y	Y	Y	N	secreted	1	1	3
+Q99470	NA	15333_11	SDF2	N	Y	Y	Y	N	intracellular	1	1	3
+Q03692	NA	15653_9	COL10A1	N	Y	Y	N	Y	secreted	1	1	3
+O00469	NA	6923_1	PLOD2	N	Y	Y	Y	N	membrane	1	1	3
+Q9NUM4	NA	8687_26	TMEM106B	N	Y	Y	Y	Y	membrane	1	1	3
+O75503	NA	8874_53	CLN5	N	Y	Y	Y	Y	intracellular	1	1	3
+Q6UXL0	OID30461	13435_31	IL20RB	Y	Y	N	N	N	membrane	2	1	3
+P25440	OID30826	10074_128	BRD2	Y	Y	N	N	N	intracellular	2	0	3
+P25440	OID30826	15372_43	BRD2	Y	Y	Y	N	Y	intracellular	2	1	3

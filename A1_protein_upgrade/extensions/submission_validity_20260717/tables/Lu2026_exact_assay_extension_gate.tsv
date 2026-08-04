@@ -1,0 +1,5 @@
+criterion	observed	threshold	passed
+Lu_candidates_supported_in_at_least_two_dataset_outcomes_and_two_independent_datasets	8	>=1 for source-universe documentation	TRUE
+exact_SomaScan_aptamer_UniProt_to_UKB_PPP_Olink_candidates	5	>=5	TRUE
+minimum_exact_assay_extension_gate	TRUE	TRUE	TRUE
+primary_panel_modified	FALSE	FALSE	TRUE

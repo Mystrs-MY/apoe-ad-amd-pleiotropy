@@ -1,0 +1,34 @@
+gene_symbol	synapse_id	synapse_file_name	selection_status	selection_reason
+ACE	syn52361489	ACE_P12821_OID30696_v1_Inflammation_II.tar	selected_for_download	A unique exact gene-prefix Olink assay is available; literature-to-assay confidence is evaluated downstream.
+BLNK	syn52362578	BLNK_Q8WV28_OID30541_v1_Inflammation_II.tar	verified_local_existing	A unique exact gene-prefix Olink assay is already available locally.
+BRD2	syn52361478	BRD2_P25440_OID30826_v1_Neurology_II.tar	selected_for_download	A unique exact gene-prefix Olink assay is available; literature-to-assay confidence is evaluated downstream.
+C1R	syn52362314	C1R_P00736_OID30753_v1_Inflammation_II.tar	verified_local_existing	A unique exact gene-prefix Olink assay is already available locally.
+C1S	syn52362466	C1S_P09871_OID30731_v1_Inflammation_II.tar	verified_local_existing	A unique exact gene-prefix Olink assay is already available locally.
+CD226	syn52363420	CD226_Q15762_OID30556_v1_Inflammation_II.tar	verified_local_existing	A unique exact gene-prefix Olink assay is already available locally.
+CD2AP	syn51469680	CD2AP_Q9Y5K6_OID20177_v1_Cardiometabolic.tar	verified_local_existing	A unique exact gene-prefix Olink assay is already available locally.
+CD33	syn51471257	CD33_P20138_OID21472_v1_Oncology.tar	verified_local_existing	A unique exact gene-prefix Olink assay is already available locally.
+CLN5			assay_unavailable	No exact gene-prefix Olink assay was found; missingness is not treated as zero.
+COL10A1			assay_unavailable	No exact gene-prefix Olink assay was found; missingness is not treated as zero.
+CR1	syn52363649	CR1_P17927_OID30697_v1_Inflammation_II.tar	verified_local_existing	A unique exact gene-prefix Olink assay is already available locally.
+CSF2	syn52363222	CSF2_P04141_OID30072_v1_Cardiometabolic_II.tar	verified_local_existing	A unique exact gene-prefix Olink assay is already available locally.
+CTSH	syn51468736	CTSH_P09668_OID20113_v1_Cardiometabolic.tar	verified_local_existing	A unique exact gene-prefix Olink assay is already available locally.
+GRN	syn51470277	GRN_P28799_OID21159_v1_Neurology.tar	verified_local_existing	A unique exact gene-prefix Olink assay is already available locally.
+IL20RB	syn52363595	IL20RB_Q6UXL0_OID30461_v1_Inflammation_II.tar	verified_local_existing	A unique exact gene-prefix Olink assay is already available locally.
+IL34	syn51469958	IL34_Q6ZMJ4_OID20809_v1_Neurology.tar	verified_local_existing	A unique exact gene-prefix Olink assay is already available locally.
+LBP	syn51471331	LBP_P18428_OID20355_v1_Cardiometabolic.tar	selected_for_download	A unique exact gene-prefix Olink assay is available; literature-to-assay confidence is evaluated downstream.
+LILRB2	syn51468619	LILRB2_Q8N423_OID20301_v1_Cardiometabolic.tar	verified_local_existing	A unique exact gene-prefix Olink assay is already available locally.
+MME	syn51470229	MME_P08473_OID21307_v1_Oncology.tar	verified_local_existing	A unique exact gene-prefix Olink assay is already available locally.
+PILRA	syn51470989	PILRA_Q9UKJ1_OID21129_v1_Neurology.tar	verified_local_existing	A unique exact gene-prefix Olink assay is already available locally.
+PILRB	syn51468895	PILRB_Q9UKJ0_OID20197_v1_Cardiometabolic.tar	verified_local_existing	A unique exact gene-prefix Olink assay is already available locally.
+PLOD2			assay_unavailable	No exact gene-prefix Olink assay was found; missingness is not treated as zero.
+PRSS8	syn51470497	PRSS8_Q16651_OID20763_v1_Inflammation.tar	verified_local_existing	A unique exact gene-prefix Olink assay is already available locally.
+SDF2			assay_unavailable	No exact gene-prefix Olink assay was found; missingness is not treated as zero.
+SERPINF2	syn52362020	SERPINF2_P08697_OID30779_v1_Inflammation_II.tar	verified_local_existing	A unique exact gene-prefix Olink assay is already available locally.
+SIGLEC9	syn51470763	SIGLEC9_Q9Y336_OID21390_v1_Oncology.tar	verified_local_existing	A unique exact gene-prefix Olink assay is already available locally.
+SIRPA	syn51469925	SIRPA_P78324_OID20304_v1_Cardiometabolic.tar	verified_local_existing	A unique exact gene-prefix Olink assay is already available locally.
+TGFB1	syn51471354	TGFB1_P01137_OID20621_v1_Inflammation.tar	verified_local_existing	A unique exact gene-prefix Olink assay is already available locally.
+TMEM106B			assay_unavailable	No exact gene-prefix Olink assay was found; missingness is not treated as zero.
+TNFRSF10A	syn51468629	TNFRSF10A_O00220_OID20967_v1_Neurology.tar	verified_local_existing	A unique exact gene-prefix Olink assay is already available locally.
+TREM2	syn51468784	TREM2_Q9NZC2_OID20731_v1_Inflammation.tar	verified_local_existing	A unique exact gene-prefix Olink assay is already available locally.
+VTN			assay_unavailable	No exact gene-prefix Olink assay was found; missingness is not treated as zero.
+ZBTB16	syn51468802	ZBTB16_Q05516_OID21205_v1_Oncology.tar	verified_local_existing	A unique exact gene-prefix Olink assay is already available locally.

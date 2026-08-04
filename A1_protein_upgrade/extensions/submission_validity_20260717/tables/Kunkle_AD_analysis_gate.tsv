@@ -1,0 +1,5 @@
+criterion	observed	threshold	passed
+estimable_proteins	25	>=20 of 25	TRUE
+frozen_protein_SNP_pair_coverage	0.941320	>=0.80 of 409 pairs	TRUE
+both_direct_APOE_total_effects	TRUE	TRUE	TRUE
+full_mediation_gate	TRUE	all criteria TRUE	TRUE

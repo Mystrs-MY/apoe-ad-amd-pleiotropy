@@ -1,0 +1,6 @@
+gene_symbol	UKB_PPP_OID	rows_scanned_autosomes	rs429358_match_count	rs7412_match_count	n_pqtl_candidates_after_APOE_exclusion	candidate_QC_rule	alpha_unique_pass
+BCAM	OID21076	15507524	1	1	7632	ADD; P<5e-8; MAF>=0.01; INFO>=0.8; F>10; APOE region excluded	True
+CD55	OID20377	15388373	1	1	2262	ADD; P<5e-8; MAF>=0.01; INFO>=0.8; F>10; APOE region excluded	True
+LILRB1	OID20323	15545392	1	1	20504	ADD; P<5e-8; MAF>=0.01; INFO>=0.8; F>10; APOE region excluded	True
+LILRB5	OID20324	15545392	1	1	1505	ADD; P<5e-8; MAF>=0.01; INFO>=0.8; F>10; APOE region excluded	True
+SCARA5	OID21058	15532823	1	1	1597	ADD; P<5e-8; MAF>=0.01; INFO>=0.8; F>10; APOE region excluded	True

@@ -1,0 +1,6 @@
+gene_symbol	chromosome	gene_start_grch37	gene_end_grch37	strand	ensembl_gene_id	assembly	cis_window_bp	source_url	verified_date
+BCAM	19	45312328	45324673	1	ENSG00000187244	GRCh37	1000000	https://grch37.rest.ensembl.org/lookup/symbol/homo_sapiens/BCAM	2026-07-14
+CD55	1	207494853	207534311	1	ENSG00000196352	GRCh37	1000000	https://grch37.rest.ensembl.org/lookup/symbol/homo_sapiens/CD55	2026-07-14
+LILRB1	19	55085346	55148979	1	ENSG00000104972	GRCh37	1000000	https://grch37.rest.ensembl.org/lookup/symbol/homo_sapiens/LILRB1	2026-07-14
+LILRB5	19	54754263	54761164	-1	ENSG00000105609	GRCh37	1000000	https://grch37.rest.ensembl.org/lookup/symbol/homo_sapiens/LILRB5	2026-07-14
+SCARA5	8	27727399	27850244	-1	ENSG00000168079	GRCh37	1000000	https://grch37.rest.ensembl.org/lookup/symbol/homo_sapiens/SCARA5	2026-07-14

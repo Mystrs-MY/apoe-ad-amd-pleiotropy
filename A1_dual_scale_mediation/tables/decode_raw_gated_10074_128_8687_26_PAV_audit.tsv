@@ -1,0 +1,3 @@
+gene_symbol	assay_target_ID	SNP	source_ST20_match_status	source_variant	source_cis_trans	source_any_coding_same_gene	source_cis_eqtl_coding_genes	target_gene_PAV_linked	automatic_exclusion	audit_boundary
+BRD2	10074_128	rs147168394	unresolved_or_multiple	NA	NA	NA	NA	False	False	PAV unresolved is not treated as no risk; filtering is a separate sensitivity
+TMEM106B	8687_26	rs13237518	matched_unique_LD_class	rs13237518	cis	True	TMEM106B (e); TMEM106B (c)	True	False	PAV unresolved is not treated as no risk; filtering is a separate sensitivity

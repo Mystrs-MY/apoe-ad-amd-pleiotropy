@@ -1,0 +1,188 @@
+gene_symbol	protein_name	disease	disease_subtype	n_evidence_rows	n_unique_studies	n_tier1_rows	best_evidence_tier	evidence_independence_summary	source_PMIDs	platforms	notes
+A4GALT	A4GALT	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+ABO	ABO	AMD	any_AMD	2	2	0	Tier2	overlap_or_independence_unclear	38903171;40327005	UKB-PPP Olink;UKB-PPP_Olink	Counts are not interpreted as independent replications without the independence flag.
+ABO	ABO	AMD	wet_AMD	2	2	0	Tier2	overlap_or_independence_unclear	38903171;40327005	UKB-PPP Olink;UKB-PPP_Olink	Counts are not interpreted as independent replications without the independence flag.
+ACAA1	ACAA1	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	40050982	UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+ACADSB	ACADSB	AMD	any_AMD	1	1	0	Tier2	overlap_or_independence_unclear	38903171	deCODE	Counts are not interpreted as independent replications without the independence flag.
+ACADSB	ACADSB	AMD	dry_AMD	2	1	0	Tier2	overlap_or_independence_unclear	38903171	UKB-PPP_Olink;deCODE	Counts are not interpreted as independent replications without the independence flag.
+ACADVL	ACADV	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41350740	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+ACE	ACE	AD	AD	4	3	1	Tier1	overlap_or_independence_unclear	40037332;40050982;41350740	Olink;SomaScan;UKB-PPP Olink;deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+ACHE	ACHE	AD	AD	2	2	0	Tier2	overlap_or_independence_unclear	40037332;40050982	Olink;UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+ADGRE1	ADGRE1	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	40037332	Olink	Counts are not interpreted as independent replications without the independence flag.
+AGER	AGER	AMD	any_AMD	1	1	0	Tier2	overlap_or_independence_unclear	40327005	UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+ALDH1A3	ALDH1A3	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+ANXA2	ANXA2	AMD	dry_AMD	1	1	0	Tier2	contains_independent_component	41064534	UKB-PPP Olink discovery; deCODE where indicated	Counts are not interpreted as independent replications without the independence flag.
+APOC1	APOC1	AD	AD	2	1	0	Tier2	overlap_or_independence_unclear	40037332	Olink;SomaScan	Counts are not interpreted as independent replications without the independence flag.
+APOE	APOE	AD	AD	4	3	0	Tier2	overlap_or_independence_unclear	40037332;40050982;41630303	Olink;SomaScan;UKB-PPP Olink;deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+APOE	APOE	AMD	dry_AMD	1	1	0	Tier2	contains_independent_component	41064534	UKB-PPP Olink discovery; deCODE where indicated	Counts are not interpreted as independent replications without the independence flag.
+APOE	APOE	AMD	early_AMD	1	1	0	Tier2	overlap_or_independence_unclear	40327005	UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+APP	APP	AD	AD	3	2	0	Tier2	overlap_or_independence_unclear	40037332;40050982	Olink;SomaScan;UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+ARHGAP45	ARHGAP45	AD	AD	2	2	0	Tier2	overlap_or_independence_unclear	40037332;40050982	Olink;UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+AZGP1	AZGP1	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	40037332	SomaScan	Counts are not interpreted as independent replications without the independence flag.
+BCAM	BCAM	AD	AD	2	1	0	Tier2	overlap_or_independence_unclear	40037332	Olink;SomaScan	Counts are not interpreted as independent replications without the independence flag.
+BIN1	BIN1	AD	AD	2	2	0	Tier2	overlap_or_independence_unclear	40037332;41350740	SomaScan;deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+BIRC2	BIRC2	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+BLNK	BLNK	AD	AD	2	2	2	Tier1	contains_independent_component	40037332;40050982	Olink;UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+BRD2	BRD2	AMD	any_AMD	1	1	1	Tier1	overlap_or_independence_unclear	38903171	deCODE	Counts are not interpreted as independent replications without the independence flag.
+C1R	C1R	AD	AD	2	1	2	Tier1	overlap_or_independence_unclear	40037332	Olink;SomaScan	Counts are not interpreted as independent replications without the independence flag.
+C1S	C1S	AD	AD	2	1	2	Tier1	overlap_or_independence_unclear	40037332	Olink;SomaScan	Counts are not interpreted as independent replications without the independence flag.
+C3	C3	AMD	any_AMD	6	2	0	Tier2	overlap_or_independence_unclear	39408566;40327005	deCODE;deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+C3	C3	AMD	dry_AMD	6	2	0	Tier2	contains_independent_component	40327005;41064534	UKB-PPP Olink;UKB-PPP Olink discovery; deCODE where indicated;deCODE	Counts are not interpreted as independent replications without the independence flag.
+C3	C3	AMD	early_AMD	6	1	0	Tier2	overlap_or_independence_unclear	40327005	UKB-PPP Olink;deCODE	Counts are not interpreted as independent replications without the independence flag.
+C3	C3	AMD	wet_AMD	1	1	0	Tier2	overlap_or_independence_unclear	40327005	deCODE	Counts are not interpreted as independent replications without the independence flag.
+C5	C5	AMD	any_AMD	1	1	0	Tier2	overlap_or_independence_unclear	39408566	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+CASP10	CASP10	AMD	early_AMD	1	1	0	Tier2	overlap_or_independence_unclear	40327005	UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+CBLIF	CBLIF	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	40050982	UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+CCDC134	CCDC134	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+CCL21	CCL21	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+CD226	CD226	AMD	wet_AMD	1	1	1	Tier1	overlap_or_independence_unclear	38903171	UKB-PPP_Olink	Counts are not interpreted as independent replications without the independence flag.
+CD2AP	CD2AP	AD	AD	2	2	2	Tier1	contains_independent_component	40037332;40050982	Olink;UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+CD300LG	CD300LG	AMD	dry_AMD	1	1	0	Tier2	overlap_or_independence_unclear	40327005	UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+CD33	CD33	AD	AD	2	1	1	Tier1	overlap_or_independence_unclear	40037332	Olink;SomaScan	Counts are not interpreted as independent replications without the independence flag.
+CD46	CD46	AMD	early_AMD	1	1	0	Tier2	overlap_or_independence_unclear	40327005	deCODE	Counts are not interpreted as independent replications without the independence flag.
+CD55	CD55	AD	AD	3	2	0	Tier2	overlap_or_independence_unclear	40037332;41630303	Olink;SomaScan;deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+CDSN	CDSN	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	40050982	UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+CDSN	CDSN	AMD	early_AMD	1	1	0	Tier2	overlap_or_independence_unclear	40327005	UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+CEACAM19	CEACAM19	AD	AD	2	2	0	Tier2	overlap_or_independence_unclear	40037332;40050982	Olink;UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+CFB	CFB	AMD	early_AMD	1	1	0	Tier2	overlap_or_independence_unclear	40327005	deCODE	Counts are not interpreted as independent replications without the independence flag.
+CFD	CFD	AMD	any_AMD	1	1	0	Tier2	overlap_or_independence_unclear	38903171	UKB-PPP_Olink	Counts are not interpreted as independent replications without the independence flag.
+CFHR2	CFHR2	AMD	dry_AMD	1	1	0	Tier2	contains_independent_component	41064534	UKB-PPP Olink discovery; deCODE where indicated	Counts are not interpreted as independent replications without the independence flag.
+CLN5	CLN5	AD	AD	1	1	1	Tier1	overlap_or_independence_unclear	40037332	SomaScan	Counts are not interpreted as independent replications without the independence flag.
+COL10A1	COL10A1	AMD	any_AMD	2	2	0	Tier2	overlap_or_independence_unclear	38903171;40327005	deCODE	Counts are not interpreted as independent replications without the independence flag.
+COL10A1	COL10A1	AMD	dry_AMD	2	2	0	Tier2	overlap_or_independence_unclear	38903171;40327005	deCODE	Counts are not interpreted as independent replications without the independence flag.
+COL10A1	COL10A1	AMD	wet_AMD	2	2	1	Tier1	overlap_or_independence_unclear	38903171;40327005	deCODE	Counts are not interpreted as independent replications without the independence flag.
+CR1	CR1	AD	AD	2	1	2	Tier1	overlap_or_independence_unclear	40037332	Olink;SomaScan	Counts are not interpreted as independent replications without the independence flag.
+CSF2	CSF2	AMD	wet_AMD	2	2	1	Tier1	overlap_or_independence_unclear	38903171;40327005	UKB-PPP Olink;UKB-PPP_Olink	Counts are not interpreted as independent replications without the independence flag.
+CSF3	CSF3	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+CSK	CSK	AMD	any_AMD	1	1	0	Tier2	overlap_or_independence_unclear	40327005	deCODE	Counts are not interpreted as independent replications without the independence flag.
+CTF1	CTF1	AD	AD	2	2	0	Tier2	overlap_or_independence_unclear	40037332;40050982	Olink;UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+CTSH	CTSH	AD	AD	1	1	1	Tier1	overlap_or_independence_unclear	40037332	SomaScan	Counts are not interpreted as independent replications without the independence flag.
+DHRS4L2	DHRS4L2	AD	AD	2	2	0	Tier2	overlap_or_independence_unclear	40037332;40050982	Olink;UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+DHRS9	DHRS9	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+DMP1	DMP1	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	40050982	UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+DNAJB4	DNAJB4	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+DNASE1L2	DNASE1L2	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+DPEP2	DPEP2	AMD	any_AMD	1	1	0	Tier2	overlap_or_independence_unclear	40327005	UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+DPEP2	DPEP2	AMD	dry_AMD	2	2	0	Tier2	overlap_or_independence_unclear	38903171;40327005	UKB-PPP Olink;UKB-PPP_Olink	Counts are not interpreted as independent replications without the independence flag.
+ECM1	ECM1	AMD	dry_AMD	1	1	0	Tier2	contains_independent_component	41064534	UKB-PPP Olink discovery; deCODE where indicated	Counts are not interpreted as independent replications without the independence flag.
+EIF4G3	EIF4G3	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	40037332	Olink	Counts are not interpreted as independent replications without the independence flag.
+EPHA1	EPHA1	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	40037332	Olink	Counts are not interpreted as independent replications without the independence flag.
+EPHX2	EPHX2	AD	AD	2	2	0	Tier2	overlap_or_independence_unclear	40037332;40050982	Olink;UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+ERP44	ERP44	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+F13B	F13B	AMD	dry_AMD	1	1	0	Tier2	contains_independent_component	41064534	UKB-PPP Olink discovery; deCODE where indicated	Counts are not interpreted as independent replications without the independence flag.
+FTMT	FTMT	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+GC	GC	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	40037332	Olink	Counts are not interpreted as independent replications without the independence flag.
+GNAS	GNAS	AD	AD	2	2	0	Tier2	overlap_or_independence_unclear	40037332;40050982	Olink;UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+GNPNAT1	GNPNAT1	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	40037332	SomaScan	Counts are not interpreted as independent replications without the independence flag.
+GRN	GRN	AD	AD	4	3	4	Tier1	contains_independent_component	40037332;40050982;41350740	Olink;SomaScan;UKB-PPP Olink;deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+HAVCR2	TIMD3	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41350740	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+HDGF	HDGF	AD	AD	2	1	0	Tier2	overlap_or_independence_unclear	40037332	Olink;SomaScan	Counts are not interpreted as independent replications without the independence flag.
+HSPA1L	HSPA1L	AMD	dry_AMD	2	2	0	Tier2	overlap_or_independence_unclear	38903171;40327005	deCODE	Counts are not interpreted as independent replications without the independence flag.
+HSPA1L	HSPA1L	AMD	wet_AMD	2	2	0	Tier2	overlap_or_independence_unclear	38903171;40327005	deCODE	Counts are not interpreted as independent replications without the independence flag.
+IBSP	IBSP	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	40037332	SomaScan	Counts are not interpreted as independent replications without the independence flag.
+IDUA	IDUA	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	40037332	Olink	Counts are not interpreted as independent replications without the independence flag.
+IFNLR1	IFNLR1	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+IGFBP7	IGFBP7	AMD	any_AMD	1	1	0	Tier2	overlap_or_independence_unclear	39408566	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+IL20RB	IL20RB	AMD	any_AMD	2	2	1	Tier1	overlap_or_independence_unclear	38903171;40327005	UKB-PPP Olink;UKB-PPP_Olink	Counts are not interpreted as independent replications without the independence flag.
+IL20RB	IL20RB	AMD	dry_AMD	2	2	1	Tier1	overlap_or_independence_unclear	38903171;40327005	UKB-PPP Olink;UKB-PPP_Olink	Counts are not interpreted as independent replications without the independence flag.
+IL34	IL34	AD	AD	1	1	1	Tier1	overlap_or_independence_unclear	40037332	Olink	Counts are not interpreted as independent replications without the independence flag.
+ING4	ING4	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+KLK10	KLK10	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+KPNA2	KPNA2	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+LBP	LBP	AMD	any_AMD	1	1	0	Tier2	overlap_or_independence_unclear	40327005	deCODE	Counts are not interpreted as independent replications without the independence flag.
+LBP	LBP	AMD	wet_AMD	3	2	1	Tier1	overlap_or_independence_unclear	38903171;40327005	UKB-PPP Olink;deCODE	Counts are not interpreted as independent replications without the independence flag.
+LEAP2	LEAP2	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+LGALS3	LGALS3	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	40037332	SomaScan	Counts are not interpreted as independent replications without the independence flag.
+LGMN	LGMN	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+LILRA4	LILRA4	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	40037332	SomaScan	Counts are not interpreted as independent replications without the independence flag.
+LILRA5	LILRA5	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+LILRB1	LILRB1	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	40037332	SomaScan	Counts are not interpreted as independent replications without the independence flag.
+LILRB2	LILRB2	AD	AD	1	1	1	Tier1	contains_independent_component	40050982	UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+LILRB5	LILRB5	AD	AD	2	1	0	Tier2	overlap_or_independence_unclear	40037332	Olink;SomaScan	Counts are not interpreted as independent replications without the independence flag.
+LRP12	LRP12	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+LRRC37A2	LRRC37A2	AD	AD	2	2	0	Tier2	overlap_or_independence_unclear	40037332;40050982	Olink;UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+LRRTM4	LRRTM4	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+LTA	LTA	AMD	any_AMD	2	2	0	Tier2	overlap_or_independence_unclear	38903171;40327005	deCODE	Counts are not interpreted as independent replications without the independence flag.
+LTA	LTA	AMD	dry_AMD	2	2	0	Tier2	overlap_or_independence_unclear	38903171;40327005	deCODE	Counts are not interpreted as independent replications without the independence flag.
+LTA	LTA	AMD	wet_AMD	1	1	0	Tier2	overlap_or_independence_unclear	40327005	deCODE	Counts are not interpreted as independent replications without the independence flag.
+MAGEA3	MAGEA3	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+MASP1	MASP1	AMD	dry_AMD	1	1	0	Tier2	contains_independent_component	41064534	UKB-PPP Olink discovery; deCODE where indicated	Counts are not interpreted as independent replications without the independence flag.
+MCEMP1	MCEMP1	AMD	early_AMD	1	1	0	Tier2	overlap_or_independence_unclear	40327005	deCODE	Counts are not interpreted as independent replications without the independence flag.
+MCEMP1	MCEMP1	AMD	wet_AMD	1	1	0	Tier2	overlap_or_independence_unclear	40327005	deCODE	Counts are not interpreted as independent replications without the independence flag.
+MICB	MICB	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+MME	MME	AD	AD	2	2	1	Tier1	overlap_or_independence_unclear	40037332;40050982	Olink;UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+MPIG6B	MPIG6B	AMD	any_AMD	1	1	0	Tier2	overlap_or_independence_unclear	40327005	deCODE	Counts are not interpreted as independent replications without the independence flag.
+MSLN	MSLN	AMD	dry_AMD	1	1	0	Tier2	overlap_or_independence_unclear	40327005	UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+NECTIN2	NECTIN2	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	40037332	Olink	Counts are not interpreted as independent replications without the independence flag.
+NEK7	NEK7	AMD	any_AMD	1	1	0	Tier2	overlap_or_independence_unclear	39408566	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+NME2	NME2	AMD	dry_AMD	1	1	0	Tier2	overlap_or_independence_unclear	40327005	deCODE	Counts are not interpreted as independent replications without the independence flag.
+NSF	NSF	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	40037332	SomaScan	Counts are not interpreted as independent replications without the independence flag.
+OMGP	OMGP	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41350740	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+PARP1	PARP1	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	40037332	SomaScan	Counts are not interpreted as independent replications without the independence flag.
+PAXX	PAXX	AMD	any_AMD	1	1	0	Tier2	overlap_or_independence_unclear	38903171	UKB-PPP_Olink	Counts are not interpreted as independent replications without the independence flag.
+PAXX	PAXX	AMD	dry_AMD	1	1	0	Tier2	overlap_or_independence_unclear	38903171	UKB-PPP_Olink	Counts are not interpreted as independent replications without the independence flag.
+PCDHGA10	PCDHGA10	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+PEBP1	PEBP1	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+PHGDH	PHGDH	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+PILRA	PILRA	AD	AD	4	3	3	Tier1	contains_independent_component	40037332;40050982;41630303	Olink;SomaScan;UKB-PPP Olink;deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+PILRA	PILRA	AMD	any_AMD	4	2	0	Tier2	overlap_or_independence_unclear	38903171;39408566	UKB-PPP_Olink;deCODE;deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+PILRA	PILRA	AMD	dry_AMD	1	1	0	Tier2	contains_independent_component	41064534	UKB-PPP Olink discovery; deCODE where indicated	Counts are not interpreted as independent replications without the independence flag.
+PILRA	PILRA isoform FDF03-M14	AD	AD	1	1	1	Tier1	overlap_or_independence_unclear	41350740	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+PILRA	PILRA isoform FDF03-deltaTM	AD	AD	1	1	1	Tier1	overlap_or_independence_unclear	41350740	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+PILRB	PILRB	AD	AD	2	2	2	Tier1	contains_independent_component	40037332;40050982	Olink;UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+PILRB	PILRB	AMD	dry_AMD	1	1	0	Tier2	contains_independent_component	41064534	UKB-PPP Olink discovery; deCODE where indicated	Counts are not interpreted as independent replications without the independence flag.
+PLOD2	PLOD2	AD	AD	1	1	1	Tier1	overlap_or_independence_unclear	40037332	SomaScan	Counts are not interpreted as independent replications without the independence flag.
+PRSS53	PRSS53	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	40037332	Olink	Counts are not interpreted as independent replications without the independence flag.
+PRSS8	PRSS8	AD	AD	2	2	1	Tier1	overlap_or_independence_unclear	40037332;40050982	Olink;UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+PSD2	PSD2	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+PSMB9	PSMB9	AMD	wet_AMD	1	1	0	Tier2	overlap_or_independence_unclear	40327005	deCODE	Counts are not interpreted as independent replications without the independence flag.
+PSME1	PSME1	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+PTPN9	PTPN9	AMD	any_AMD	1	1	0	Tier2	overlap_or_independence_unclear	40327005	deCODE	Counts are not interpreted as independent replications without the independence flag.
+PTPN9	PTPN9	AMD	wet_AMD	1	1	0	Tier2	overlap_or_independence_unclear	40327005	deCODE	Counts are not interpreted as independent replications without the independence flag.
+PVR	PVR	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	40037332	Olink	Counts are not interpreted as independent replications without the independence flag.
+RARRES2	RARRES2	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+RNASET2	RNASET2	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+RPS10	RPS10	AMD	any_AMD	1	1	0	Tier2	overlap_or_independence_unclear	40327005	deCODE	Counts are not interpreted as independent replications without the independence flag.
+RPS10	RPS10	AMD	dry_AMD	1	1	0	Tier2	overlap_or_independence_unclear	40327005	deCODE	Counts are not interpreted as independent replications without the independence flag.
+S100A13	S100A13	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+SDF2	SDF2	AMD	wet_AMD	2	2	1	Tier1	overlap_or_independence_unclear	38903171;40327005	deCODE	Counts are not interpreted as independent replications without the independence flag.
+SERPINB1	SERPINB1	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	40050982	UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+SERPINF2	SERPINF2	AD	AD	3	2	1	Tier1	contains_independent_component	40037332;40050982	Olink;SomaScan;UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+SEZ6L2	SEZ6L2	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	40037332	Olink	Counts are not interpreted as independent replications without the independence flag.
+SFTA2	SFTA2	AMD	any_AMD	1	1	0	Tier2	overlap_or_independence_unclear	38903171	deCODE	Counts are not interpreted as independent replications without the independence flag.
+SFTA2	SFTA2	AMD	dry_AMD	1	1	0	Tier2	overlap_or_independence_unclear	38903171	deCODE	Counts are not interpreted as independent replications without the independence flag.
+SFTA2	SFTA2	AMD	wet_AMD	1	1	0	Tier2	overlap_or_independence_unclear	38903171	deCODE	Counts are not interpreted as independent replications without the independence flag.
+SIGLEC7	SIGLEC7	AMD	dry_AMD	1	1	0	Tier2	contains_independent_component	41064534	UKB-PPP Olink discovery; deCODE where indicated	Counts are not interpreted as independent replications without the independence flag.
+SIGLEC9	SIGLEC9	AD	AD	2	1	2	Tier1	overlap_or_independence_unclear	40037332	Olink;SomaScan	Counts are not interpreted as independent replications without the independence flag.
+SIRPA	SIRPA	AD	AD	2	1	2	Tier1	overlap_or_independence_unclear	40037332	Olink;SomaScan	Counts are not interpreted as independent replications without the independence flag.
+SLC35G2	SLC35G2	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+SMAP1	SMAP1	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+ST13	ST13	AD	AD	3	2	0	Tier2	overlap_or_independence_unclear	40037332;40050982	Olink;SomaScan;UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+SULT1A3	SULT1A3	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	40037332	SomaScan	Counts are not interpreted as independent replications without the independence flag.
+TGFB1	TGFB1	AMD	any_AMD	2	2	1	Tier1	overlap_or_independence_unclear	38903171;40327005	UKB-PPP Olink;UKB-PPP_Olink	Counts are not interpreted as independent replications without the independence flag.
+TGFB1	TGFB1	AMD	wet_AMD	2	2	1	Tier1	overlap_or_independence_unclear	38903171;40327005	UKB-PPP Olink;UKB-PPP_Olink	Counts are not interpreted as independent replications without the independence flag.
+TGM1	TGM1	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+TLR1	TLR1	AMD	dry_AMD	1	1	0	Tier2	contains_independent_component	41064534	UKB-PPP Olink discovery; deCODE where indicated	Counts are not interpreted as independent replications without the independence flag.
+TMEM106B	TMEM106B	AD	AD	1	1	1	Tier1	overlap_or_independence_unclear	40037332	SomaScan	Counts are not interpreted as independent replications without the independence flag.
+TNFAIP3	TNFAIP3	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+TNFRSF10A	TNFRSF10A	AMD	any_AMD	1	1	1	Tier1	overlap_or_independence_unclear	38903171	UKB-PPP_Olink	Counts are not interpreted as independent replications without the independence flag.
+TNFRSF10A	TNFRSF10A	AMD	early_AMD	1	1	0	Tier2	overlap_or_independence_unclear	40327005	UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+TNFRSF10A	TNFRSF10A	AMD	wet_AMD	1	1	1	Tier1	overlap_or_independence_unclear	38903171	UKB-PPP_Olink	Counts are not interpreted as independent replications without the independence flag.
+TNFSF14	TNFSF14	AMD	any_AMD	2	2	0	Tier2	overlap_or_independence_unclear	38903171;40327005	UKB-PPP Olink;UKB-PPP_Olink	Counts are not interpreted as independent replications without the independence flag.
+TNFSF14	TNFSF14	AMD	early_AMD	1	1	0	Tier2	overlap_or_independence_unclear	40327005	deCODE	Counts are not interpreted as independent replications without the independence flag.
+TNFSF14	TNFSF14	AMD	wet_AMD	1	1	0	Tier2	overlap_or_independence_unclear	40327005	deCODE	Counts are not interpreted as independent replications without the independence flag.
+TPST1	TPST1	AMD	any_AMD	1	1	0	Tier2	overlap_or_independence_unclear	39408566	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+TREM2	TREM2	AD	AD	4	2	2	Tier1	overlap_or_independence_unclear	40037332;41350740	Olink;SomaScan;deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+TREML2	TREML2	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	40037332	Olink	Counts are not interpreted as independent replications without the independence flag.
+TXNDC15	TXNDC15	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	40050982	UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+UBASH3B	UBASH3B	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	40037332	SomaScan	Counts are not interpreted as independent replications without the independence flag.
+UBD	UBD	AMD	dry_AMD	1	1	0	Tier2	overlap_or_independence_unclear	40327005	deCODE	Counts are not interpreted as independent replications without the independence flag.
+ULK3	ULK3	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+UPP1	UPP1	AD	AD	1	1	0	Tier2	overlap_or_independence_unclear	41630303	deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+VARS1	VARS1	AMD	wet_AMD	2	2	0	Tier2	overlap_or_independence_unclear	38903171;40327005	deCODE	Counts are not interpreted as independent replications without the independence flag.
+VTCN1	VTCN1	AMD	any_AMD	1	1	0	Tier2	overlap_or_independence_unclear	40327005	UKB-PPP Olink	Counts are not interpreted as independent replications without the independence flag.
+VTN	VTN	AMD	wet_AMD	2	2	1	Tier1	overlap_or_independence_unclear	38903171;40327005	deCODE	Counts are not interpreted as independent replications without the independence flag.
+WARS1	WARS1	AMD	any_AMD	5	3	0	Tier2	overlap_or_independence_unclear	38903171;39408566;40327005	UKB-PPP Olink;UKB-PPP_Olink;deCODE;deCODE SomaScan	Counts are not interpreted as independent replications without the independence flag.
+WARS1	WARS1	AMD	dry_AMD	4	2	0	Tier2	overlap_or_independence_unclear	38903171;40327005	UKB-PPP Olink;UKB-PPP_Olink;deCODE	Counts are not interpreted as independent replications without the independence flag.
+WARS1	WARS1	AMD	wet_AMD	4	2	0	Tier2	overlap_or_independence_unclear	38903171;40327005	UKB-PPP Olink;UKB-PPP_Olink;deCODE	Counts are not interpreted as independent replications without the independence flag.
+ZBTB16	ZBTB16	AD	AD	1	1	1	Tier1	overlap_or_independence_unclear	40037332	Olink	Counts are not interpreted as independent replications without the independence flag.

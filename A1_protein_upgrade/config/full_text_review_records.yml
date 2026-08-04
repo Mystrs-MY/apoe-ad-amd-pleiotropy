@@ -1,0 +1,59 @@
+version: 1.0
+
+records:
+  - record_id: PMID41630303
+    priority_reason: AD_4907_plasma_protein_MR
+  - record_id: PMID42384774
+    priority_reason: AD_proteome_wide_association_and_causal_prioritization
+  - record_id: PMID40452368
+    priority_reason: AD_UKB_PPP_and_deCODE_proteome_wide_MR
+  - record_id: PMID40533815
+    priority_reason: AD_plasma_PWAS_with_probabilistic_MR
+  - record_id: PMID40037332
+    priority_reason: AD_cross_platform_cis_MR_and_colocalization
+  - record_id: PMID41127252
+    priority_reason: AD_2172_UKB_plasma_proteins
+  - record_id: PMID41350740
+    priority_reason: AD_integrative_drug_target_multiomics
+  - record_id: PMID40397384
+    priority_reason: AD_bidirectional_plasma_protein_MR
+  - record_id: PMID40050982
+    priority_reason: AD_1916_cis_proteins_discovery_replication
+  - record_id: PMID40186323
+    priority_reason: AD_plasma_protein_MR_and_colocalization
+  - record_id: PMID39637861
+    priority_reason: AD_genome_wide_UKB_proteomics_MR_SPI
+  - record_id: PMID39108314
+    priority_reason: AD_90_protein_PGS_then_MR_background
+  - record_id: PMID37662610
+    priority_reason: AD_2994_plasma_protein_MR
+  - record_id: PMID36510323
+    priority_reason: AD_multi_tissue_proteome_phenome_MR
+  - record_id: PMID35475137
+    priority_reason: AD_282_literature_selected_proteins_background
+  - record_id: PMID37118015
+    priority_reason: AD_observational_proteome_then_MR_background
+  - record_id: PMID34381170
+    priority_reason: AD_brain_and_blood_PWAS_MR_colocalization
+  - record_id: PMID34239129
+    priority_reason: AD_multi_tissue_pQTL_atlas_and_MR
+  - record_id: PMID42094129
+    priority_reason: AD_APOE4_protected_carrier_preprint_lineage
+  - record_id: PMID40092369
+    priority_reason: dementia_two_UK_cohorts_causal_evidence_background
+  - record_id: PMID38903171
+    priority_reason: AMD_UKB_PPP_deCODE_SMR_colocalization
+  - record_id: PMID41064534
+    priority_reason: dry_AMD_UKB_PPP_deCODE_replication
+  - record_id: PMID40327005
+    priority_reason: AMD_deCODE_UKB_circulating_proteins
+  - record_id: PMID39408566
+    priority_reason: AMD_ocular_cross_omics_PWAS_MR_colocalization
+  - record_id: PMID36705323
+    priority_reason: AMD_4591_exposure_phenome_wide_MR
+  - record_id: PMID41158172
+    priority_reason: retinal_neurodegenerative_disease_proteomic_MR
+  - record_id: PMID42225822
+    priority_reason: nAMD_drug_selected_SMR_background
+  - record_id: DOI_643ffb96543c
+    priority_reason: AMD_91_inflammatory_proteins_background

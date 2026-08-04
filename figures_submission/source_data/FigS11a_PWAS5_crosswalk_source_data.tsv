@@ -1,0 +1,16 @@
+gene_symbol	mapping_confidence	frozen_before_results	stage	label
+BCAM	moderate_cross_platform_gene_level	TRUE	Literature candidate	2026 SomaScan PWAS
+CD55	moderate_cross_platform_gene_level	TRUE	Literature candidate	2026 SomaScan PWAS
+LILRB1	moderate_cross_platform_gene_level	TRUE	Literature candidate	2026 SomaScan PWAS
+LILRB5	moderate_cross_platform_gene_level	TRUE	Literature candidate	2026 SomaScan PWAS
+SCARA5	moderate_cross_platform_gene_level	TRUE	Literature candidate	2026 SomaScan PWAS
+BCAM	moderate_cross_platform_gene_level	TRUE	UKB-PPP assay	OID21076 Olink
+CD55	moderate_cross_platform_gene_level	TRUE	UKB-PPP assay	OID20377 Olink
+LILRB1	moderate_cross_platform_gene_level	TRUE	UKB-PPP assay	OID20323 Olink
+LILRB5	moderate_cross_platform_gene_level	TRUE	UKB-PPP assay	OID20324 Olink
+SCARA5	moderate_cross_platform_gene_level	TRUE	UKB-PPP assay	OID21058 Olink
+BCAM	moderate_cross_platform_gene_level	TRUE	Mapping boundary	Gene-level crosswalk
+CD55	moderate_cross_platform_gene_level	TRUE	Mapping boundary	Gene-level crosswalk
+LILRB1	moderate_cross_platform_gene_level	TRUE	Mapping boundary	Gene-level crosswalk
+LILRB5	moderate_cross_platform_gene_level	TRUE	Mapping boundary	Gene-level crosswalk
+SCARA5	moderate_cross_platform_gene_level	TRUE	Mapping boundary	Gene-level crosswalk

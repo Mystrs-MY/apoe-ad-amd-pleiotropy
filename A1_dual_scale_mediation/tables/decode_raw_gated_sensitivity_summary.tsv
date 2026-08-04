@@ -1,0 +1,4 @@
+scope	estimable_paths	Bonferroni_16_survivors	independent_confirmation	reason
+raw_genome_wide	16	0	False	two assays were selected after SMP outcome results
+raw_cis_only	16	0	False	two assays were selected after SMP outcome results
+raw_cis_only_PAV_filtered	8	0	False	two assays were selected after SMP outcome results

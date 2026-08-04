@@ -1,0 +1,11 @@
+"Study","Country","Design","AMD (N)","Control (N)","Follow-up (yr)","AMD Ascertainment","AD Ascertainment","AMD→AD (95% CI)","Weight (%)","NOS"
+"Choi 2020","South Korea","Retrospective",2213,306127,"8.0","ICD-10; ≥2 visits/hosp","ICD-10 F00/G30+anti-dementia Rx","1.48 (1.25–1.74)",3.6,9
+"Hwang PH 2021","United States","Prospective",668,2707,"4.1","ICD-9+Medicare+Hx","NINCDS+DSM; panel+MRI","1.87 (1.13–3.09)",0.4,9
+"Keenan 2014","United Kingdom","Record linkage",65894,7700963,"NR (min >1)","Hospital admission (ICD)","Hospital admission (ICD)","0.86 (0.67–1.08)",1.8,5
+"Klaver 1999","Netherlands","Prospective",113,811,"2.1","Fundus photography; grading","NINCDS; 3-step screen","1.50 (0.60–3.50)",0.1,8
+"Lee CS 2019","United States","Prospective",1036,2284,"~8.0","ICD-9 from EMR","NINCDS; consensus panel","1.20 (1.02–1.40)",4,9
+"Shang 2021","United Kingdom","Prospective",3671,87602,"11.0","Self-report+hosp records","ICD; hosp+death+self-report","1.08 (0.80–1.44)",1.2,6
+"Tsai 2015","China (Taiwan)","Retrospective",4993,24965,"4.4","ICD-9-CM; ≥2 visits","ICD-9-CM 331.0/290.x; ≥2 dx","1.44 (1.26–1.64)",5.7,7
+"Wen 2021","China (Taiwan)","Retrospective",10578,10578,"5.7","ICD-9-CM; ophthalmologist dx","ICD-9-CM 331","1.23 (1.04–1.46)",3.5,8
+"Son 2025","South Korea","Retrospective",21384,1662319,"9.7","ICD-10 H35.3; claims","ICD-10 F00/G30+anti-dementia Rx","1.09 (1.05–1.13)",74,8
+"Lishinsky-Fischer 2025","Multi-national","Retrospective",56035,56035,"5–10","ICD-10 from EMR","ICD-10 G30+medication records","1.02 (0.89–1.16)",5.7,8

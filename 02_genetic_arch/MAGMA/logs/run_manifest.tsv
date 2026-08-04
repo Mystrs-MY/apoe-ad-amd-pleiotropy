@@ -1,0 +1,11 @@
+field	value
+MAGMA_version	1.10_linux
+execution_environment	Ubuntu_WSL2
+LD_reference	1000_Genomes_EUR
+LD_reference_samples	503
+gene_location	Rev.NCBI37.3.gene.loc
+gene_location_source	STAR_Protocols_MAGMA_analysis_protocol
+gene_window	upstream_35kb_downstream_10kb
+gene_model	snp-wise_mean
+sample_size_mode	per_variant_N_column
+duplicate_SNP_policy	error

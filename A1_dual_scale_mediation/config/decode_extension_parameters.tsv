@@ -1,0 +1,13 @@
+parameter	value	status	rationale
+source_platform	deCODE_SomaScan_v4	frozen	Independent same-platform plasma sensitivity extension
+source_genome_build	GRCh38_hg38	frozen	Declared in deCODE bucket README
+primary_normalization	smp	frozen	Manufacturer-recommended median-adjusted data used for the source article main results
+sensitivity_normalization	raw	frozen	Non-normalized source data retained as a separate sensitivity
+direct_alpha_variants	rs429358;rs7412	frozen	No proxy substitution for APOE defining variants
+unified_pqtl_candidate_P	5e-8	frozen	Matches the current A1 protein-beta instrument candidate threshold
+decode_studywide_strict_P	1.8e-9	frozen	Source-study proteome-wide pQTL threshold retained as a strict sensitivity flag
+candidate_extraction_MAF_filter	none	frozen	Preserve ImpMAF for downstream auditable instrument QC; missing is not zero
+primary_clump_r2	0.001	validated_and_executed	Matches the frozen A1 protein-beta workflow
+primary_clump_kb	10000	validated_and_executed	Matches the frozen A1 protein-beta workflow
+APOE_region_exclusion	GRCh37_19:44000000-46500000_after_UCSC_hg38_to_hg19_liftover	validated_and_executed	Each candidate was lifted to hg19 with the official UCSC chain before exclusion
+merge_into_primary_25_assay_aggregate	false	frozen	The extension cannot redefine or enter the frozen Olink aggregate

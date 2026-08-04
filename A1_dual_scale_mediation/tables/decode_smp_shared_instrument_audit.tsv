@@ -1,0 +1,4 @@
+row_type	SNP_A	SNP_B	R2	assays_A	assays_B	genes_A	genes_B	cross_assay_reuse
+distinct_SNP_pair_in_high_LD	rs10922094	rs10922098	1	8687_26	10074_128	TMEM106B	BRD2	True
+distinct_SNP_pair_in_high_LD	rs10922094	rs28664709	1	8687_26	8874_53	TMEM106B	CLN5	True
+distinct_SNP_pair_in_high_LD	rs10922098	rs28664709	1	10074_128	8874_53	BRD2	CLN5	True

@@ -1,0 +1,11 @@
+Study	Year	outcome	effect_metric	estimate	ci_lower	ci_upper	included_in_primary	included_in_HR_only
+"Choi 2020"	2020	"AD"	"aHR"	1.48	1.25	1.74	TRUE	TRUE
+"Hwang PH 2021"	2021	"AD (without VaD)"	"HR"	1.87	1.13	3.09	TRUE	TRUE
+"Keenan 2014"	2014	"AD"	"Rate Ratio"	0.86	0.67	1.08	TRUE	FALSE
+"Klaver 1999"	1999	"AD"	"RR"	1.5	0.6	3.5	TRUE	FALSE
+"Lee CS 2019"	2019	"AD (probable/possible)"	"HR"	1.2	1.02	1.4	TRUE	TRUE
+"Shang 2021"	2021	"AD"	"HR"	1.08	0.8	1.44	TRUE	TRUE
+"Tsai 2015"	2015	"AD or senile dementia"	"HR"	1.44	1.26	1.64	TRUE	TRUE
+"Wen 2021"	2021	"AD"	"aHR"	1.23	1.04	1.46	TRUE	TRUE
+"Son 2025"	2025	"AD"	"HR"	1.09	1.05	1.13	TRUE	TRUE
+"Lishinsky-Fischer 2025"	2025	"AD (ICD-10 G30)"	"HR"	1.02	0.89	1.16	TRUE	TRUE

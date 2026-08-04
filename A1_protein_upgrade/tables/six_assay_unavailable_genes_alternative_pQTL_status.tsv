@@ -1,0 +1,7 @@
+gene_symbol	alternative_pQTL_platform	verified_sources	platform_evidence_available	eligible_for_APOE_mediation	boundary_reason
+CLN5	deCODE SomaScan; AGES blood proteome	PMID40452368; PMID34381170	yes	no	Published beta only; no rs429358/rs7412 alpha for the same assay.
+COL10A1	deCODE SomaScan	PMID40452368; PMID40397384	yes	no	No corrected-significant AD beta in retrieved tables; alpha unavailable.
+PLOD2	deCODE SomaScan	PMID40452368; PMID40397384	yes	no	No corrected-significant AD beta in retrieved tables; alpha unavailable.
+SDF2	deCODE SomaScan; brain pQTL	PMID40452368; PMID40397384; PMID34381170	yes	no	Circulating and brain evidence kept separate; alpha unavailable.
+TMEM106B	deCODE SomaScan; AGES blood proteome; brain pQTL	PMID40452368; PMID40397384; PMID34381170	yes	no	Corrected-significant published AD beta exists on deCODE, but same-assay alpha is unavailable.
+VTN	deCODE SomaScan; brain pQTL	PMID40452368; PMID40397384; PMID34381170	yes	no	Circulating published beta is not corrected-significant; alpha unavailable.

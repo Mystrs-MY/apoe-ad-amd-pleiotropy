@@ -1,0 +1,65 @@
+version: 1.0
+genome_build: GRCh37_hg19
+
+outcomes:
+  AD:
+    label: Alzheimer disease
+    current_A1_source: Wightman_2021
+    accession: GCST013196
+    local_file: data/external/GWAS/AD_Wightman_cleaned_hg19.tsv.gz
+    ancestry: European
+    overlap_with_UKB_PPP: possible_approximately_10_to_15_percent
+  any_AMD:
+    label: Any age-related macular degeneration
+    current_A1_source: FinnGen_R12_H7_AMD
+    local_file: data/external/GWAS/AMD_H7_R12_cleaned_hg19.tsv.gz
+    ancestry: European
+    overlap_with_UKB_PPP: none_expected
+  dry_AMD:
+    label: Dry age-related macular degeneration
+    current_A1_source: FinnGen_R12_DRY_AMD
+    local_file: data/external/GWAS/AMD_Dry_R12_cleaned_hg19.tsv.gz
+    ancestry: European
+    overlap_with_UKB_PPP: none_expected
+  wet_AMD:
+    label: Wet or neovascular age-related macular degeneration
+    current_A1_source: FinnGen_R12_WET_AMD
+    local_file: data/external/GWAS/AMD_Wet_R12_cleaned_hg19.tsv.gz
+    ancestry: European
+    overlap_with_UKB_PPP: none_expected
+
+apoe_total_effects:
+  rs429358_C:
+    AD:
+      beta: 1.1275
+      source: current_A1_harmonized_GWAS
+      verification_status: direct_variant_reextracted_2026_07_11
+    dry_AMD:
+      beta: -0.210934
+      source: current_A1_harmonized_GWAS
+      verification_status: direct_variant_reextracted_2026_07_11
+    wet_AMD:
+      beta: -0.221611
+      source: current_A1_harmonized_GWAS
+      verification_status: direct_variant_reextracted_2026_07_11
+    any_AMD:
+      beta: -0.203119
+      source: current_A1_harmonized_GWAS
+      verification_status: direct_variant_reextracted_2026_07_11
+  rs7412_T:
+    AD:
+      beta: -0.4776
+      source: current_A1_harmonized_GWAS
+      verification_status: direct_variant_reextracted_2026_07_11
+    dry_AMD:
+      beta: 0.105656
+      source: current_A1_harmonized_GWAS
+      verification_status: direct_variant_reextracted_2026_07_11
+    wet_AMD:
+      beta: 0.122092
+      source: current_A1_harmonized_GWAS
+      verification_status: direct_variant_reextracted_2026_07_11
+    any_AMD:
+      beta: 0.125921
+      source: current_A1_harmonized_GWAS
+      verification_status: direct_variant_reextracted_2026_07_11

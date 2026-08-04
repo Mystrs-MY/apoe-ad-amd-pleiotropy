@@ -1,0 +1,10 @@
+sha256	path
+cfaf44469064d3b4b6717cea11666b9754d0250950d35ce290d059327ae5a583		/mnt/d/Article_1/A1_protein_upgrade/tools/magma_v1.10/extracted/magma
+c628e49f6674492c61140d3df8b850cd1bf963f87df505c175d6ada743b5d845		/mnt/d/Article_1/A1_protein_upgrade/tools/magma_v1.10/gene_location/Rev.NCBI37.3.gene.loc
+ffe4adc0cd22d53397050ff8584323a31958bc4cbce281b1aeb935d5555e8363		/mnt/d/AD_AMD/Resource/EUR/EUR.bed
+fa1084f8104ea52c24fa71bedca04b28721e0e5519b38d723b65fa68c4b689b5		/mnt/d/AD_AMD/Resource/EUR/EUR.bim
+a6971a3b9b7fd344009619d7d2803d7c7d77aae2b1974cf6b1b29a0fbae293cd		/mnt/d/AD_AMD/Resource/EUR/EUR.fam
+c945ee6140407805d5b0a18a34a4d51c856c1eda232fff027e03ec549c355402		/mnt/d/AD_AMD/Resource/GWAS/AD_Wightman_cleaned_hg19.tsv.gz
+621ff05ff26e5f0f4b53840c340bf23af9a58ad01067ed9f1fd2e5e32d489f86		/mnt/d/AD_AMD/Resource/GWAS/AMD_Dry_R12_cleaned_hg19.tsv.gz
+eb790bb8d3228bb009ae0dbba8bd6e8106c7e35a72c96bf6c917b1c3635478b9		/mnt/d/AD_AMD/Resource/GWAS/AMD_Wet_R12_cleaned_hg19.tsv.gz
+55baf9ef1f72c1cc76ce5c9b3a8dce4e920a4a5e7474516103317abb3a2cc597		/mnt/d/AD_AMD/Resource/GWAS/AMD_H7_R12_cleaned_hg19.tsv.gz

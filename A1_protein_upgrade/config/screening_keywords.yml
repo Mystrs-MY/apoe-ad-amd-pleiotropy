@@ -1,0 +1,51 @@
+version: 1.0
+
+disease:
+  AD:
+    - alzheimer
+  AMD:
+    - age-related macular degeneration
+    - age related macular degeneration
+    - geographic atrophy
+    - dry amd
+    - wet amd
+    - neovascular amd
+    - neovascular macular degeneration
+
+circulating_protein:
+  - plasma protein
+  - plasma proteome
+  - serum protein
+  - serum proteome
+  - circulating protein
+  - blood protein
+  - proteome-wide
+  - proteome wide
+  - proteomic
+  - pqtl
+  - protein quantitative trait
+  - olink
+  - somascan
+  - ukb-ppp
+  - decode
+  - interval
+  - fenland
+  - scallop
+
+genetic_causal:
+  - mendelian randomization
+  - mendelian randomisation
+  - summary-data-based mendelian
+  - summary data-based mendelian
+  - smr
+  - heidi
+  - colocalization
+  - colocalisation
+  - genetically predicted
+  - causal protein
+
+background_only:
+  - review
+  - protocol
+  - editorial
+  - commentary

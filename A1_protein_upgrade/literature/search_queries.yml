@@ -1,0 +1,90 @@
+version: 1.0
+search_date: 2026-07-10
+contact_email: ""
+ncbi_tool: A1_protein_upgrade
+
+pubmed:
+  AD_proteome_MR: >-
+    ("Alzheimer Disease"[Mesh] OR Alzheimer*[Title/Abstract])
+    AND
+    ("Mendelian Randomization Analysis"[Mesh] OR "Mendelian randomization"[Title/Abstract]
+    OR "Mendelian randomisation"[Title/Abstract] OR SMR[Title/Abstract]
+    OR HEIDI[Title/Abstract] OR colocalization[Title/Abstract]
+    OR colocalisation[Title/Abstract])
+    AND
+    ("proteome-wide"[Title/Abstract] OR "proteome wide"[Title/Abstract]
+    OR proteomic*[Title/Abstract] OR "plasma protein"[Title/Abstract]
+    OR "plasma proteins"[Title/Abstract] OR "circulating protein"[Title/Abstract]
+    OR "circulating proteins"[Title/Abstract] OR pQTL[Title/Abstract]
+    OR "protein quantitative trait loci"[Title/Abstract] OR Olink[Title/Abstract]
+    OR SomaScan[Title/Abstract] OR "UKB-PPP"[Title/Abstract]
+    OR deCODE[Title/Abstract] OR INTERVAL[Title/Abstract]
+    OR Fenland[Title/Abstract] OR SCALLOP[Title/Abstract])
+  AMD_proteome_MR: >-
+    ("Macular Degeneration"[Mesh] OR "age-related macular degeneration"[Title/Abstract]
+    OR "age related macular degeneration"[Title/Abstract] OR AMD[Title/Abstract]
+    OR "geographic atrophy"[Title/Abstract] OR "dry AMD"[Title/Abstract]
+    OR "wet AMD"[Title/Abstract] OR "neovascular AMD"[Title/Abstract]
+    OR "neovascular macular degeneration"[Title/Abstract])
+    AND
+    ("Mendelian Randomization Analysis"[Mesh] OR "Mendelian randomization"[Title/Abstract]
+    OR "Mendelian randomisation"[Title/Abstract] OR SMR[Title/Abstract]
+    OR HEIDI[Title/Abstract] OR colocalization[Title/Abstract]
+    OR colocalisation[Title/Abstract])
+    AND
+    ("proteome-wide"[Title/Abstract] OR "proteome wide"[Title/Abstract]
+    OR proteomic*[Title/Abstract] OR "plasma protein"[Title/Abstract]
+    OR "plasma proteins"[Title/Abstract] OR "circulating protein"[Title/Abstract]
+    OR "circulating proteins"[Title/Abstract] OR pQTL[Title/Abstract]
+    OR "protein quantitative trait loci"[Title/Abstract] OR Olink[Title/Abstract]
+    OR SomaScan[Title/Abstract] OR "UKB-PPP"[Title/Abstract]
+    OR deCODE[Title/Abstract] OR INTERVAL[Title/Abstract]
+    OR Fenland[Title/Abstract] OR SCALLOP[Title/Abstract])
+  AD_causal_protein_platforms: >-
+    (Alzheimer*[Title/Abstract])
+    AND
+    (Olink[Title/Abstract] OR SomaScan[Title/Abstract] OR deCODE[Title/Abstract]
+    OR "UKB-PPP"[Title/Abstract] OR INTERVAL[Title/Abstract]
+    OR Fenland[Title/Abstract] OR SCALLOP[Title/Abstract])
+    AND
+    (causal[Title/Abstract] OR Mendelian[Title/Abstract]
+    OR colocalization[Title/Abstract] OR colocalisation[Title/Abstract])
+  AMD_causal_protein_platforms: >-
+    ("age-related macular degeneration"[Title/Abstract] OR AMD[Title/Abstract]
+    OR "geographic atrophy"[Title/Abstract] OR "neovascular AMD"[Title/Abstract])
+    AND
+    (Olink[Title/Abstract] OR SomaScan[Title/Abstract] OR deCODE[Title/Abstract]
+    OR "UKB-PPP"[Title/Abstract] OR INTERVAL[Title/Abstract]
+    OR Fenland[Title/Abstract] OR SCALLOP[Title/Abstract])
+    AND
+    (causal[Title/Abstract] OR Mendelian[Title/Abstract]
+    OR colocalization[Title/Abstract] OR colocalisation[Title/Abstract])
+  AD_serum_protein_MR_supplement: >-
+    ("Alzheimer Disease"[Mesh] OR Alzheimer*[Title/Abstract])
+    AND
+    ("Mendelian Randomization Analysis"[Mesh] OR "Mendelian randomization"[Title/Abstract]
+    OR "Mendelian randomisation"[Title/Abstract] OR SMR[Title/Abstract]
+    OR HEIDI[Title/Abstract] OR colocalization[Title/Abstract]
+    OR colocalisation[Title/Abstract])
+    AND
+    ("serum protein"[Title/Abstract] OR "serum proteins"[Title/Abstract]
+    OR "serum proteome"[Title/Abstract])
+  AMD_serum_protein_MR_supplement: >-
+    ("Macular Degeneration"[Mesh] OR "age-related macular degeneration"[Title/Abstract]
+    OR "age related macular degeneration"[Title/Abstract] OR AMD[Title/Abstract]
+    OR "geographic atrophy"[Title/Abstract] OR "dry AMD"[Title/Abstract]
+    OR "wet AMD"[Title/Abstract] OR "neovascular AMD"[Title/Abstract])
+    AND
+    ("Mendelian Randomization Analysis"[Mesh] OR "Mendelian randomization"[Title/Abstract]
+    OR "Mendelian randomisation"[Title/Abstract] OR SMR[Title/Abstract]
+    OR HEIDI[Title/Abstract] OR colocalization[Title/Abstract]
+    OR colocalisation[Title/Abstract])
+    AND
+    ("serum protein"[Title/Abstract] OR "serum proteins"[Title/Abstract]
+    OR "serum proteome"[Title/Abstract])
+
+crossref:
+  - Alzheimer disease proteome-wide Mendelian randomization plasma proteins
+  - age-related macular degeneration proteome-wide Mendelian randomization plasma proteins
+  - geographic atrophy circulating proteins Mendelian randomization
+  - neovascular AMD circulating proteins Mendelian randomization

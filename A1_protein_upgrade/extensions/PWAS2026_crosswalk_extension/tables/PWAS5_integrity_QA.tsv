@@ -1,0 +1,6 @@
+analysis_order	gene_symbol	UKB_PPP_OID	archive_name	size_matches_frozen_config	md5_matches_frozen_config	sha256_matches_frozen_config	tar_readable	member_count_is_23	chromosomes_1_to_22_and_X_complete	all_headers_exact_match	all_first_last_rows_complete	all_members_have_data	OID_matches_archive_name	target_matches_archive_name	UniProt_matches_archive_name	overall_pass	stale_partial_file_present	stale_partial_action
+1	BCAM	OID21076	BCAM_P50895_OID21076_v1_Neurology.tar	True	True	True	True	True	True	True	True	True	True	True	True	True	False	quarantine_after_complete_archive_pass; never use as input
+2	CD55	OID20377	CD55_P08174_OID20377_v1_Cardiometabolic.tar	True	True	True	True	True	True	True	True	True	True	True	True	True	False	quarantine_after_complete_archive_pass; never use as input
+3	LILRB1	OID20323	LILRB1_Q8NHL6_OID20323_v1_Cardiometabolic.tar	True	True	True	True	True	True	True	True	True	True	True	True	True	False	quarantine_after_complete_archive_pass; never use as input
+4	LILRB5	OID20324	LILRB5_O75023_OID20324_v1_Cardiometabolic.tar	True	True	True	True	True	True	True	True	True	True	True	True	True	False	quarantine_after_complete_archive_pass; never use as input
+5	SCARA5	OID21058	SCARA5_Q6ZMJ2_OID21058_v1_Neurology.tar	True	True	True	True	True	True	True	True	True	True	True	True	True	False	quarantine_after_complete_archive_pass; never use as input

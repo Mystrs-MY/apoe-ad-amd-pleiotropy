@@ -1,0 +1,5 @@
+"data_file","source","rows"
+"Figure_3a_conditional_QQ_AD_given_Dry.csv","AD_Wightman_cleaned_hg19.tsv.gz + AMD_Dry_R12_cleaned_hg19.tsv.gz; original P column; merge key=SNP",796
+"Figure_3b_conditional_QQ_Dry_given_AD.csv","AD_Wightman_cleaned_hg19.tsv.gz + AMD_Dry_R12_cleaned_hg19.tsv.gz; original P column; merge key=SNP",794
+"Figure_3_LDSC_results.csv","LDSC_Results_Formatted.csv",6
+"Figure_3_HDL_results.csv","TableS3d_HDL_Results.csv",6

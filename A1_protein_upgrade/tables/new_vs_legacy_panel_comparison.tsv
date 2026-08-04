@@ -1,0 +1,154 @@
+record_type	panel	metric	outcome	gene_symbol	in_literature_panel	in_legacy_panel	value	n	notes	mean	median	q1	q3	minimum	maximum	variant
+membership	literature	panel_membership	NA	ACE	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	legacy	panel_membership	NA	APOE	False	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	BLNK	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	BRD2	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	legacy	panel_membership	NA	C1QA	False	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	C1R	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	C1S	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	legacy	panel_membership	NA	C2	False	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	legacy	panel_membership	NA	C3	False	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	legacy	panel_membership	NA	C5	False	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	legacy	panel_membership	NA	CCL2	False	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	legacy	panel_membership	NA	CCL5	False	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	legacy	panel_membership	NA	CD14	False	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	CD226	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	CD2AP	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	CD33	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	legacy	panel_membership	NA	CD40	False	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	legacy	panel_membership	NA	CFB	False	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	legacy	panel_membership	NA	CFD	False	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	legacy	panel_membership	NA	CFH	False	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	legacy	panel_membership	NA	CFI	False	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	legacy	panel_membership	NA	CFP	False	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	CLN5	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	COL10A1	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	CR1	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	legacy	panel_membership	NA	CSF1	False	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	CSF2	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	CTSH	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	legacy	panel_membership	NA	CX3CL1	False	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	legacy	panel_membership	NA	CXCL10	False	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	legacy	panel_membership	NA	CXCL12	False	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	GRN	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	legacy	panel_membership	NA	IFNG	False	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	legacy	panel_membership	NA	IL10	False	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	legacy	panel_membership	NA	IL18	False	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	legacy	panel_membership	NA	IL1B	False	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	IL20RB	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	IL34	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	legacy	panel_membership	NA	IL6	False	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	LBP	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	LILRB2	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	legacy	panel_membership	NA	LPA	False	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	MME	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	PILRA	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	PILRB	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	PLOD2	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	legacy	panel_membership	NA	PON1	False	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	PRSS8	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	SDF2	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	SERPINF2	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	legacy	panel_membership	NA	SERPING1	False	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	SIGLEC9	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	SIRPA	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	both	panel_membership	NA	TGFB1	True	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	legacy	panel_membership	NA	TLR4	False	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	TMEM106B	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	legacy	panel_membership	NA	TNF	False	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	TNFRSF10A	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	both	panel_membership	NA	TREM2	True	True	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	VTN	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+membership	literature	panel_membership	NA	ZBTB16	True	False	NA	1	Gene-level membership only; assay-level mapping remains separate.	NA	NA	NA	NA	NA	NA	NA
+panel_summary	new_vs_legacy	literature_unique_genes	NA	NA	NA	NA	33	NA	No study count is interpreted as independent replication.	NA	NA	NA	NA	NA	NA	NA
+panel_summary	new_vs_legacy	legacy_unique_genes	NA	NA	NA	NA	30	NA	No study count is interpreted as independent replication.	NA	NA	NA	NA	NA	NA	NA
+panel_summary	new_vs_legacy	overlap_genes	NA	NA	NA	NA	2	NA	No study count is interpreted as independent replication.	NA	NA	NA	NA	NA	NA	NA
+panel_summary	new_vs_legacy	union_genes	NA	NA	NA	NA	61	NA	No study count is interpreted as independent replication.	NA	NA	NA	NA	NA	NA	NA
+panel_summary	new_vs_legacy	Jaccard_index	NA	NA	NA	NA	0.03278688524590164	NA	No study count is interpreted as independent replication.	NA	NA	NA	NA	NA	NA	NA
+panel_summary	new_vs_legacy	overlap_coefficient	NA	NA	NA	NA	0.06666666666666667	NA	No study count is interpreted as independent replication.	NA	NA	NA	NA	NA	NA	NA
+distribution_summary	literature	alpha_rs429358	NA	NA	NA	NA	NA	27	Direct alpha with eligible target-to-assay mapping; 27 unique Olink assay genes.	-0.008813358481481482	-0.0133831	-0.01904275	0.0049842805	-0.0477905	0.0256198	NA
+distribution_summary	literature	alpha_rs7412	NA	NA	NA	NA	NA	27	Direct alpha with eligible target-to-assay mapping; 27 unique Olink assay genes.	0.016599607333333335	0.0189822	0.000860714	0.031646549999999996	-0.0262655	0.0962883	NA
+distribution_summary	legacy	alpha_rs429358	NA	NA	NA	NA	NA	29	Legacy alpha table; APOE protein excluded.	-0.012489273103448275	-0.0132531	-0.0271454	0.00219991	-0.0477905	0.0274166	NA
+distribution_summary	legacy	alpha_rs7412	NA	NA	NA	NA	NA	0	Legacy analysis did not extract rs7412 alpha.	NA	NA	NA	NA	NA	NA	NA
+distribution_summary	literature	beta_reestimated	AD	NA	NA	NA	NA	25	Current A1 harmonization and clumping; 25 re-estimated assay genes.	-0.0028929697596083086	-0.0049120133863917	-0.0312556368058841	0.0359076010923538	-0.227905816787578	0.198787743817332	NA
+distribution_summary	legacy	beta_legacy_IVW	AD	NA	NA	NA	NA	29	Legacy 29-protein IVW estimates; pipeline limitations are documented in the audit.	-0.009477818113745208	-0.0125614089069917	-0.0258938810711206	0.0247506714189972	-0.200114958923406	0.0923560362727337	NA
+distribution_summary	literature	beta_reestimated	any_AMD	NA	NA	NA	NA	25	Current A1 harmonization and clumping; 25 re-estimated assay genes.	0.020939563447643916	0.0021857696765925	-0.0331160042604526	0.0604466356199806	-0.105490215659226	0.242235869837302	NA
+distribution_summary	legacy	beta_legacy_IVW	any_AMD	NA	NA	NA	NA	29	Legacy 29-protein IVW estimates; pipeline limitations are documented in the audit.	-0.047591313139145115	0.0469136625803592	-0.0275720080588883	0.123348057145728	-1.53805757809601	0.374851307102486	NA
+distribution_summary	literature	beta_reestimated	dry_AMD	NA	NA	NA	NA	25	Current A1 harmonization and clumping; 25 re-estimated assay genes.	0.012440234867445103	0.0030651523212537	-0.0299027258152861	0.04738282190442	-0.148266940104542	0.196367515956626	NA
+distribution_summary	legacy	beta_legacy_IVW	dry_AMD	NA	NA	NA	NA	29	Legacy 29-protein IVW estimates; pipeline limitations are documented in the audit.	-0.05231172763156723	0.0461487073329737	-0.0362458840151917	0.0962139447764202	-1.60814006084212	0.430843353675073	NA
+distribution_summary	literature	beta_reestimated	wet_AMD	NA	NA	NA	NA	25	Current A1 harmonization and clumping; 25 re-estimated assay genes.	0.02361873017180641	0.0028007132074221	-0.0254911213085857	0.0627120450912911	-0.157679563876025	0.366855190950246	NA
+distribution_summary	legacy	beta_legacy_IVW	wet_AMD	NA	NA	NA	NA	29	Legacy 29-protein IVW estimates; pipeline limitations are documented in the audit.	-0.06482204267777832	0.0526477844481436	-0.0878913401661779	0.110795077715645	-1.63399160836487	0.326275702212517	NA
+total_mediation	literature	total_mediated_proportion	AD	TOTAL	NA	NA	0.014704287011826016	25	Enriched-panel estimate among proteins with both alpha and re-estimated beta; not total circulating mediation.	NA	NA	NA	NA	NA	NA	rs429358
+total_mediation	legacy	total_mediated_proportion_rebased	AD	TOTAL	NA	NA	0.0038719729377203766	29	Legacy indirect effects divided by newly verified current-A1 total effect for denominator comparability; not a rerun of legacy beta.	NA	NA	NA	NA	NA	NA	rs429358
+total_mediation	literature	total_mediated_proportion	any_AMD	TOTAL	NA	NA	0.06157972053112998	25	Enriched-panel estimate among proteins with both alpha and re-estimated beta; not total circulating mediation.	NA	NA	NA	NA	NA	NA	rs429358
+total_mediation	legacy	total_mediated_proportion_rebased	any_AMD	TOTAL	NA	NA	-0.004263000105437694	29	Legacy indirect effects divided by newly verified current-A1 total effect for denominator comparability; not a rerun of legacy beta.	NA	NA	NA	NA	NA	NA	rs429358
+total_mediation	literature	total_mediated_proportion	dry_AMD	TOTAL	NA	NA	0.030302583669267347	25	Enriched-panel estimate among proteins with both alpha and re-estimated beta; not total circulating mediation.	NA	NA	NA	NA	NA	NA	rs429358
+total_mediation	legacy	total_mediated_proportion_rebased	dry_AMD	TOTAL	NA	NA	-0.014638181726746432	29	Legacy indirect effects divided by newly verified current-A1 total effect for denominator comparability; not a rerun of legacy beta.	NA	NA	NA	NA	NA	NA	rs429358
+total_mediation	literature	total_mediated_proportion	wet_AMD	TOTAL	NA	NA	0.08366066352806428	25	Enriched-panel estimate among proteins with both alpha and re-estimated beta; not total circulating mediation.	NA	NA	NA	NA	NA	NA	rs429358
+total_mediation	legacy	total_mediated_proportion_rebased	wet_AMD	TOTAL	NA	NA	-0.02882665689172962	29	Legacy indirect effects divided by newly verified current-A1 total effect for denominator comparability; not a rerun of legacy beta.	NA	NA	NA	NA	NA	NA	rs429358
+total_mediation	literature	total_mediated_proportion	AD	TOTAL	NA	NA	-0.0004807237346890281	25	Enriched-panel estimate among proteins with both alpha and re-estimated beta; not total circulating mediation.	NA	NA	NA	NA	NA	NA	rs7412
+total_mediation	literature	total_mediated_proportion	any_AMD	TOTAL	NA	NA	0.11910463147039754	25	Enriched-panel estimate among proteins with both alpha and re-estimated beta; not total circulating mediation.	NA	NA	NA	NA	NA	NA	rs7412
+total_mediation	literature	total_mediated_proportion	dry_AMD	TOTAL	NA	NA	0.16092414646173542	25	Enriched-panel estimate among proteins with both alpha and re-estimated beta; not total circulating mediation.	NA	NA	NA	NA	NA	NA	rs7412
+total_mediation	literature	total_mediated_proportion	wet_AMD	TOTAL	NA	NA	0.09596049596637234	25	Enriched-panel estimate among proteins with both alpha and re-estimated beta; not total circulating mediation.	NA	NA	NA	NA	NA	NA	rs7412
+sensitivity_subset	literature	all_primary	all	NA	NA	NA	33	25	value=primary genes meeting evidence filter; n=genes also eligible for mediation.	NA	NA	NA	NA	NA	NA	NA
+sensitivity_total_mediation	literature	all_primary	AD	TOTAL	NA	NA	0.014704287011826016	25	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs429358
+sensitivity_total_mediation	literature	all_primary	any_AMD	TOTAL	NA	NA	0.06157972053112998	25	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs429358
+sensitivity_total_mediation	literature	all_primary	dry_AMD	TOTAL	NA	NA	0.030302583669267347	25	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs429358
+sensitivity_total_mediation	literature	all_primary	wet_AMD	TOTAL	NA	NA	0.08366066352806428	25	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs429358
+sensitivity_total_mediation	literature	all_primary	AD	TOTAL	NA	NA	-0.0004807237346890281	25	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs7412
+sensitivity_total_mediation	literature	all_primary	any_AMD	TOTAL	NA	NA	0.11910463147039754	25	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs7412
+sensitivity_total_mediation	literature	all_primary	dry_AMD	TOTAL	NA	NA	0.16092414646173542	25	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs7412
+sensitivity_total_mediation	literature	all_primary	wet_AMD	TOTAL	NA	NA	0.09596049596637234	25	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs7412
+sensitivity_subset	literature	literature_cis_evidence_only	all	NA	NA	NA	33	25	value=primary genes meeting evidence filter; n=genes also eligible for mediation.	NA	NA	NA	NA	NA	NA	NA
+sensitivity_total_mediation	literature	literature_cis_evidence_only	AD	TOTAL	NA	NA	0.014704287011826016	25	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs429358
+sensitivity_total_mediation	literature	literature_cis_evidence_only	any_AMD	TOTAL	NA	NA	0.06157972053112998	25	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs429358
+sensitivity_total_mediation	literature	literature_cis_evidence_only	dry_AMD	TOTAL	NA	NA	0.030302583669267347	25	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs429358
+sensitivity_total_mediation	literature	literature_cis_evidence_only	wet_AMD	TOTAL	NA	NA	0.08366066352806428	25	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs429358
+sensitivity_total_mediation	literature	literature_cis_evidence_only	AD	TOTAL	NA	NA	-0.0004807237346890281	25	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs7412
+sensitivity_total_mediation	literature	literature_cis_evidence_only	any_AMD	TOTAL	NA	NA	0.11910463147039754	25	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs7412
+sensitivity_total_mediation	literature	literature_cis_evidence_only	dry_AMD	TOTAL	NA	NA	0.16092414646173542	25	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs7412
+sensitivity_total_mediation	literature	literature_cis_evidence_only	wet_AMD	TOTAL	NA	NA	0.09596049596637234	25	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs7412
+sensitivity_subset	literature	coloc_supported_only	all	NA	NA	NA	27	22	value=primary genes meeting evidence filter; n=genes also eligible for mediation.	NA	NA	NA	NA	NA	NA	NA
+sensitivity_total_mediation	literature	coloc_supported_only	AD	TOTAL	NA	NA	0.012378562509488896	22	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs429358
+sensitivity_total_mediation	literature	coloc_supported_only	any_AMD	TOTAL	NA	NA	0.04927490473221357	22	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs429358
+sensitivity_total_mediation	literature	coloc_supported_only	dry_AMD	TOTAL	NA	NA	0.02916165445915613	22	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs429358
+sensitivity_total_mediation	literature	coloc_supported_only	wet_AMD	TOTAL	NA	NA	0.06866725813813497	22	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs429358
+sensitivity_total_mediation	literature	coloc_supported_only	AD	TOTAL	NA	NA	-0.0013353043085038239	22	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs7412
+sensitivity_total_mediation	literature	coloc_supported_only	any_AMD	TOTAL	NA	NA	0.10686652875917796	22	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs7412
+sensitivity_total_mediation	literature	coloc_supported_only	dry_AMD	TOTAL	NA	NA	0.13856379661221796	22	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs7412
+sensitivity_total_mediation	literature	coloc_supported_only	wet_AMD	TOTAL	NA	NA	0.09539835226895847	22	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs7412
+sensitivity_subset	literature	independent_outcome_only	all	NA	NA	NA	7	7	value=primary genes meeting evidence filter; n=genes also eligible for mediation.	NA	NA	NA	NA	NA	NA	NA
+sensitivity_total_mediation	literature	independent_outcome_only	AD	TOTAL	NA	NA	0.005382634880846499	7	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs429358
+sensitivity_total_mediation	literature	independent_outcome_only	any_AMD	TOTAL	NA	NA	0.00784159576756532	7	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs429358
+sensitivity_total_mediation	literature	independent_outcome_only	dry_AMD	TOTAL	NA	NA	-0.003156501232478195	7	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs429358
+sensitivity_total_mediation	literature	independent_outcome_only	wet_AMD	TOTAL	NA	NA	0.012279773478421485	7	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs429358
+sensitivity_total_mediation	literature	independent_outcome_only	AD	TOTAL	NA	NA	-0.010615849592246568	7	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs7412
+sensitivity_total_mediation	literature	independent_outcome_only	any_AMD	TOTAL	NA	NA	0.10794908323907275	7	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs7412
+sensitivity_total_mediation	literature	independent_outcome_only	dry_AMD	TOTAL	NA	NA	0.1593879776702265	7	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs7412
+sensitivity_total_mediation	literature	independent_outcome_only	wet_AMD	TOTAL	NA	NA	0.07010372624411468	7	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs7412
+sensitivity_subset	literature	replication_supported_only	all	NA	NA	NA	9	9	value=primary genes meeting evidence filter; n=genes also eligible for mediation.	NA	NA	NA	NA	NA	NA	NA
+sensitivity_total_mediation	literature	replication_supported_only	AD	TOTAL	NA	NA	0.015652065395258916	9	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs429358
+sensitivity_total_mediation	literature	replication_supported_only	any_AMD	TOTAL	NA	NA	0.017891054566643694	9	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs429358
+sensitivity_total_mediation	literature	replication_supported_only	dry_AMD	TOTAL	NA	NA	-0.005359019596941486	9	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs429358
+sensitivity_total_mediation	literature	replication_supported_only	wet_AMD	TOTAL	NA	NA	0.03947341182343008	9	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs429358
+sensitivity_total_mediation	literature	replication_supported_only	AD	TOTAL	NA	NA	0.011007048574435173	9	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs7412
+sensitivity_total_mediation	literature	replication_supported_only	any_AMD	TOTAL	NA	NA	0.11782592276068869	9	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs7412
+sensitivity_total_mediation	literature	replication_supported_only	dry_AMD	TOTAL	NA	NA	0.14793703156294055	9	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs7412
+sensitivity_total_mediation	literature	replication_supported_only	wet_AMD	TOTAL	NA	NA	0.10967987177642967	9	Main-instrument indirect effects filtered by prespecified literature evidence attribute; empty subsets are NA, not zero.	NA	NA	NA	NA	NA	NA	rs7412
+sensitivity_total_mediation	literature	cis_only_instrument_set	AD	TOTAL	NA	NA	0.00180690829123028	25	Two-step mediation rerun using cis-only protein instruments; unavailable results are NA, not zero.	NA	NA	NA	NA	NA	NA	rs429358
+sensitivity_total_mediation	literature	cis_only_instrument_set	any_AMD	TOTAL	NA	NA	0.0303868190862013	25	Two-step mediation rerun using cis-only protein instruments; unavailable results are NA, not zero.	NA	NA	NA	NA	NA	NA	rs429358
+sensitivity_total_mediation	literature	cis_only_instrument_set	dry_AMD	TOTAL	NA	NA	0.0329927302288477	25	Two-step mediation rerun using cis-only protein instruments; unavailable results are NA, not zero.	NA	NA	NA	NA	NA	NA	rs429358
+sensitivity_total_mediation	literature	cis_only_instrument_set	wet_AMD	TOTAL	NA	NA	0.0571035333660285	25	Two-step mediation rerun using cis-only protein instruments; unavailable results are NA, not zero.	NA	NA	NA	NA	NA	NA	rs429358
+sensitivity_total_mediation	literature	cis_only_instrument_set	AD	TOTAL	NA	NA	-0.0616925584880764	25	Two-step mediation rerun using cis-only protein instruments; unavailable results are NA, not zero.	NA	NA	NA	NA	NA	NA	rs7412
+sensitivity_total_mediation	literature	cis_only_instrument_set	any_AMD	TOTAL	NA	NA	0.0168885774128629	25	Two-step mediation rerun using cis-only protein instruments; unavailable results are NA, not zero.	NA	NA	NA	NA	NA	NA	rs7412
+sensitivity_total_mediation	literature	cis_only_instrument_set	dry_AMD	TOTAL	NA	NA	-0.0983191504278218	25	Two-step mediation rerun using cis-only protein instruments; unavailable results are NA, not zero.	NA	NA	NA	NA	NA	NA	rs7412
+sensitivity_total_mediation	literature	cis_only_instrument_set	wet_AMD	TOTAL	NA	NA	0.0965305254268515	25	Two-step mediation rerun using cis-only protein instruments; unavailable results are NA, not zero.	NA	NA	NA	NA	NA	NA	rs7412
+sensitivity_subset	literature	strict_annotation_sensitivity	all	NA	NA	NA	18	18	High-confidence target annotation only; all retained alpha and beta estimates use the same UKB-PPP assay.	NA	NA	NA	NA	NA	NA	NA
+sensitivity_total_mediation	literature	strict_annotation_sensitivity	AD	TOTAL	NA	NA	0.00540447794408946	18	High-confidence mapping sensitivity; moderate mappings are excluded uniformly rather than protein-by-protein.	NA	NA	NA	NA	NA	NA	rs429358
+sensitivity_total_mediation	literature	strict_annotation_sensitivity	any_AMD	TOTAL	NA	NA	0.0233678072610322	18	High-confidence mapping sensitivity; moderate mappings are excluded uniformly rather than protein-by-protein.	NA	NA	NA	NA	NA	NA	rs429358
+sensitivity_total_mediation	literature	strict_annotation_sensitivity	dry_AMD	TOTAL	NA	NA	0.00767271226235054	18	High-confidence mapping sensitivity; moderate mappings are excluded uniformly rather than protein-by-protein.	NA	NA	NA	NA	NA	NA	rs429358
+sensitivity_total_mediation	literature	strict_annotation_sensitivity	wet_AMD	TOTAL	NA	NA	0.0219964976590234	18	High-confidence mapping sensitivity; moderate mappings are excluded uniformly rather than protein-by-protein.	NA	NA	NA	NA	NA	NA	rs429358
+sensitivity_total_mediation	literature	strict_annotation_sensitivity	AD	TOTAL	NA	NA	-0.0220621932984002	18	High-confidence mapping sensitivity; moderate mappings are excluded uniformly rather than protein-by-protein.	NA	NA	NA	NA	NA	NA	rs7412
+sensitivity_total_mediation	literature	strict_annotation_sensitivity	any_AMD	TOTAL	NA	NA	0.0840953197949087	18	High-confidence mapping sensitivity; moderate mappings are excluded uniformly rather than protein-by-protein.	NA	NA	NA	NA	NA	NA	rs7412
+sensitivity_total_mediation	literature	strict_annotation_sensitivity	dry_AMD	TOTAL	NA	NA	0.14954141498451	18	High-confidence mapping sensitivity; moderate mappings are excluded uniformly rather than protein-by-protein.	NA	NA	NA	NA	NA	NA	rs7412
+sensitivity_total_mediation	literature	strict_annotation_sensitivity	wet_AMD	TOTAL	NA	NA	0.0122168013864099	18	High-confidence mapping sensitivity; moderate mappings are excluded uniformly rather than protein-by-protein.	NA	NA	NA	NA	NA	NA	rs7412

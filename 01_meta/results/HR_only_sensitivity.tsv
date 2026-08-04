@@ -1,0 +1,2 @@
+analysis	included_effect_metrics	excluded_studies	k	pooled_relative_effect	CI_lower	CI_upper	P_value	I2_percent	tau2	prediction_interval_lower	prediction_interval_upper	model
+"HR_only_sensitivity"	"HR;aHR"	"Keenan 2014;Klaver 1999"	8	1.23060401498966	1.07017914107904	1.41507733012041	0.00982164026060541	79.8076499733538	0.017419511711147	0.875894764754231	1.72895912003037	"REML random effects with Hartung-Knapp confidence interval"

@@ -1,0 +1,43 @@
+# Analysis-to-output map
+
+## Clinical layer
+
+| Analysis | Primary code | Committed verification data |
+|---|---|---|
+| Random-effects meta-analysis | `01_meta/scripts/meta_analysis.R` | `01_meta/source_data/Figure_2_source_data.csv` |
+| Effect-metric audit and HR-only sensitivity | `01_meta/scripts/effect_metric_sensitivity.R` | `01_meta/results/` |
+| GRADE | `01_meta/scripts/grade_assessment.R` | `01_meta/tables/Table4_GRADE_SoF.csv` and `TableS7_GRADE_Evidence_Profile.csv` |
+| PRISMA screening counts and checklist locations | Layout code intentionally not distributed | `01_meta/PRISMA/Article1_PRISMA_content.json` |
+
+## Genetic architecture layer
+
+| Analysis | Primary code | Committed verification data |
+|---|---|---|
+| LDSC | `02_genetic_arch/LDSC/0.LDSC.R` | `LDSC_Results_Formatted.csv` |
+| HDL | `02_genetic_arch/HDL/0.HDL.R` | `Figure_3_HDL_results.csv` |
+| MiXeR and conditional Q-Q | `02_genetic_arch/MiXeR/` | JSON fits and summary CSV files |
+| LAVA | `02_genetic_arch/LAVA/1.LAVA.R` | Three final local-correlation scans |
+| HyPrColoc | `02_genetic_arch/HyPrColoc_v1/HyPrColoc.R` | APOE-region source and result tables |
+| MAGMA | `02_genetic_arch/MAGMA/` | Four complete `.genes.out` files and figure source data |
+
+## APOE anchoring layer
+
+| Analysis | Primary code | Committed verification data |
+|---|---|---|
+| rs429358 and rs7412 contrasts | `03_causal_lock/02_wald_ratio.R`, `P0_isoform/01_rs7412_wald.R` | Variant-effect tables under each module's `results/` |
+| Genome-wide bidirectional MR | `03_causal_lock/03_gw_bidirectional.R` | Summary tables under `03_causal_lock/results/` |
+| APOE-region exclusion | `03_causal_lock/04_apoe_exclusion.R` | `table2_with_vs_without_apoe.csv` |
+| Approximate conditional analysis | `P0_finemap/04_gcta_cojo_apoe_conditional.R` | COJO outputs and `FigS10_GCTA_COJO_source_data.tsv` |
+
+## Circulating-protein layer
+
+| Analysis | Primary code | Committed verification data |
+|---|---|---|
+| Literature search, screening, and provenance | `A1_protein_upgrade/scripts/01_*` to `06_*` | `literature/` and provenance tables |
+| APOE variant-to-protein alpha | `07_extract_apoe_alpha.py` | `APOE_variant_to_literature_proteins_alpha.tsv` |
+| Protein-to-outcome beta | `09_reestimate_literature_panel_beta.R` | `literature_panel_beta_results.tsv` |
+| Two-step mediation | `11_two_step_mediation.R` | `APOE_linkable_two_step_mediation.tsv` and sensitivity variants |
+| Panel finalization and comparison | `12_finalize_panel_tables.py` | `new_vs_legacy_panel_comparison.tsv` and exclusion tables |
+| deCODE same-platform extension | `A1_dual_scale_mediation/scripts/04_*` to `18_*` | deCODE alpha, beta, mediation, PAV, and shared-instrument tables |
+
+The original biology-guided panel remains under `04_protein_mr/`, `05_mediation/`, `06_pathway_mvmr/`, and `P0_proteome/` as a frozen sensitivity analysis. Historical filenames do not imply a de novo proteome-wide scan.

@@ -1,0 +1,47 @@
+version: 1.0
+genome_build: GRCh37_hg19
+
+default_policy:
+  high_complexity: true
+  prohibit_tier1_from_MR_P_alone: true
+  require_instrument_review: true
+  require_colocalization_assumption_review: true
+  record_structural_variation_risk: true
+  record_assay_specificity_risk: true
+
+loci:
+  APOE_TOMM40_APOC1:
+    chromosome: 19
+    start_bp: 44000000
+    end_bp: 46500000
+    risks:
+      - strong_long_range_LD
+      - multiple_genes
+      - isoform_defining_variants
+      - cis_circularity_for_APOE_protein
+  CFH_CFHR1_5:
+    chromosome: 1
+    start_bp: 195000000
+    end_bp: 197500000
+    risks:
+      - segmental_duplication
+      - structural_variation
+      - homologous_proteins
+      - assay_cross_reactivity
+      - multiple_causal_variants_possible
+  HLA:
+    chromosome: 6
+    start_bp: 25000000
+    end_bp: 34000000
+    risks:
+      - extended_LD
+      - high_polymorphism
+      - multiple_causal_variants_possible
+  IGH:
+    chromosome: 14
+    start_bp: 105000000
+    end_bp: 107500000
+    risks:
+      - structural_variation
+      - somatic_rearrangement_region
+      - mapping_complexity

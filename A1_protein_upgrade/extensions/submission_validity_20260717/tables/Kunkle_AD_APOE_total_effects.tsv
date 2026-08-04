@@ -1,0 +1,3 @@
+variant	outcome	requested_effect_allele	requested_other_allele	original_effect_allele	original_other_allele	allele_flipped	beta	SE	P_value	sample_size	outcome_GWAS	availability_status	exclusion_reason
+"rs429358"	"AD_Kunkle_2019_clinically_diagnosed"	"C"	"T"	"T"	"C"	TRUE	1.2017	0.0189	0	63926	"Kunkle_2019_Stage1_clinically_diagnosed_AD"	"direct_variant_available"	"NA"
+"rs7412"	"AD_Kunkle_2019_clinically_diagnosed"	"T"	"C"	"T"	"C"	FALSE	-0.4673	0.0305	6.401e-53	63926	"Kunkle_2019_Stage1_clinically_diagnosed_AD"	"direct_variant_available"	"NA"

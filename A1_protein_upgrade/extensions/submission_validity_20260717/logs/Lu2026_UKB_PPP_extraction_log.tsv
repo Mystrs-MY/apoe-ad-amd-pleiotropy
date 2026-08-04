@@ -1,0 +1,6 @@
+gene_symbol	source_tar	n_p_lt_5e8_after_APOE_exclusion	direct_APOE_variants_found	status
+CTF1	data_raw/lu2026_ukbppp_exact_assays/CTF1_Q16619_OID20061_v1_Cardiometabolic.tar	516	2	complete
+HBQ1	data_raw/lu2026_ukbppp_exact_assays/HBQ1_P09105_OID21433_v1_Oncology.tar	1316	2	complete
+LRRN1	data_raw/lu2026_ukbppp_exact_assays/LRRN1_Q6UXK5_OID20438_v1_Inflammation.tar	3181	2	complete
+S100A13	data_raw/lu2026_ukbppp_exact_assays/S100A13_Q99584_OID30529_v1_Inflammation_II.tar	484	2	complete
+TBCA	data_raw/lu2026_ukbppp_exact_assays/TBCA_O75347_OID30616_v1_Inflammation_II.tar	948	2	complete

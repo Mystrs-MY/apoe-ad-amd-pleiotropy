@@ -1,0 +1,35 @@
+gene	outcome	status	n_common	SNP_selection	high_complexity	n_pqtl_signals	n_gwas_signals	n_signal_pairs
+TREM2	AD	"SuSiE_error: GWAS: The estimated prior variance is unreasonably large.
+	     This is usually caused by mismatch between the summary statistics and the LD matrix.
+             Please check the input."	1200	top_signal_plus_genomic_grid_sensitivity	FALSE			
+TREM2	Dry	not_prespecified_multicausal_pair	1200	top_signal_plus_genomic_grid_sensitivity	FALSE			
+TREM2	Wet	not_prespecified_multicausal_pair	1200	top_signal_plus_genomic_grid_sensitivity	FALSE			
+TREM2	Any	not_prespecified_multicausal_pair	1200	top_signal_plus_genomic_grid_sensitivity	FALSE			
+IL6R	AD	not_prespecified_multicausal_pair	1200	top_signal_plus_genomic_grid_sensitivity	FALSE			
+IL6R	Dry	"SuSiE_error: pQTL: The estimated prior variance is unreasonably large.
+	     This is usually caused by mismatch between the summary statistics and the LD matrix.
+             Please check the input."	1200	top_signal_plus_genomic_grid_sensitivity	FALSE			
+IL6R	Wet	"SuSiE_error: pQTL: The estimated prior variance is unreasonably large.
+	     This is usually caused by mismatch between the summary statistics and the LD matrix.
+             Please check the input."	1200	top_signal_plus_genomic_grid_sensitivity	FALSE			
+IL6R	Any	"SuSiE_error: pQTL: The estimated prior variance is unreasonably large.
+	     This is usually caused by mismatch between the summary statistics and the LD matrix.
+             Please check the input."	1200	top_signal_plus_genomic_grid_sensitivity	FALSE			
+CFB	AD	not_prespecified_multicausal_pair	1200	top_signal_plus_genomic_grid_sensitivity	TRUE			
+CFB	Dry	estimated	1200	top_signal_plus_genomic_grid_sensitivity	TRUE	5	5	25
+CFB	Wet	estimated	1200	top_signal_plus_genomic_grid_sensitivity	TRUE	5	5	25
+CFB	Any	estimated	1200	top_signal_plus_genomic_grid_sensitivity	TRUE	5	5	25
+CFH	AD	not_prespecified_multicausal_pair	1200	top_signal_plus_genomic_grid_sensitivity	TRUE			
+CFH	Dry	estimated	1200	top_signal_plus_genomic_grid_sensitivity	TRUE	3	3	9
+CFH	Wet	estimated	1200	top_signal_plus_genomic_grid_sensitivity	TRUE	3	2	6
+CFH	Any	estimated	1200	top_signal_plus_genomic_grid_sensitivity	TRUE	3	5	15
+CFP	AD	no_LD_reference_region	0		FALSE			
+CFP	Dry	no_LD_reference_region	0		FALSE			
+CFP	Wet	no_LD_reference_region	0		FALSE			
+CFP	Any	no_LD_reference_region	0		FALSE			
+PCSK9	AD	not_prespecified_multicausal_pair	1200	top_signal_plus_genomic_grid_sensitivity	FALSE			
+PCSK9	Dry	"SuSiE_error: GWAS: The estimated prior variance is unreasonably large.
+	     This is usually caused by mismatch between the summary statistics and the LD matrix.
+             Please check the input."	1200	top_signal_plus_genomic_grid_sensitivity	FALSE			
+PCSK9	Wet	estimated	1200	top_signal_plus_genomic_grid_sensitivity	FALSE	5	0	1
+PCSK9	Any	estimated	1200	top_signal_plus_genomic_grid_sensitivity	FALSE	5	3	15

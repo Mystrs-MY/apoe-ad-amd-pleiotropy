@@ -1,0 +1,3 @@
+gene_symbol	assay_target_ID	n_candidates_in_EUR_reference	n_clumped_instruments	n_clumped_cis	minimum_F	median_F	n_ImpMAF_lt_0_01
+"BRD2"	"10074_128"	17	1	1	38.3395376477671	38.3395376477671	0
+"TMEM106B"	"8687_26"	288	1	1	201.931533871235	201.931533871235	0

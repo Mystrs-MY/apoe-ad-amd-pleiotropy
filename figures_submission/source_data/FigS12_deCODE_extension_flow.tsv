@@ -1,0 +1,7 @@
+stage	count	interpretation
+excluded_genes	8	BRD2;IL20RB;CLN5;COL10A1;PLOD2;SDF2;TMEM106B;VTN
+exact_SomaScan_aptamers	9	BRD2 has two aptamers
+planned_mediation_paths	72	9 aptamers x 2 APOE variants x 4 outcomes
+genome_wide_corrected_paths	3	BRD2 10074_128; CFH-locus trans tool
+cis_only_corrected_paths	1	TMEM106B 8687_26; target-gene PAV-linked tool
+robust_after_cis_PAV_shared_tool_audit	0	no robust mediator retained

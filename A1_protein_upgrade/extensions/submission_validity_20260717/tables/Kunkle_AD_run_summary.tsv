@@ -1,0 +1,10 @@
+metric	value
+frozen_protein_SNP_pairs	409
+unique_frozen_SNPs	367
+requested_SNPs_found_in_Kunkle	347
+pair_coverage_fraction	0.941320293398533
+estimable_proteins	25
+primary_beta_tests	25
+protein_mediation_paths	50
+aggregate_rows	2
+beta_direction_concordance_fraction	0.8
