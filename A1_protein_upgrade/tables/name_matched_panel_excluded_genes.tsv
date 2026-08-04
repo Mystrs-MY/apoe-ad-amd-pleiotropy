@@ -1,8 +1,8 @@
 gene_symbol	literature_target_entries	candidate_UKB_assays	selected_Olink_assay	mapping_confidence	rs429358_alpha_available	rs7412_alpha_available	estimable_outcome_beta_count	eligible_for_final_mediation	exclusion_reason	missing_values_treated_as_zero	notes
-BRD2	1	1	OID30826	moderate	True	True	0	False	one_or_more_current_A1_outcome_beta_estimates_not_reestimable	False	Published beta was not substituted for a missing same-assay UKB-PPP estimate.
+BRD2	1	1	OID30826	moderate	True	True	0	False	one_or_more_primary_outcome_beta_estimates_not_reestimable	False	Published beta was not substituted for a missing same-assay UKB-PPP estimate.
 CLN5	1	0	NA	not_mapped	False	False	0	False	UKB-PPP_assay_unavailable_after_alias_audit	False	Published beta was not substituted for a missing same-assay UKB-PPP estimate.
 COL10A1	1	0	NA	not_mapped	False	False	0	False	UKB-PPP_assay_unavailable_after_alias_audit	False	Published beta was not substituted for a missing same-assay UKB-PPP estimate.
-IL20RB	1	1	OID30461	moderate	True	True	0	False	one_or_more_current_A1_outcome_beta_estimates_not_reestimable	False	Published beta was not substituted for a missing same-assay UKB-PPP estimate.
+IL20RB	1	1	OID30461	moderate	True	True	0	False	one_or_more_primary_outcome_beta_estimates_not_reestimable	False	Published beta was not substituted for a missing same-assay UKB-PPP estimate.
 PLOD2	1	0	NA	not_mapped	False	False	0	False	UKB-PPP_assay_unavailable_after_alias_audit	False	Published beta was not substituted for a missing same-assay UKB-PPP estimate.
 SDF2	1	0	NA	not_mapped	False	False	0	False	UKB-PPP_assay_unavailable_after_alias_audit	False	Published beta was not substituted for a missing same-assay UKB-PPP estimate.
 TMEM106B	1	0	NA	not_mapped	False	False	0	False	UKB-PPP_assay_unavailable_after_alias_audit	False	Published beta was not substituted for a missing same-assay UKB-PPP estimate.

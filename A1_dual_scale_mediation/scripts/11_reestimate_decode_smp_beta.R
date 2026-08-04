@@ -21,7 +21,7 @@ arg_value <- function(name, default) {
 }
 output_prefix <- arg_value("output-prefix", "decode_smp")
 normalization_label <- arg_value("normalization-label", "smp")
-inference_role <- arg_value("inference-role", "independent_same_platform_sensitivity")
+inference_role <- arg_value("inference-role", "independent_platform_same_assay_sensitivity")
 planned_assays <- as.integer(arg_value("planned-assays", "9"))
 root <- normalizePath(file.path(dirname(script_path), ".."), winslash = "/", mustWork = TRUE)
 project_root <- normalizePath(file.path(root, ".."), winslash = "/", mustWork = TRUE)
@@ -122,7 +122,7 @@ empty_result <- function(meta, outcome, status, reason, n_clumped = 0L, n_harmon
     Cochran_Q = NA_real_, Q_df = NA_real_, Q_P = NA_real_, Egger_intercept = NA_real_,
     Egger_intercept_SE = NA_real_, Egger_intercept_P = NA_real_, mean_F = NA_real_, min_F = NA_real_,
     beta_status = status, exclusion_reason = reason,
-    beta_source = paste0("deCODE_SomaScan_", normalization_label, "_", analysis_mode, "_to_frozen_A1_outcomes"),
+    beta_source = paste0("deCODE_SomaScan_", normalization_label, "_", analysis_mode, "_to_prespecified_primary_outcomes"),
     instrument_scope = analysis_mode,
     inference_role = inference_role,
     planned_tests_per_outcome = planned_assays, planned_global_beta_tests = planned_global_beta_family,
@@ -244,7 +244,7 @@ for (assay_id in names(clumped_by_assay)) {
       Egger_intercept_P = if (nrow(pleiotropy)) pleiotropy$pval[1] else NA_real_,
       mean_F = mean(harmonized$F_statistic), min_F = min(harmonized$F_statistic),
       beta_status = "reestimated", exclusion_reason = "NA",
-      beta_source = paste0("deCODE_SomaScan_", normalization_label, "_", analysis_mode, "_to_frozen_A1_outcomes"),
+      beta_source = paste0("deCODE_SomaScan_", normalization_label, "_", analysis_mode, "_to_prespecified_primary_outcomes"),
       instrument_scope = analysis_mode,
       inference_role = inference_role,
       planned_tests_per_outcome = planned_assays, planned_global_beta_tests = planned_global_beta_family,

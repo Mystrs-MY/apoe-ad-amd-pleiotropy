@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Finalize alpha/beta flags and construct new-versus-legacy comparison tables."""
+"""Finalize alpha/beta flags and compare literature and biology-guided panels."""
 
 from __future__ import annotations
 
@@ -18,16 +18,20 @@ MEDIATION = ROOT / "tables" / "APOE_linkable_two_step_mediation.tsv"
 MEDIATION_CIS = ROOT / "tables" / "APOE_linkable_two_step_mediation_cis_sensitivity.tsv"
 MEDIATION_STRICT = ROOT / "tables" / "APOE_linkable_two_step_mediation_strict_sensitivity.tsv"
 TARGET_MAPPING = ROOT / "tables" / "APOE_linkable_target_assay_mapping.tsv"
-TOTALS = ROOT / "tables" / "APOE_variant_total_effects_current_A1.tsv"
-LEGACY_SELECTION = ROOT.parent / "tables" / "TableS4_Protein_Selection.csv"
-LEGACY_ALPHA = ROOT.parent / "04_protein_mr" / "C6_rs429358_effects.csv"
-LEGACY_BETA = ROOT.parent / "04_protein_mr" / "C6_ukbppp_mr_all.csv"
-LEGACY_MEDIATION = ROOT.parent / "05_mediation" / "D_nvmr_mediation_all.csv"
-COMPARISON = ROOT / "tables" / "new_vs_legacy_panel_comparison.tsv"
-CURRENT_EXCLUSIONS = ROOT / "tables" / "name_matched_panel_excluded_genes.tsv"
+TOTALS = ROOT / "tables" / "APOE_variant_total_effects_primary_analysis.tsv"
+BIOLOGY_GUIDED_ALPHA = ROOT.parent / "04_protein_mr" / "C6_rs429358_effects.csv"
+BIOLOGY_GUIDED_BETA = ROOT.parent / "04_protein_mr" / "C6_ukbppp_mr_all.csv"
+BIOLOGY_GUIDED_MEDIATION = ROOT.parent / "05_mediation" / "D_two_step_mediation_all.csv"
+COMPARISON = ROOT / "tables" / "literature_vs_biology_guided_panel_comparison.tsv"
+EXCLUSIONS_OUTPUT = ROOT / "tables" / "name_matched_panel_excluded_genes.tsv"
 
 OUTCOMES = ["AD", "any_AMD", "dry_AMD", "wet_AMD"]
-LEGACY_OUTCOME_MAP = {"AD": "AD", "Any_AMD": "any_AMD", "Dry_AMD": "dry_AMD", "Wet_AMD": "wet_AMD"}
+BIOLOGY_GUIDED_OUTCOME_MAP = {
+    "AD": "AD",
+    "Any_AMD": "any_AMD",
+    "Dry_AMD": "dry_AMD",
+    "Wet_AMD": "wet_AMD",
+}
 
 
 def semicolon(values: pd.Series) -> str:
@@ -42,11 +46,16 @@ def update_provenance(
     target_mapping: pd.DataFrame,
 ) -> pd.DataFrame:
     key_columns = ["gene_symbol", "protein_name", "protein_form_or_isoform"]
+    eligible_mapping = target_mapping[
+        target_mapping["eligible_for_primary"].astype(str).str.lower().eq("true")
+    ]
     mapped_keys = {
-        tuple(row[column] for column in key_columns)
-        for _, row in target_mapping[
-            target_mapping["eligible_for_alpha_beta_triangulation"].astype(str).str.lower().eq("true")
-        ].iterrows()
+        (
+            row["standardized_gene_symbol"],
+            row["literature_protein_name"],
+            row["literature_protein_form"],
+        )
+        for _, row in eligible_mapping.iterrows()
     }
     provenance_keys = provenance[key_columns].apply(tuple, axis=1)
     scope_mask = provenance["inclusion_status"].isin([
@@ -101,7 +110,7 @@ def add_beta_placeholders(
                 "method": "not_estimable", "method_role": "primary", "nsnp": 0,
                 "beta": "NA", "SE": "NA", "P_value": "NA", "beta_status": "not_reestimable",
                 "exclusion_reason": (
-                    "No harmonizable protein instruments were available for the current outcome GWAS."
+                    "No harmonizable protein instruments were available for the corresponding outcome GWAS."
                     if mapped else "No eligible UKB-PPP assay was found after approved-symbol and alias audit."
                 ),
                 "beta_source": "published_beta_retained_in_provenance_only",
@@ -117,7 +126,7 @@ def distribution_record(panel: str, variable: str, outcome: str, values: pd.Seri
     numeric = pd.to_numeric(values, errors="coerce").dropna()
     return {
         "record_type": "distribution_summary", "panel": panel, "metric": variable, "outcome": outcome,
-        "gene_symbol": "NA", "in_literature_panel": "NA", "in_legacy_panel": "NA",
+        "gene_symbol": "NA", "in_literature_panel": "NA", "in_biology_guided_panel": "NA",
         "value": "NA", "n": len(numeric), "mean": numeric.mean() if len(numeric) else "NA",
         "median": numeric.median() if len(numeric) else "NA",
         "q1": numeric.quantile(0.25) if len(numeric) else "NA",
@@ -137,67 +146,91 @@ def build_comparison(
     target_mapping: pd.DataFrame,
 ) -> None:
     new_genes = sorted(provenance.loc[provenance["inclusion_status"] == "primary_high_confidence_panel", "gene_symbol"].unique())
-    legacy_selection = pd.read_csv(LEGACY_SELECTION, dtype=str)
-    legacy_genes = sorted(legacy_selection["Gene"].unique())
-    union = sorted(set(new_genes) | set(legacy_genes))
-    overlap = set(new_genes) & set(legacy_genes)
+    biology_guided_alpha = pd.read_csv(BIOLOGY_GUIDED_ALPHA, dtype=str)
+    biology_guided_genes = sorted(biology_guided_alpha["Gene"].unique())
+    union = sorted(set(new_genes) | set(biology_guided_genes))
+    overlap = set(new_genes) & set(biology_guided_genes)
     rows: list[dict[str, object]] = []
     for gene in union:
         rows.append({
-            "record_type": "membership", "panel": "both" if gene in overlap else "literature" if gene in new_genes else "legacy",
+            "record_type": "membership",
+            "panel": "both" if gene in overlap else "literature" if gene in new_genes else "biology_guided",
             "metric": "panel_membership", "outcome": "NA", "gene_symbol": gene,
-            "in_literature_panel": gene in new_genes, "in_legacy_panel": gene in legacy_genes,
+            "in_literature_panel": gene in new_genes,
+            "in_biology_guided_panel": gene in biology_guided_genes,
             "value": "NA", "n": 1, "notes": "Gene-level membership only; assay-level mapping remains separate.",
         })
     union_count = len(set(union))
     summaries = {
-        "literature_unique_genes": len(new_genes), "legacy_unique_genes": len(legacy_genes),
+        "literature_unique_genes": len(new_genes),
+        "biology_guided_unique_genes": len(biology_guided_genes),
         "overlap_genes": len(overlap), "union_genes": union_count,
         "Jaccard_index": len(overlap) / union_count if union_count else math.nan,
-        "overlap_coefficient": len(overlap) / min(len(new_genes), len(legacy_genes)),
+        "overlap_coefficient": len(overlap) / min(len(new_genes), len(biology_guided_genes)),
     }
     for metric, value in summaries.items():
         rows.append({
-            "record_type": "panel_summary", "panel": "new_vs_legacy", "metric": metric, "outcome": "NA",
-            "gene_symbol": "NA", "in_literature_panel": "NA", "in_legacy_panel": "NA",
+            "record_type": "panel_summary", "panel": "literature_vs_biology_guided", "metric": metric, "outcome": "NA",
+            "gene_symbol": "NA", "in_literature_panel": "NA", "in_biology_guided_panel": "NA",
             "value": value, "n": "NA", "notes": "No study count is interpreted as independent replication.",
         })
 
     mapping_eligible = alpha.get("eligible_for_two_step_mapping", "false").astype(str).str.lower().eq("true")
     new_alpha = alpha[(alpha["availability_status"] == "direct_variant_available") & mapping_eligible]
     alpha_note = f"Direct alpha with eligible target-to-assay mapping; {new_alpha['gene_symbol'].nunique()} unique Olink assay genes."
-    legacy_alpha = pd.read_csv(LEGACY_ALPHA)
+    biology_guided_alpha = pd.read_csv(BIOLOGY_GUIDED_ALPHA)
     rows.append(distribution_record("literature", "alpha_rs429358", "NA", new_alpha.loc[new_alpha["variant"] == "rs429358", "beta"],
                                     alpha_note))
     rows.append(distribution_record("literature", "alpha_rs7412", "NA", new_alpha.loc[new_alpha["variant"] == "rs7412", "beta"],
                                     alpha_note))
-    rows.append(distribution_record("legacy", "alpha_rs429358", "NA", legacy_alpha.loc[legacy_alpha["Gene"] != "APOE", "BETA"],
-                                    "Legacy alpha table; APOE protein excluded."))
-    rows.append(distribution_record("legacy", "alpha_rs7412", "NA", pd.Series(dtype=float),
-                                    "Legacy analysis did not extract rs7412 alpha."))
+    rows.append(distribution_record(
+        "biology_guided",
+        "alpha_rs429358",
+        "NA",
+        biology_guided_alpha.loc[biology_guided_alpha["Gene"] != "APOE", "BETA"],
+        "Biology-guided panel alpha table; APOE protein excluded.",
+    ))
+    rows.append(distribution_record(
+        "biology_guided",
+        "alpha_rs7412",
+        "NA",
+        pd.Series(dtype=float),
+        "The biology-guided panel analysis did not extract rs7412 alpha.",
+    ))
 
     mapped_genes = set(target_mapping.loc[
-        target_mapping["eligible_for_alpha_beta_triangulation"].astype(str).str.lower().eq("true"),
-        "gene_symbol",
+        target_mapping["eligible_for_primary"].astype(str).str.lower().eq("true"),
+        "standardized_gene_symbol",
     ])
-    current_primary = beta[
+    primary_beta = beta[
         (beta["method_role"] == "primary")
         & (beta["beta_status"] == "reestimated")
         & beta["gene_symbol"].isin(mapped_genes)
     ]
-    legacy_beta = pd.read_csv(LEGACY_BETA)
-    legacy_beta = legacy_beta[(legacy_beta["method"] == "Inverse variance weighted") & (legacy_beta["exposure"] != "APOE")]
-    legacy_beta["outcome_standard"] = legacy_beta["outcome"].map(LEGACY_OUTCOME_MAP)
+    biology_guided_beta = pd.read_csv(BIOLOGY_GUIDED_BETA)
+    biology_guided_beta = biology_guided_beta[
+        (biology_guided_beta["method"] == "Inverse variance weighted")
+        & (biology_guided_beta["exposure"] != "APOE")
+    ]
+    biology_guided_beta["outcome_standard"] = biology_guided_beta["outcome"].map(
+        BIOLOGY_GUIDED_OUTCOME_MAP
+    )
     for outcome in OUTCOMES:
         rows.append(distribution_record("literature", "beta_reestimated", outcome,
-                                        current_primary.loc[current_primary["outcome"] == outcome, "beta"],
-                                        f"Current A1 harmonization and clumping; {current_primary.loc[current_primary['outcome'] == outcome, 'gene_symbol'].nunique()} re-estimated assay genes."))
-        rows.append(distribution_record("legacy", "beta_legacy_IVW", outcome,
-                                        legacy_beta.loc[legacy_beta["outcome_standard"] == outcome, "b"],
-                                        "Legacy 29-protein IVW estimates; pipeline limitations are documented in the audit."))
+                                        primary_beta.loc[primary_beta["outcome"] == outcome, "beta"],
+                                        f"Primary-analysis harmonization and clumping; {primary_beta.loc[primary_beta['outcome'] == outcome, 'gene_symbol'].nunique()} re-estimated assay genes."))
+        rows.append(distribution_record(
+            "biology_guided",
+            "beta_biology_guided_IVW",
+            outcome,
+            biology_guided_beta.loc[biology_guided_beta["outcome_standard"] == outcome, "b"],
+            "Biology-guided 29-protein IVW estimates; pipeline limitations are documented in the audit.",
+        ))
 
-    legacy_med = pd.read_csv(LEGACY_MEDIATION)
-    legacy_med["outcome_standard"] = legacy_med["outcome"].map(LEGACY_OUTCOME_MAP)
+    biology_guided_med = pd.read_csv(BIOLOGY_GUIDED_MEDIATION)
+    biology_guided_med["outcome_standard"] = biology_guided_med["outcome"].map(
+        BIOLOGY_GUIDED_OUTCOME_MAP
+    )
     totals = pd.read_csv(TOTALS, sep="\t")
     new_protein_med = mediation[mediation["row_type"] == "protein"]
     for variant in ["rs429358", "rs7412"]:
@@ -214,13 +247,22 @@ def build_comparison(
                 "notes": "Enriched-panel estimate among proteins with both alpha and re-estimated beta; not total circulating mediation.",
             })
             if variant == "rs429358":
-                legacy_subset = legacy_med[legacy_med["outcome_standard"] == outcome]
-                legacy_sum = pd.to_numeric(legacy_subset["mediation"], errors="coerce").sum()
+                biology_guided_subset = biology_guided_med[
+                    biology_guided_med["outcome_standard"] == outcome
+                ]
+                biology_guided_sum = pd.to_numeric(
+                    biology_guided_subset["mediation"], errors="coerce"
+                ).sum()
                 rows.append({
-                    "record_type": "total_mediation", "panel": "legacy", "metric": "total_mediated_proportion_rebased",
-                    "outcome": outcome, "variant": variant, "gene_symbol": "TOTAL", "value": legacy_sum / denominator,
-                    "n": legacy_subset["gene"].nunique(),
-                    "notes": "Legacy indirect effects divided by newly verified current-A1 total effect for denominator comparability; not a rerun of legacy beta.",
+                    "record_type": "total_mediation",
+                    "panel": "biology_guided",
+                    "metric": "total_mediated_proportion_rebased",
+                    "outcome": outcome,
+                    "variant": variant,
+                    "gene_symbol": "TOTAL",
+                    "value": biology_guided_sum / denominator,
+                    "n": biology_guided_subset["gene"].nunique(),
+                    "notes": "Biology-guided panel indirect effects divided by the verified primary-analysis total effect for denominator comparability; not a rerun of the biology-guided panel beta estimates.",
                 })
 
     primary_evidence = provenance[provenance["inclusion_status"] == "primary_high_confidence_panel"].copy()
@@ -293,7 +335,7 @@ def build_comparison(
     comparison.to_csv(COMPARISON, sep="\t", index=False)
 
 
-def build_current_exclusions(
+def build_exclusion_audit(
     provenance: pd.DataFrame,
     alpha: pd.DataFrame,
     beta: pd.DataFrame,
@@ -328,7 +370,7 @@ def build_current_exclusions(
         elif set(alpha_gene["variant"]) != {"rs429358", "rs7412"}:
             reason = "one_or_both_direct_APOE_alpha_estimates_unavailable"
         elif beta_gene["outcome"].nunique() < 4:
-            reason = "one_or_more_current_A1_outcome_beta_estimates_not_reestimable"
+            reason = "one_or_more_primary_outcome_beta_estimates_not_reestimable"
         else:
             reason = "eligibility_assertion_requires_review"
         rows.append({
@@ -356,7 +398,7 @@ def build_current_exclusions(
     output = pd.DataFrame(rows)
     if len(output):
         assert output["exclusion_reason"].notna().all() and output["exclusion_reason"].ne("").all()
-    output.to_csv(CURRENT_EXCLUSIONS, sep="\t", index=False)
+    output.to_csv(EXCLUSIONS_OUTPUT, sep="\t", index=False)
 
 
 def main() -> None:
@@ -373,7 +415,7 @@ def main() -> None:
                                      ["gene_symbol", "protein_name", "protein_form_or_isoform"]].drop_duplicates()
     beta = add_beta_placeholders(beta, primary_targets, target_mapping)
     build_comparison(provenance, alpha, beta, mediation, cis_mediation, strict_mediation, target_mapping)
-    build_current_exclusions(provenance, alpha, beta, mediation, target_mapping)
+    build_exclusion_audit(provenance, alpha, beta, mediation, target_mapping)
     print(f"Primary target entries: {len(primary_targets)}")
     print(f"Two-step eligible genes: {len(eligible)}")
     print(f"Output: {COMPARISON}")

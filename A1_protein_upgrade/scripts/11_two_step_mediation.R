@@ -20,7 +20,7 @@ upgrade_root <- normalizePath(file.path(dirname(script_path), ".."), winslash = 
 
 alpha_file <- file.path(upgrade_root, "tables", "APOE_variant_to_literature_proteins_alpha.tsv")
 beta_file <- file.path(upgrade_root, "tables", "literature_panel_beta_results.tsv")
-total_file <- file.path(upgrade_root, "tables", "APOE_variant_total_effects_current_A1.tsv")
+total_file <- file.path(upgrade_root, "tables", "APOE_variant_total_effects_primary_analysis.tsv")
 provenance_file <- file.path(upgrade_root, "tables", "Table_Literature_Prioritized_Protein_Provenance.tsv")
 target_mapping_file <- file.path(upgrade_root, "tables", "APOE_linkable_target_assay_mapping.tsv")
 output_file <- file.path(
@@ -76,30 +76,38 @@ beta_available <- beta_counts[n_outcomes == 4L, gene_symbol]
 eligible_genes <- intersect(alpha_available, beta_available)
 
 eligibility <- copy(primary_targets)
+target_mapping_for_merge <- unique(target_mapping[, .(
+  gene_symbol = standardized_gene_symbol,
+  protein_name = literature_protein_name,
+  protein_form_or_isoform = literature_protein_form,
+  UKB_PPP_Olink_target_ID = UKB_PPP_OID,
+  target_assay_mapping_status = fifelse(
+    mapping_eligible_bool,
+    paste0("name_matched_", mapping_confidence),
+    "mapping_unresolved"
+  ),
+  target_assay_mapping_confidence = mapping_confidence,
+  target_assay_mapping_eligible = mapping_eligible_bool
+)])
 eligibility <- merge(
   eligibility,
-  target_mapping[, .(
-    gene_symbol, protein_name, protein_form_or_isoform, local_Olink_target_ID,
-    target_assay_mapping_status = mapping_status,
-    target_assay_mapping_confidence = mapping_confidence,
-    target_assay_mapping_eligible = mapping_eligible_bool
-  )],
+  target_mapping_for_merge,
   by = c("gene_symbol", "protein_name", "protein_form_or_isoform"),
   all.x = TRUE
 )
-eligibility[, local_Olink_assay_available := !is.na(local_Olink_target_ID) & local_Olink_target_ID != "mapping_unresolved"]
+eligibility[, UKB_PPP_Olink_assay_available := !is.na(UKB_PPP_Olink_target_ID) & UKB_PPP_Olink_target_ID != "mapping_unresolved"]
 eligibility[, rs429358_alpha_available := target_assay_mapping_eligible %in% TRUE & gene_symbol %in% alpha[
   variant == "rs429358" & availability_status == "direct_variant_available", gene_symbol
 ]]
 eligibility[, rs7412_alpha_available := target_assay_mapping_eligible %in% TRUE & gene_symbol %in% alpha[
   variant == "rs7412" & availability_status == "direct_variant_available", gene_symbol
 ]]
-eligibility[, beta_reestimated_current_A1 := target_assay_mapping_eligible %in% TRUE & gene_symbol %in% beta_available]
+eligibility[, beta_reestimated_primary_analysis := target_assay_mapping_eligible %in% TRUE & gene_symbol %in% beta_available]
 eligibility[, eligible_for_two_step_MR := target_assay_mapping_eligible %in% TRUE & gene_symbol %in% eligible_genes]
 eligibility[, exclusion_reason := fifelse(
   eligible_for_two_step_MR, "NA",
-  fifelse(!local_Olink_assay_available,
-          "local_Olink_assay_unavailable",
+  fifelse(!UKB_PPP_Olink_assay_available,
+          "UKB_PPP_Olink_assay_unavailable",
           fifelse(!(target_assay_mapping_eligible %in% TRUE),
                   "target_to_Olink_assay_mapping_unresolved",
           fifelse(!rs429358_alpha_available | !rs7412_alpha_available,
@@ -142,8 +150,8 @@ flow <- data.table(
     "One selected Olink assay per included gene; one-to-many mappings are not auto-selected.",
     "Direct rs429358-C alpha; no proxy.", "Direct rs7412-T alpha; no proxy.",
     "Both direct APOE alpha estimates are required for the eight-path design.",
-    "At least one current-A1 outcome beta is estimable.",
-    "All four current-A1 outcome betas are estimable.",
+    "At least one primary-analysis outcome beta is estimable.",
+    "All four primary-analysis outcome betas are estimable.",
     "Same-assay alpha and beta with both APOE variants and all four outcomes.",
     "Unique assays represented by final mediation genes.",
     "Asserted as final genes x 2 APOE variants x 4 outcomes."

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Extract and harmonize direct APOE variant effects from current A1 outcome GWAS files."""
+"""Extract and harmonize direct APOE variant effects from the primary outcome GWAS files."""
 
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTCOMES_CONFIG = yaml.safe_load((ROOT / "config" / "outcomes.yml").read_text(encoding="utf-8"))
-OUTPUT = ROOT / "tables" / "APOE_variant_total_effects_current_A1.tsv"
+OUTPUT = ROOT / "tables" / "APOE_variant_total_effects_primary_analysis.tsv"
 
 VARIANTS = {
     "rs429358": {"position_hg19": 45411941, "effect_allele": "C", "other_allele": "T"},
@@ -52,7 +52,7 @@ def main() -> None:
                     "requested_effect_allele": variant["effect_allele"], "requested_other_allele": variant["other_allele"],
                     "source_SNP": "NA", "original_effect_allele": "NA", "original_other_allele": "NA",
                     "allele_flipped": "NA", "beta": "NA", "SE": "NA", "P_value": "NA", "EAF_original": "NA",
-                    "sample_size": "NA", "outcome_GWAS": specification["current_A1_source"],
+                    "sample_size": "NA", "outcome_GWAS": specification["primary_outcome_source"],
                     "source_file": str(path), "availability_status": "direct_variant_not_found",
                     "exclusion_reason": "Variant absent by both rsID and verified hg19 position.",
                 })
@@ -78,7 +78,7 @@ def main() -> None:
                 "source_SNP": source["SNP"], "original_effect_allele": effect, "original_other_allele": other,
                 "allele_flipped": flipped, "beta": beta, "SE": source["SE"], "P_value": source["P"],
                 "EAF_harmonized": eaf, "EAF_original": source_eaf, "sample_size": source["N"],
-                "outcome_GWAS": specification["current_A1_source"], "source_file": str(path),
+                "outcome_GWAS": specification["primary_outcome_source"], "source_file": str(path),
                 "availability_status": "direct_variant_available" if flipped != "not_harmonizable" else "alleles_not_harmonizable",
                 "exclusion_reason": "NA" if flipped != "not_harmonizable" else f"Observed {effect}/{other}.",
             })

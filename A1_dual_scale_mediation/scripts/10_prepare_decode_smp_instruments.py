@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Map and audit deCODE SMP pQTL candidates for the frozen A1 outcomes."""
+"""Map and audit deCODE SMP pQTL candidates for the prespecified primary outcomes."""
 
 from __future__ import annotations
 
@@ -218,9 +218,9 @@ def main() -> None:
 
     apoe_direct = pd.DataFrame([
         {"source_build": "GRCh38", "source_variant": "rs429358", "source_chromosome": "chr19", "source_position": 44908684,
-         "target_build": "GRCh37", "target_chromosome": "19", "target_position": 45411941, "validation": "matches_frozen_A1_direct_variant"},
+         "target_build": "GRCh37", "target_chromosome": "19", "target_position": 45411941, "validation": "matches_prespecified_primary_direct_variant"},
         {"source_build": "GRCh38", "source_variant": "rs7412", "source_chromosome": "chr19", "source_position": 44908822,
-         "target_build": "GRCh37", "target_chromosome": "19", "target_position": 45412079, "validation": "matches_frozen_A1_direct_variant"},
+         "target_build": "GRCh37", "target_chromosome": "19", "target_position": 45412079, "validation": "matches_prespecified_primary_direct_variant"},
     ])
     apoe_direct["frozen_exclusion_interval_hg19"] = f"chr19:{APOE_START_HG19}-{APOE_END_HG19}"
     apoe_direct["chain_file"] = str(CHAIN)

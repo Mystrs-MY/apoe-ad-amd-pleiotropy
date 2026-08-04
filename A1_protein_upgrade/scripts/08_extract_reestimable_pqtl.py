@@ -19,7 +19,7 @@ CONFIG = yaml.safe_load((ROOT / "config" / "resources.yml").read_text(encoding="
 TAR_DIR = Path(CONFIG["paths"]["ukb_ppp_tar_dir"])
 RSID_DIR = Path(CONFIG["paths"]["rsid_map_dir"])
 ALPHA = ROOT / "tables" / "APOE_variant_to_literature_proteins_alpha.tsv"
-MANIFEST = ROOT / "data_processed" / "ukbppp_local_assay_manifest.tsv"
+MANIFEST = ROOT / "data_processed" / "ukbppp_assay_manifest.tsv"
 OUTPUT = ROOT / "data_processed" / "literature_panel_pqtl_candidates.tsv"
 LOG = ROOT / "logs" / "pqtl_candidate_extraction.tsv"
 COORDINATES = ROOT / "config" / "protein_gene_coordinates_grch37.tsv"

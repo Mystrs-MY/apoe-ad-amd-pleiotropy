@@ -17,5 +17,5 @@ paths:
 write_policy:
   external_resources: read_only
   synapse_selected_download_cache: append_resume_then_immutable_after_md5
-  legacy_A1_modules: read_only
+  biology_guided_modules: read_only
   upgrade_outputs: writable

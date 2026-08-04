@@ -18,7 +18,7 @@ Drug-target, perturbational, pharmacovigilance, and derivative C3 full-region an
 1. `literature_source_universe`: verified positive protein-outcome records from published AD/AMD proteome-wide studies.
 2. `primary_literature_prioritized_panel`: high-confidence protein-evidence entries after provenance, multiplicity, mapping, and evidence-tier review.
 3. `APOE_linkable_mediation_subset`: assays with both direct APOE variant-to-protein alpha and re-estimable protein-to-outcome beta.
-4. `legacy_biology_guided_sensitivity_panel`: the original 30-protein panel, retained only for sensitivity and biological context.
+4. `exploratory_biology_guided_sensitivity_panel`: an author-defined 30-protein candidate panel retained only for sensitivity and biological context.
 
 The five-protein PWAS crosswalk (BCAM, CD55, LILRB1, LILRB5, and SCARA5) is a prespecified sensitivity extension to layer 3. It does not redefine the 25-protein primary panel.
 
@@ -57,11 +57,10 @@ A1_protein_upgrade/
 |   `-- submission_validity_20260717/  Kunkle, PAV, and Lu 2026 bounded sensitivities
 |-- logs/                   decisions, run logs, session information, and unresolved items
 |-- manuscript_patch/       revised sections, table index, and change log
-|-- archive_legacy_panel/   internal legacy metadata and historical sensitivity assets
 |-- run_all.ps1             primary protein-panel workflow
 |-- run_PWAS2026_extension.ps1
 |-- run_submission_core.ps1 submission-facing orchestration entry
-`-- run_submission_QA.ps1   retained-asset and manuscript consistency checks
+`-- run_submission_QA.ps1   submission asset and table consistency checks
 ```
 
 Controlled UKB-PPP archives are stored outside the repository at:
@@ -103,7 +102,7 @@ It regenerates the effect-measure audit, GCTA-COJO conditional source tables, Hy
 - Included standalone plotting and data-reduction code: `<project_root>/figures_submission/code/`
 - Supplementary tables: `<project_root>/tables_submission/supplementary_tables/`
 
-The public package is intentionally limited to analysis reproduction and quantitative source-data verification. Bespoke flowchart, graphical-abstract, and multi-panel assembly code is not distributed; Figure 5a is excluded as a public figure asset. The underlying eligibility counts remain available in the structured analysis tables.
+The public package is intentionally limited to analysis reproduction and quantitative source-data verification. Bespoke layout code and assets for flowcharts, graphical abstracts, and multi-panel figure assembly are not distributed; the corresponding quantitative results remain available in the structured analysis tables.
 
 ## Key Files
 
@@ -116,7 +115,7 @@ The public package is intentionally limited to analysis reproduction and quantit
 - Main mediation: `tables/APOE_linkable_two_step_mediation.tsv`
 - Cis-only mediation: `tables/APOE_linkable_two_step_mediation_cis_sensitivity.tsv`
 - Strict mapping sensitivity: `tables/APOE_linkable_two_step_mediation_strict_sensitivity.tsv`
-- New-versus-legacy comparison: `tables/new_vs_legacy_panel_comparison.tsv`
+- Literature-versus-biology-guided comparison: `tables/literature_vs_biology_guided_panel_comparison.tsv`
 - Decision log: `logs/decision_log.tsv`
 - Submission table builder: `scripts/39_prepare_submission_facing_supplement_tables.R`
 - Targeted sensitivity builder: `scripts/40_targeted_submission_sensitivities.R`
@@ -129,12 +128,4 @@ The public package is intentionally limited to analysis reproduction and quantit
 - Bootstrap intervals do not model publication selection, winner's curse, mapping uncertainty as a probability model, or empirical between-protein covariance.
 - Cross-platform gene-symbol agreement alone does not authorize assay merging.
 - TREM2 is retained with moderate mapping confidence because its measured cross-platform correspondence is traceable but its epitope and soluble or cleaved form remain incompletely resolved.
-- The legacy pathway aggregation is not standard multivariable MR; its ridge output is a penalized multivariable sensitivity model.
-
-## Current Manuscripts
-
-- Chinese logic master (V1.0): `<project_root>/manuscripts/Article1_完整手稿_中文_整合初稿_V1.0.md`
-- English manuscript: `<project_root>/manuscripts/Article1_CellGenomics_English_Manuscript_Draft.md`
-- English Supplementary Information: `<project_root>/manuscripts/Article1_CellGenomics_Supplementary_Information_Draft.md`
-
-The Chinese Markdown file is the current scientific logic master. The English drafts and the Word derivative are frozen working copies and must not be described as synchronized until they are explicitly regenerated from the current Markdown version.
+- The author-defined biology-category aggregation is not standard multivariable MR; its ridge-penalized output is reported only as a penalized multivariable sensitivity model.

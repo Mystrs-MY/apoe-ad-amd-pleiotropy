@@ -1,4 +1,4 @@
-gene_symbol	frozen_pairs	present_in_Kunkle	retained_after_harmonization	coverage_fraction	status	exclusion_reason
+gene_symbol	prespecified_instrument_pairs	present_in_Kunkle	retained_after_harmonization	coverage_fraction	status	exclusion_reason
 "ACE"	12	11	10	0.916666666666667	"estimable"	"NA"
 "BLNK"	5	5	5	1	"estimable"	"NA"
 "C1R"	4	4	3	1	"estimable"	"NA"

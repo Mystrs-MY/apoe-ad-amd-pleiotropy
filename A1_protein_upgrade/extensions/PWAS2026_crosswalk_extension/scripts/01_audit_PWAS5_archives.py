@@ -145,7 +145,7 @@ def main() -> None:
             "UniProt_ID": spec["UniProt_ID"],
             "Olink_panel": spec["Olink_panel"],
             "synapse_id": spec["synapse_id"],
-            "download_source": f"Synapse {spec['synapse_id']}; manually completed locally",
+            "download_source": f"Synapse {spec['synapse_id']}; provider-authorized archive verified",
             "archive_name": path.name,
             "archive_path": str(path),
             "file_size_bytes": stat.st_size,

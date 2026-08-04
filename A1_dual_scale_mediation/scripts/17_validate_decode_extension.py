@@ -58,11 +58,11 @@ def main() -> None:
 
     gate = pd.read_csv(ROOT / "tables" / "decode_same_platform_feasibility_gate.tsv", sep="\t")
     require(len(gate) == 9, "Expected nine assay-level gate rows")
-    require(gate.current_gate_status.eq("same_platform_alpha_beta_mediation_complete").all(),
+    require(gate.gate_status.eq("same_platform_alpha_beta_mediation_complete").all(),
             "Every gate row must be complete")
     require(gate.reestimated_outcome_beta_count.eq(4).all(), "Each assay must have four beta estimates")
 
-    attrition = pd.read_csv(ROOT / "tables" / "TableS28_V2_candidate_attrition_provenance.tsv", sep="\t")
+    attrition = pd.read_csv(ROOT / "tables" / "TableS28_candidate_attrition_provenance.tsv", sep="\t")
     require(len(attrition) == 8, "Expected eight excluded unique genes")
     require(attrition.same_platform_alpha_beta_loop_status.eq("complete_separate_non_UKB_sensitivity").all(),
             "Every excluded gene must have a completed deCODE loop")

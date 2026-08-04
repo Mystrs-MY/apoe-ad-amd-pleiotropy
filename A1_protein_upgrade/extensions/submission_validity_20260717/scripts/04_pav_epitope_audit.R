@@ -22,7 +22,7 @@ harmonized_file <- file.path(extension_root, "freeze_before_extension", "literat
 beta_file <- file.path(extension_root, "freeze_before_extension", "literature_panel_beta_results.tsv")
 mediation_file <- file.path(extension_root, "freeze_before_extension", "APOE_linkable_two_step_mediation.tsv")
 alpha_file <- file.path(extension_root, "freeze_before_extension", "APOE_variant_to_literature_proteins_alpha.tsv")
-total_file <- file.path(upgrade_root, "tables", "APOE_variant_total_effects_current_A1.tsv")
+total_file <- file.path(upgrade_root, "tables", "APOE_variant_total_effects_primary_analysis.tsv")
 resources <- read_yaml(file.path(upgrade_root, "config", "resources.yml"))
 
 table_dir <- file.path(extension_root, "tables")
@@ -396,10 +396,10 @@ current_mediation <- fread(mediation_file, na.strings = c("NA", ""))
 aggregate_comparison <- merge(
   current_mediation[row_type == "total", .(
     variant, outcome,
-    current_number_of_proteins = number_of_eligible_proteins,
-    current_mediated_proportion = mediated_proportion,
-    current_CI_lower = mediated_proportion_CI_lower_bootstrap,
-    current_CI_upper = mediated_proportion_CI_upper_bootstrap
+    unfiltered_number_of_proteins = number_of_eligible_proteins,
+    unfiltered_mediated_proportion = mediated_proportion,
+    unfiltered_CI_lower = mediated_proportion_CI_lower_bootstrap,
+    unfiltered_CI_upper = mediated_proportion_CI_upper_bootstrap
   )],
   filtered_mediation[row_type == "total", .(
     variant, outcome,
@@ -411,7 +411,7 @@ aggregate_comparison <- merge(
   by = c("variant", "outcome"), all = TRUE
 )
 aggregate_comparison[, mediated_proportion_absolute_difference :=
-                       abs(current_mediated_proportion - filtered_mediated_proportion)]
+                       abs(unfiltered_mediated_proportion - filtered_mediated_proportion)]
 fwrite(aggregate_comparison, file.path(table_dir, "PAV_filtered_aggregate_comparison.tsv"), sep = "\t", na = "NA")
 
 status_summary <- audit[, .(n = .N), by = .(category = annotation_status)]

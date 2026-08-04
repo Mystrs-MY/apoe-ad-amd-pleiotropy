@@ -6,8 +6,11 @@ name_matched_unique_Olink_assays	27	unique assays	One selected Olink assay per i
 genes_with_rs429358_alpha	27	unique genes	Direct rs429358-C alpha; no proxy.
 genes_with_rs7412_alpha	27	unique genes	Direct rs7412-T alpha; no proxy.
 genes_with_both_alpha	27	unique genes	Both direct APOE alpha estimates are required for the eight-path design.
-genes_with_at_least_one_estimable_beta	25	unique genes	At least one current-A1 outcome beta is estimable.
-genes_with_four_outcome_beta	25	unique genes	All four current-A1 outcome betas are estimable.
+genes_with_at_least_one_estimable_beta	25	unique genes	At least one primary-analysis outcome beta is estimable.
+genes_with_four_outcome_beta	25	unique genes	All four primary-analysis outcome betas are estimable.
 final_mediation_genes	25	unique genes	Same-assay alpha and beta with both APOE variants and all four outcomes.
 final_mediation_assays	25	unique assays	Unique assays represented by final mediation genes.
 mediation_path_count	200	protein-variant-outcome paths	Asserted as final genes x 2 APOE variants x 4 outcomes.
+priority_studies_newly_fulltext_verified	4	studies	All four previously pending priority studies now have verified publisher supplements.
+new_Bonferroni_PWAS_candidates_external_only	19	assay-level PWAS rows	PWAS Z statistics are not standardized beta estimates and were not inserted into pooled mediation.
+prespecified_five_protein_crosswalk_extension_completed	5	assays	BCAM, CD55, LILRB1, LILRB5 and SCARA5 have complete readable provider-authorized assay archives and completed strict-QC alpha/beta/cis/mediation re-estimation as a sensitivity-only extension; they do not backfill the prespecified 25-protein primary panel.

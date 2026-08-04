@@ -26,7 +26,6 @@ FORBIDDEN_RELATIVE_PATHS = {
     Path("01_meta/PRISMA/build_prisma_documents.ps1"),
     Path("01_meta/PRISMA/template_contract.md"),
     Path("figures_submission/code/Figure_1_study_design.R"),
-    Path("figures_submission/code/Graphical_Abstract_V1.4.R"),
     Path("figures_submission/code/FigS12_decode_extension.R"),
     Path("figures_submission/code/Figure_3_vector.R"),
     Path("figures_submission/code/Figure_4_vector.R"),
@@ -34,7 +33,6 @@ FORBIDDEN_RELATIVE_PATHS = {
     Path("figures_submission/code/compose_Figure_4_pdf.py"),
     Path("figures_submission/code/compose_supplementary_FigS3_FigS11.R"),
     Path("figures_submission/code/figure_utils.R"),
-    Path("figures_submission/code/Figure_5a_literature_to_mediation_flow.csv"),
     Path("02_genetic_arch/MiXeR/plot_mixer_venn.R"),
     Path("02_genetic_arch/LAVA/LAVAFigure_Updated.R"),
     Path("02_genetic_arch/HyPrColoc_v1/LocusZoom_Article1.R"),
@@ -43,6 +41,16 @@ FORBIDDEN_RELATIVE_PATHS = {
     Path("A1_protein_upgrade/scripts/18_plot_independent_protein_figures.R"),
     Path("A1_protein_upgrade/scripts/19_qa_independent_protein_figures.py"),
     Path("figures_submission/assets/Fig4b_LAVA_Dual_Panel.pdf"),
+}
+FORBIDDEN_PATH_PATTERNS = {
+    "excluded diagram or graphical-abstract asset": re.compile(
+        r"^figures_submission/(?:code|assets|source_data)/.*(?:graphical[_ -]?abstract|figure[_ -]?5a)",
+        re.I,
+    ),
+    "excluded multi-panel assembly code": re.compile(
+        r"^figures_submission/code/(?:compose_|.*assembled|compose_supplementary)",
+        re.I,
+    ),
 }
 TEXT_SUFFIXES = {
     ".r", ".py", ".ps1", ".sh", ".awk", ".md", ".txt", ".yml", ".yaml",
@@ -56,7 +64,7 @@ SECRET_PATTERNS = {
 MACHINE_PATH_PATTERNS = {
     "local Article_1 path": re.compile(r"[A-Za-z]:[\\/]Article_1", re.I),
     "local user path": re.compile(r"[A-Za-z]:[\\/]Users[\\/]", re.I),
-    "legacy resource path": re.compile(r"[A-Za-z]:[\\/]AD_AMD[\\/]Resource", re.I),
+    "deprecated resource path": re.compile(r"[A-Za-z]:[\\/]AD_AMD[\\/]Resource", re.I),
 }
 
 
@@ -90,6 +98,10 @@ def main() -> int:
         relative = path.relative_to(ROOT)
         if relative in FORBIDDEN_RELATIVE_PATHS:
             failures.append(f"excluded diagram-layout asset present: {relative}")
+        relative_text = relative.as_posix()
+        for label, pattern in FORBIDDEN_PATH_PATTERNS.items():
+            if pattern.search(relative_text):
+                failures.append(f"{label}: {relative}")
         if path.stat().st_size > MAX_FILE_BYTES:
             failures.append(f"oversized file: {relative} ({path.stat().st_size} bytes)")
         if path.suffix.lower() in FORBIDDEN_SUFFIXES and relative not in ALLOWED_BINARY:

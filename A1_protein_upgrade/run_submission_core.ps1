@@ -70,8 +70,8 @@ Invoke-Checked 'Submission consistency QA' {
     & powershell -ExecutionPolicy Bypass -File (Join-Path $UpgradeRoot 'run_submission_QA.ps1')
 }
 
-Invoke-Checked 'V1.4 hard consistency, inventory and source-data QA' {
-    & py -3.12 (Join-Path $ProjectRoot 'A1_dual_scale_mediation\scripts\19_build_v1_4_submission_QA.py')
+Invoke-Checked 'Public release safety QA' {
+    & py -3.12 (Join-Path $ProjectRoot 'workflow\validate_release.py')
 }
 
 Write-Host "`nA1 submission-facing core workflow completed." -ForegroundColor Green

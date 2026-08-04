@@ -61,8 +61,8 @@ def main() -> None:
         patterns = [re.compile(rf"^{re.escape(symbol)}_", re.IGNORECASE) for symbol in candidate_symbols]
         matches = [row for row in files if any(pattern.match(row.get("name", "")) for pattern in patterns)]
         if gene in local_genes and len(matches) == 1:
-            status = "verified_local_existing"
-            reason = "A unique exact gene-prefix Olink assay is already available locally."
+            status = "verified_provider_authorized_existing"
+            reason = "A unique exact gene-prefix Olink assay is already available in the provider-authorized project resources."
         elif len(matches) == 1:
             status = "selected_for_download"
             reason = "A unique exact gene-prefix Olink assay is available; literature-to-assay confidence is evaluated downstream."
@@ -86,7 +86,7 @@ def main() -> None:
     selected = sum(row["selection_status"] == "selected_for_download" for row in output)
     unavailable = sum(row["selection_status"] == "assay_unavailable" for row in output)
     unresolved = sum(row["selection_status"] == "mapping_unresolved" for row in output)
-    existing = sum(row["selection_status"] == "verified_local_existing" for row in output)
+    existing = sum(row["selection_status"] == "verified_provider_authorized_existing" for row in output)
     print(f"Primary genes={len(output)}; selected={selected}; existing={existing}; unavailable={unavailable}; unresolved={unresolved}")
 
 

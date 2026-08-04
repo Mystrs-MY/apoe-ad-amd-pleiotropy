@@ -123,7 +123,7 @@ for (outcome_name in names(outcome_specs)) {
       P_FDR_observed_reestimated = NA_real_, P_Bonferroni_planned_family = NA_real_,
       corrected_significance_FDR_observed = NA, corrected_significance_Bonferroni_planned = NA,
       beta_status = "reestimated_cis_only", exclusion_reason = "NA",
-      beta_source = "current_A1_reestimated", availability_scope = "reestimated_subset",
+      beta_source = "primary_analysis_reestimated", availability_scope = "reestimated_subset",
       analysis_set = "cis_only_sensitivity"
     )]
     setnames(estimate, c("b", "se", "pval"), c("beta", "SE", "P_value"))

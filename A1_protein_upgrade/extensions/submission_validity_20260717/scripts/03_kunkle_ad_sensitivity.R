@@ -114,7 +114,7 @@ for (gene in sort(unique(iv$gene_symbol))) {
   present <- gene_iv[SNP %chin% kunkle$SNP]
   if (!nrow(present)) {
     coverage_rows[[gene]] <- data.table(
-      gene_symbol = gene, frozen_pairs = nrow(gene_iv), present_in_Kunkle = 0L,
+      gene_symbol = gene, prespecified_instrument_pairs = nrow(gene_iv), present_in_Kunkle = 0L,
       retained_after_harmonization = 0L, coverage_fraction = 0,
       status = "not_estimable", exclusion_reason = "No frozen instruments were present in Kunkle Stage 1."
     )
@@ -128,7 +128,7 @@ for (gene in sort(unique(iv$gene_symbol))) {
 
   coverage_rows[[gene]] <- data.table(
     gene_symbol = gene,
-    frozen_pairs = nrow(gene_iv),
+    prespecified_instrument_pairs = nrow(gene_iv),
     present_in_Kunkle = nrow(present),
     retained_after_harmonization = nrow(harmonized),
     coverage_fraction = nrow(present) / nrow(gene_iv),

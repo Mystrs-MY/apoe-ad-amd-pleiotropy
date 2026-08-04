@@ -1,7 +1,7 @@
 # ============================================================
-# E2_mvmr_pathway.R
-# B: Pathway-Aggregated MVMR (main analysis)
-# D: Ridge MVMR sensitivity
+# 08_biology_category_models.R
+# B: Biology-category aggregated genetic score analysis
+# D: Penalized multivariable sensitivity model
 # ============================================================
 
 library(data.table)
@@ -11,14 +11,21 @@ library(glmnet)
 
 set.seed(20240604)
 
-RESULTS_DIR <- "results"
-dir.create(RESULTS_DIR, showWarnings = FALSE, recursive = TRUE)
+script_arg <- grep("^--file=", commandArgs(trailingOnly = FALSE), value = TRUE)
+if (!length(script_arg)) stop("Run this file with Rscript.")
+script_path <- normalizePath(sub("^--file=", "", script_arg[1]), winslash = "/", mustWork = TRUE)
+SCRIPT_DIR <- dirname(script_path)
+PROJECT_ROOT <- normalizePath(file.path(SCRIPT_DIR, ".."), winslash = "/", mustWork = TRUE)
+RESOURCE_ROOT <- Sys.getenv("A1_RESOURCE_ROOT", unset = file.path(PROJECT_ROOT, "data", "external"))
+RESULTS_DIR <- SCRIPT_DIR
 
 # ---- Load exposures & outcomes ----
-exposures <- readRDS("../04_protein_mr/ukbppp_exposures.rds")
+exposure_file <- file.path(PROJECT_ROOT, "04_protein_mr", "results", "ukbppp_exposures.rds")
+if (!file.exists(exposure_file)) stop("Missing protein instrument object: ", exposure_file)
+exposures <- readRDS(exposure_file)
 cat(sprintf("Loaded %d proteins\n", length(exposures)))
 
-GWAS_DIR <- "../../Resource/GWAS/"
+GWAS_DIR <- file.path(RESOURCE_ROOT, "GWAS")
 load_outcome <- function(path, trait_name) {
   dat <- fread(path, select=c("SNP","CHR","BP","A1","A2","FREQ","BETA","SE","P","N"))
   setnames(dat, c("CHR","BP","A1","A2","FREQ","BETA","SE","P","N"),
@@ -29,15 +36,15 @@ load_outcome <- function(path, trait_name) {
 }
 
 outcomes <- list(
-  AD      = load_outcome(paste0(GWAS_DIR, "AD_Wightman_cleaned_hg19.tsv.gz"), "AD"),
-  Dry_AMD = load_outcome(paste0(GWAS_DIR, "AMD_Dry_R12_cleaned_hg19.tsv.gz"), "Dry_AMD"),
-  Wet_AMD = load_outcome(paste0(GWAS_DIR, "AMD_Wet_R12_cleaned_hg19.tsv.gz"), "Wet_AMD"),
-  Any_AMD = load_outcome(paste0(GWAS_DIR, "AMD_H7_R12_cleaned_hg19.tsv.gz"), "Any_AMD")
+  AD      = load_outcome(file.path(GWAS_DIR, "AD_Wightman_cleaned_hg19.tsv.gz"), "AD"),
+  Dry_AMD = load_outcome(file.path(GWAS_DIR, "AMD_Dry_R12_cleaned_hg19.tsv.gz"), "Dry_AMD"),
+  Wet_AMD = load_outcome(file.path(GWAS_DIR, "AMD_Wet_R12_cleaned_hg19.tsv.gz"), "Wet_AMD"),
+  Any_AMD = load_outcome(file.path(GWAS_DIR, "AMD_H7_R12_cleaned_hg19.tsv.gz"), "Any_AMD")
 )
 cat("Outcomes loaded\n")
 
-# ---- Pathway definitions (excluding APOE) ----
-pathways <- list(
+# ---- Biology category definitions (excluding APOE) ----
+biology_categories <- list(
   Complement   = c("C1QA","C2","C3","C5","CFB","CFD","CFH","CFI","CFP","SERPING1"),
   Inflammatory = c("CSF1","IFNG","IL10","IL18","IL1B","IL6","TGFB1","TNF"),
   Chemokine    = c("CCL2","CCL5","CX3CL1","CXCL10","CXCL12"),
@@ -46,18 +53,18 @@ pathways <- list(
 )
 
 # ============================================================
-# B: PATHWAY-AGGREGATED MVMR (MAIN)
+# B: BIOLOGY-CATEGORY AGGREGATED GENETIC SCORE ANALYSIS
 # ============================================================
 cat("\n", paste(rep("=",60), collapse=""), "\n")
-cat("B: PATHWAY-AGGREGATED MVMR\n")
+cat("B: BIOLOGY-CATEGORY AGGREGATED GENETIC SCORE ANALYSIS\n")
 cat(paste(rep("=",60), collapse=""), "\n")
 
-# For each pathway, build a single aggregated exposure from all member proteins
-build_pathway_exposure <- function(pw_genes, exposures_list) {
+# For each biology category, build a single aggregated exposure from all member proteins.
+build_biology_category_exposure <- function(pw_genes, exposures_list) {
   pw_exp <- exposures_list[names(exposures_list) %in% pw_genes]
   if (length(pw_exp) == 0) return(NULL)
 
-  # Collect all unique SNPs across pathway
+  # Collect all unique SNPs across the biology category.
   all_snps <- unique(unlist(lapply(pw_exp, function(x) x$SNP)))
 
   # For each SNP, compute IVW meta-analysis across proteins that have it
@@ -91,27 +98,26 @@ build_pathway_exposure <- function(pw_genes, exposures_list) {
   snp_data$se.exposure   <- 1 / sqrt(snp_data$w_agg)
   snp_data$pval.exposure <- 2 * pnorm(-abs(snp_data$beta.exposure / snp_data$se.exposure))
   snp_data$SNP <- snp_data$SNP  # keep rsID
-  snp_data$id.exposure <- paste0("PW_", paste(pw_genes, collapse="_"))
-  snp_data$exposure <- paste0("PW_", paste(pw_genes, collapse="_"))
+  snp_data$id.exposure <- paste0("BC_", paste(pw_genes, collapse="_"))
+  snp_data$exposure <- paste0("BC_", paste(pw_genes, collapse="_"))
 
-  # Keep only SNPs that are instruments for >=2 proteins (pathway-level instruments)
-  # and have reasonable strength
+  # Retain variants represented in at least one member-protein instrument set.
   snp_data <- snp_data[snp_data$n_prot >= 1 & snp_data$se.exposure < 1, ]
 
   return(snp_data)
 }
 
-# Run pathway MVMR for each pathway × outcome
+# Run the aggregated genetic score analysis for each biology category and outcome
 b_results <- list()
 
-for (pw_name in names(pathways)) {
-  pw_genes <- pathways[[pw_name]]
+for (pw_name in names(biology_categories)) {
+  pw_genes <- biology_categories[[pw_name]]
   pw_genes_avail <- pw_genes[pw_genes %in% names(exposures)]
   if (length(pw_genes_avail) < 2) next
 
   cat(sprintf("\n--- %s (%d proteins) ---\n", pw_name, length(pw_genes_avail)))
 
-  pw_exp <- build_pathway_exposure(pw_genes_avail, exposures)
+  pw_exp <- build_biology_category_exposure(pw_genes_avail, exposures)
   if (is.null(pw_exp) || nrow(pw_exp) < 3) { cat("  Failed to build exposure\n"); next }
 
   # Ensure chr/pos are integer
@@ -137,7 +143,7 @@ for (pw_name in names(pathways)) {
     mean_f <- mean((harm$beta.exposure / harm$se.exposure)^2, na.rm = TRUE)
 
     b_results[[length(b_results) + 1]] <- data.frame(
-      pathway       = pw_name,
+      biology_category       = pw_name,
       outcome       = out_name,
       n_proteins    = length(pw_genes_avail),
       n_ivs         = nrow(harm),
@@ -155,34 +161,34 @@ for (pw_name in names(pathways)) {
 }
 
 b_all <- rbindlist(b_results)
-fwrite(b_all, file.path(RESULTS_DIR, "E2_pathway_mvmr_main.csv"))
+fwrite(b_all, file.path(RESULTS_DIR, "E2_biology_category_aggregated_score.csv"))
 
 # Bonferroni summary
-cat("\n=== B: Bonferroni-Significant Pathways (P<0.05/5=0.01) ===\n")
+cat("\n=== B: Bonferroni-significant biology categories (P<0.05/5=0.01) ===\n")
 b_sig <- b_all[pval < 0.01, ][order(pval), ]
 if (nrow(b_sig) > 0) {
   for (i in 1:nrow(b_sig))
     cat(sprintf("  %-14s %-8s b=%.4f P=%.2e F=%.0f\n",
-        b_sig$pathway[i], b_sig$outcome[i], b_sig$beta[i], b_sig$pval[i], b_sig$mean_f[i]))
+        b_sig$biology_category[i], b_sig$outcome[i], b_sig$beta[i], b_sig$pval[i], b_sig$mean_f[i]))
 } else {
   cat("  None at Bonferroni threshold. Nominally significant:\n")
   b_nom <- b_all[pval < 0.05, ][order(pval), ]
   for (i in 1:nrow(b_nom))
     cat(sprintf("  %-14s %-8s b=%.4f P=%.2e\n",
-        b_nom$pathway[i], b_nom$outcome[i], b_nom$beta[i], b_nom$pval[i]))
+        b_nom$biology_category[i], b_nom$outcome[i], b_nom$beta[i], b_nom$pval[i]))
 }
 
 # ============================================================
-# D: RIDGE MVMR SENSITIVITY
+# D: PENALIZED MULTIVARIABLE SENSITIVITY MODEL
 # ============================================================
 cat("\n", paste(rep("=",60), collapse=""), "\n")
-cat("D: RIDGE MVMR SENSITIVITY\n")
+cat("D: PENALIZED MULTIVARIABLE SENSITIVITY MODEL\n")
 cat(paste(rep("=",60), collapse=""), "\n")
 
 ridge_results <- list()
 
-for (pw_name in names(pathways)) {
-  pw_genes <- pathways[[pw_name]]
+for (pw_name in names(biology_categories)) {
+  pw_genes <- biology_categories[[pw_name]]
   pw_exp <- exposures[names(exposures) %in% pw_genes]
   if (length(pw_exp) < 2) next
 
@@ -247,7 +253,7 @@ for (pw_name in names(pathways)) {
 
     for (j in seq_along(gene_names)) {
       ridge_results[[length(ridge_results) + 1]] <- data.frame(
-        pathway   = pw_name,
+        biology_category   = pw_name,
         outcome   = out_name,
         gene      = gene_names[j],
         n_snps    = nrow(bx_v),
@@ -267,18 +273,18 @@ for (pw_name in names(pathways)) {
 }
 
 r_all <- rbindlist(ridge_results)
-fwrite(r_all, file.path(RESULTS_DIR, "E2_ridge_mvmr_sensitivity.csv"))
+fwrite(r_all, file.path(RESULTS_DIR, "E2_penalized_multivariable_sensitivity.csv"))
 
 # Ridge summary
-cat("\n=== D: Ridge-MVMR Significant (P<0.05) ===\n")
+cat("\n=== D: Nominally significant penalized coefficients (P<0.05) ===\n")
 r_sig <- r_all[pval_ridge < 0.05, ][order(pval_ridge), ]
 if (nrow(r_sig) > 0) {
   for (i in 1:min(20, nrow(r_sig)))
     cat(sprintf("  %-12s %-8s %-14s b=%.4f se=%.4f P=%.2e\n",
-        r_sig$gene[i], r_sig$outcome[i], r_sig$pathway[i],
+        r_sig$gene[i], r_sig$outcome[i], r_sig$biology_category[i],
         r_sig$beta_ridge[i], r_sig$se_ridge[i], r_sig$pval_ridge[i]))
 } else {
-  cat("  None — robust to regularization\n")
+  cat("  None; robust to regularization\n")
 }
 
-cat("\nE2 complete: B (pathway MVMR) + D (Ridge sensitivity)\n")
+cat("\nE2 complete: biology-category aggregated score analysis and penalized multivariable sensitivity\n")

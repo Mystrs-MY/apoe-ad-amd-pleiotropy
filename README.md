@@ -20,7 +20,7 @@ The code supports four linked evidence layers:
 1. Systematic review and meta-analysis of the association between AMD and subsequent AD or dementia.
 2. Genome-wide and local genetic architecture analyses using LDSC, HDL, MiXeR, LAVA, HyPrColoc, and MAGMA.
 3. APOE anchoring through rs429358-C and rs7412-T, genome-wide bidirectional MR, APOE-region exclusion, and approximate conditional analysis.
-4. Targeted triangulation of a literature-prioritized circulating-protein panel, followed by an independent deCODE SomaScan sensitivity analysis for excluded genes.
+4. Targeted triangulation of a literature-prioritized circulating-protein panel, followed by a deCODE SomaScan independent-platform, same-assay sensitivity analysis for excluded genes.
 
 The protein layer is **not** a de novo proteome-wide discovery scan. Published proteome-wide MR or PWAS results define an enriched candidate set. Only proteins with both an APOE variant-to-protein estimate (alpha) and a protein-to-outcome estimate (beta) enter two-step mediation.
 
@@ -32,7 +32,7 @@ The protein layer is **not** a de novo proteome-wide discovery scan. Published p
 | B | Meta-analysis, literature provenance, MAGMA summaries, and selected result audits | Public input files listed in `docs/data_access.md` |
 | C | Full protein MR, deCODE sensitivity, conditional analysis, and genome-wide architecture workflows | Controlled or provider-authorized pQTL data, GWAS files, LD reference files, and external executables |
 
-The committed result tables permit numerical and graphical verification even when an external provider does not allow redistribution of its raw files. Bespoke layout code for flowcharts, graphical abstracts, and multi-panel figure assembly is intentionally excluded. Figure 5a is not distributed as a public figure asset; its underlying 41-to-33-to-27-to-25 eligibility counts remain auditable in the analysis tables.
+The committed result tables permit numerical and graphical verification even when an external provider does not allow redistribution of its raw files. Bespoke layout code and assets for flowcharts, graphical abstracts, and multi-panel figure assembly are intentionally excluded; the corresponding quantitative results remain auditable in the analysis tables.
 
 ## Repository map
 
@@ -44,8 +44,8 @@ The committed result tables permit numerical and graphical verification even whe
 | `P0_isoform/` | rs429358/rs7412 isoform-defining variant contrasts |
 | `P0_finemap/` | GCTA-COJO approximate conditional analysis and source data |
 | `A1_protein_upgrade/` | Literature-prioritized Olink panel, alpha/beta separation, mediation, provenance, and sensitivity analyses |
-| `A1_dual_scale_mediation/` | Independent deCODE SomaScan same-platform sensitivity branch only |
-| `04_protein_mr/`, `05_mediation/`, `06_pathway_mvmr/`, `P0_proteome/` | Frozen legacy biology-guided sensitivity analyses |
+| `A1_dual_scale_mediation/` | deCODE SomaScan independent-platform, same-assay sensitivity branch only |
+| `04_protein_mr/`, `05_mediation/`, `06_biology_category_models/`, `P0_biology_guided_panel/` | Exploratory biology-guided panel sensitivity analyses |
 | `figures_submission/code/` | Standalone quantitative plotting scripts and compact panel data; flowchart and multi-panel assembly code is excluded |
 | `figures_submission/source_data/` | Figure-level source-data tables |
 | `workflow/` | Public-release validation and convenience entry points |

@@ -34,7 +34,7 @@ def sha256(path: Path) -> str:
     return h.hexdigest()
 
 
-attrition = read_tsv(SRC / "TableS28_V2_candidate_attrition_provenance.tsv")
+attrition = read_tsv(SRC / "TableS28_candidate_attrition_provenance.tsv")
 attrition_columns = [
     "gene_symbol",
     "literature_target_entries",
@@ -67,7 +67,7 @@ attrition_columns = [
     "deCODE_cis_PAV_filtered_Bonferroni_72_survivors",
     "deCODE_result_classification",
     "ARIC_exact_assay_audit_status",
-    "final_V2_role",
+    "final_analysis_role",
     "notes",
 ]
 attrition_final = attrition.loc[:, attrition_columns].copy()
@@ -100,10 +100,10 @@ gate_columns = [
     "mapping_confidence",
     "rs429358_direct_alpha_in_full_GWAS",
     "rs7412_direct_alpha_in_full_GWAS",
-    "complete_aptamer_GWAS_available_locally",
+    "complete_aptamer_GWAS_available_in_authorized_archive",
     "same_platform_beta_reestimation_ready",
     "reestimated_outcome_beta_count",
-    "current_gate_status",
+    "gate_status",
     "absence_interpretation",
     "source_file_sha256",
 ]
@@ -187,7 +187,7 @@ integrity = pd.DataFrame(
         "etag": ledger["etag"],
         "sha256": ledger["sha256"],
         "status": ledger["status"],
-        "assertion": "remote_size_etag_and_local_sha256_recorded",
+        "assertion": "provider_size_etag_and_content_sha256_recorded",
         "assertion_value": "true",
     }
 )

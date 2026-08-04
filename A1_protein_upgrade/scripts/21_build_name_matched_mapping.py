@@ -16,7 +16,7 @@ PROVENANCE = ROOT / "tables" / "Table_Literature_Prioritized_Protein_Provenance.
 ALIASES = ROOT / "config" / "literature_target_aliases.tsv"
 TARGET_OUTPUT = ROOT / "tables" / "APOE_linkable_target_assay_mapping.tsv"
 CROSS_PLATFORM_OUTPUT = ROOT / "tables" / "protein_cross_platform_mapping.tsv"
-MANIFEST_OUTPUT = ROOT / "data_processed" / "ukbppp_local_assay_manifest.tsv"
+MANIFEST_OUTPUT = ROOT / "data_processed" / "ukbppp_assay_manifest.tsv"
 
 COMPLEX_GENES = {"APOE", "TOMM40", "APOC1", "CFH", "CFHR1", "CFHR2", "CFHR3", "CFHR4", "CFHR5"}
 FORM_TERMS = re.compile(r"isoform|soluble|fragment|complex|cleaved|precursor|mature", re.IGNORECASE)
@@ -61,7 +61,7 @@ def build_manifest() -> pd.DataFrame:
                 "Olink_target_ID": values["oid"].upper(), "assay_version": f"v{values['version']}",
                 "Olink_panel": values["panel"], "tar_path": str(path),
                 "mapping_status": "parsed_from_source_filename",
-                "resource_scope": "synapse_name_matched_panel" if "syn51365303" in resolved else "legacy_local_resource",
+                "resource_scope": "synapse_name_matched_panel" if "syn51365303" in resolved else "provider_authorized_project_resource",
             })
     manifest = pd.DataFrame(rows).sort_values(["gene_symbol", "Olink_target_ID", "tar_path"])
     manifest.to_csv(MANIFEST_OUTPUT, sep="\t", index=False)
@@ -180,18 +180,8 @@ def main() -> None:
             "eligible_for_primary": str(eligible_primary).lower(),
             "eligible_for_strict_sensitivity": str(eligible_strict).lower(),
             "exclusion_reason": exclusion,
-            "manual_verification_status": "rule_based_verified_requires_manuscript_level_review" if eligible_primary else "reviewed_not_eligible",
+            "manual_verification_status": "rule_based_mapping_verified_with_uncertainty_retained" if eligible_primary else "reviewed_not_eligible",
             "notes": "Literature prioritizes the target; it does not supply beta for mediation. Same-assay UKB-PPP alpha and beta are required.",
-            # Backward-compatible names consumed by existing downstream scripts.
-            "target_entry_id": f"L2T{index + 1:03d}",
-            "gene_symbol": gene,
-            "protein_name": target_name,
-            "protein_form_or_isoform": form,
-            "local_Olink_target_ID": selected["Olink_target_ID"] if selected is not None else "mapping_unresolved",
-            "local_Olink_UniProt_ID": selected["UniProt_ID"] if selected is not None else "mapping_unresolved",
-            "mapping_status": f"name_matched_{confidence}",
-            "mapping_basis": reason,
-            "eligible_for_alpha_beta_triangulation": str(eligible_primary).lower(),
         })
 
     mapping = pd.DataFrame(rows)

@@ -164,7 +164,7 @@ def run_mediation(alpha: pd.DataFrame, beta_path: Path, scope: str, output: Path
         total_effects[VARIANT_CONFIG_KEYS[variant]][outcome]["beta"]
         for variant, outcome in zip(merged["variant"], merged["outcome"])
     ]
-    merged["total_effect_source"] = "frozen_current_A1_harmonized_GWAS"
+    merged["total_effect_source"] = "prespecified_primary_harmonized_GWAS"
     merged["mediation_status"] = np.where(
         merged["protein_outcome_beta_status"].eq("reestimated")
         & merged["alpha"].notna() & merged["protein_outcome_beta"].notna(),
@@ -237,7 +237,7 @@ def run_mediation(alpha: pd.DataFrame, beta_path: Path, scope: str, output: Path
     result["bootstrap_seed"] = scope_seed
     result["bootstrap_covariance_model"] = "independent_normal_alpha_beta_total_effect_fixed"
     result["bootstrap_limitation"] = "does_not_model_alpha_beta_covariance_mapping_uncertainty_or_total_effect_uncertainty"
-    result["interpretation_boundary"] = "same_platform_non_UKB_sensitivity_not_merged_into_frozen_25_assay_aggregate"
+    result["interpretation_boundary"] = "same_platform_non_UKB_sensitivity_not_merged_into_prespecified_25_assay_aggregate"
     result.to_csv(output, sep="\t", index=False, na_rep="NA")
     return result
 

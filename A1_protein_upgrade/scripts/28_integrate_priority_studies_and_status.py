@@ -33,13 +33,13 @@ def update_screening() -> None:
                      "Bonferroni-significant cis-PWAS candidates extracted; effect is a PWAS Z score, not a standardized MR beta."),
         "40452368": ("publisher_full_text_and_supplement_verified", "include_layer1_tier2",
                      "publisher_supplement_downloaded", "full_text_and_source_tables_verified",
-                     "deCODE and UKB-PPP protein-outcome tables and colocalization tables extracted; GRN/CR1 overlap existing A1 targets."),
+                     "deCODE and UKB-PPP protein-outcome tables and colocalization tables extracted; GRN/CR1 overlap prespecified panel targets."),
         "40397384": ("publisher_full_text_and_supplement_verified", "include_layer1_tier2",
                      "publisher_supplement_downloaded", "full_text_and_source_tables_verified",
                      "Bidirectional UKB/deCODE results extracted; no same-assay APOE-variant alpha supplied."),
         "34381170": ("publisher_full_text_and_supplement_verified", "include_layer1_tier2",
                      "publisher_supplement_downloaded", "full_text_and_source_tables_verified",
-                     "Brain and blood evidence separated; only circulating-protein rows retained in the A1 source universe."),
+                     "Brain and blood evidence separated; only circulating-protein rows retained in the study source universe."),
     }
     for pmid, values in updates.items():
         mask = frame["PMID"].eq(pmid)
@@ -113,7 +113,7 @@ def append_provenance() -> None:
             "cis_trans_status": "cis_prediction_model", "MR_method": "proteome-wide association study",
             "P_value": row["PWAS.P"], "multiple_testing_method": "study Bonferroni threshold",
             "corrected_significance": "true", "effect_direction": "positive_PWAS_Z" if row["PWAS.Z"] > 0 else "negative_PWAS_Z",
-            "outcome_GWAS": "published AD GWAS", "overlap_with_current_A1_outcome": "likely_overlap",
+            "outcome_GWAS": "published AD GWAS", "overlap_with_primary_outcome_GWAS": "likely_overlap",
             "same_outcome_reanalysis": "false", "evidence_tier": "Tier2",
             "high_complexity_locus": "true" if gene in {"APOE", "PVRL2", "APOC1", "IGHG1|IGHG2|IGHG3|IGHG4|IGK@|IGL@"} else "false",
             "assay_cross_reactivity_risk": "multi_gene_or_complex_mapping" if "|" in gene else "SomaScan_cross_platform_review_required",
@@ -122,7 +122,7 @@ def append_provenance() -> None:
             "APOE_rs429358_alpha_available": "false", "APOE_rs7412_alpha_available": "false",
             "alpha_source": "not_available_for_same_SomaScan_assay", "eligible_for_two_step_MR": "false",
             "manual_verification_status": "full_text_and_source_table_verified",
-            "notes": "Bonferroni-significant PWAS candidate; retained as external evidence and not interpreted as a de novo A1 discovery.",
+            "notes": "Bonferroni-significant PWAS candidate; retained as external evidence and not interpreted as a de novo discovery in the present analysis.",
             "source_table_file": str(SCIENCE), "source_sheet": "ST 1. AD PWAS Results",
             "source_row": int(row.name) + 8, "beta_source_type": "published_PWAS_Z_not_beta",
             "mapping_confidence": "high" if len(match) and pd.notna(match["oid"].iloc[0]) else "moderate",
@@ -151,10 +151,10 @@ def append_provenance() -> None:
                 "CI_lower": row["Lower95"], "CI_upper": row["Upper95"], "P_value": row["Pval"],
                 "multiple_testing_method": "Benjamini-Hochberg FDR", "corrected_significance": "true",
                 "effect_direction": "higher_protein_lower_risk" if float(row["OR"]) < 1 else "higher_protein_higher_risk",
-                "outcome_GWAS": outcome_name, "overlap_with_current_A1_outcome": "partially_overlapping_or_related",
+                "outcome_GWAS": outcome_name, "overlap_with_primary_outcome_GWAS": "partially_overlapping_or_related",
                 "same_outcome_reanalysis": "false", "evidence_tier": "Tier2", "high_complexity_locus": "false",
                 "assay_cross_reactivity_risk": "platform_mapping_required", "inclusion_status": "literature_source_universe_tier2",
-                "exclusion_reason": "no_colocalization_or_independent_replication;published_beta_not_same_assay_A1_beta",
+                "exclusion_reason": "no_colocalization_or_independent_replication;published_beta_not_same_assay_primary_analysis_beta",
                 "APOE_rs429358_alpha_available": "false", "APOE_rs7412_alpha_available": "false",
                 "eligible_for_two_step_MR": "false", "manual_verification_status": "full_text_and_source_table_verified",
                 "notes": str(row.get("Note", "")), "source_table_file": str(bidirectional), "source_sheet": sheet,
@@ -182,10 +182,10 @@ def append_provenance() -> None:
             "beta_or_logOR": np.log(float(row["OR"])), "OR": row["OR"], "CI_lower": lower, "CI_upper": upper,
             "P_value": row["p"], "multiple_testing_method": "study Bonferroni threshold", "corrected_significance": "true",
             "effect_direction": "higher_protein_lower_risk" if float(row["OR"]) < 1 else "higher_protein_higher_risk",
-            "outcome_GWAS": "published AD GWAS", "overlap_with_current_A1_outcome": "partially_overlapping_or_related",
+            "outcome_GWAS": "published AD GWAS", "overlap_with_primary_outcome_GWAS": "partially_overlapping_or_related",
             "same_outcome_reanalysis": "false", "evidence_tier": "Tier2", "high_complexity_locus": "true" if gene in {"BIN1", "CR1"} else "false",
             "assay_cross_reactivity_risk": "platform_mapping_required", "inclusion_status": "literature_source_universe_tier2",
-            "exclusion_reason": "published_cross_platform_beta_not_same_assay_A1_beta;highest_tier_requires_colocalization_or_replication_review",
+            "exclusion_reason": "published_cross_platform_beta_not_same_assay_primary_analysis_beta;highest_tier_requires_colocalization_or_replication_review",
             "APOE_rs429358_alpha_available": "false", "APOE_rs7412_alpha_available": "false", "eligible_for_two_step_MR": "false",
             "manual_verification_status": "full_text_and_source_table_verified",
             "notes": "Study-Bonferroni-significant protein-outcome association; same dataset reports GRN/CR1 colocalization support.",
@@ -213,7 +213,7 @@ def append_provenance() -> None:
                 "MR_method": str(values[2]), "beta_or_logOR": values[4], "SE": values[5], "P_value": values[6],
                 "multiple_testing_method": "study-wide threshold", "corrected_significance": "true",
                 "effect_direction": "higher_protein_higher_risk" if float(values[4]) > 0 else "higher_protein_lower_risk",
-                "outcome_GWAS": outcome_label, "overlap_with_current_A1_outcome": "possible", "same_outcome_reanalysis": "false",
+                "outcome_GWAS": outcome_label, "overlap_with_primary_outcome_GWAS": "possible", "same_outcome_reanalysis": "false",
                 "evidence_tier": "Tier2", "high_complexity_locus": "false", "assay_cross_reactivity_risk": "cross_platform_mapping_required",
                 "inclusion_status": "literature_source_universe_tier2",
                 "exclusion_reason": "single_instrument_published_beta;same_assay_APOE_alpha_unavailable",
@@ -239,7 +239,11 @@ def write_crosswalk_and_boundaries() -> None:
     out.insert(0, "source_PMID", "42384774")
     out["epitope_status"] = "not_reported_by_Olink_or_source_supplement"
     out["protein_form_interpretation"] = "assay target annotation only; soluble/cleaved form not assumed"
-    out["A1_use"] = np.where(out["gene_name"].isin(["TREM2", "ACE"]), "supports_cross_platform_mapping_of_existing_assay", "external_candidate_pending_local_summary_statistics")
+    out["analysis_role"] = np.where(
+        out["gene_name"].isin(["TREM2", "ACE"]),
+        "supports_cross_platform_mapping_of_existing_assay",
+        "external_candidate_pending_available_summary_statistics",
+    )
     out.to_csv(ROOT / "tables" / "moderate_target_assay_crosswalk.tsv", sep="\t", index=False)
 
     alt = pd.DataFrame([
@@ -256,9 +260,9 @@ def update_flow_and_manifest() -> None:
     flow_path = TABLE_DIR / "TableS24_APOE_Linkable_Eligibility_Flow.tsv"
     flow = pd.read_csv(flow_path, sep="\t", dtype=str).fillna("")
     extra = pd.DataFrame([
-        ["priority_studies_newly_fulltext_verified", "4", "studies", "All four previously pending priority studies now have publisher supplements locally verified."],
+        ["priority_studies_newly_fulltext_verified", "4", "studies", "All four previously pending priority studies now have verified publisher supplements."],
         ["new_Bonferroni_PWAS_candidates_external_only", "19", "assay-level PWAS rows", "PWAS Z statistics are not standardized beta estimates and were not inserted into pooled mediation."],
-        ["frozen_PWAS5_crosswalk_extension_completed", "5", "assays", "BCAM, CD55, LILRB1, LILRB5 and SCARA5 have complete readable local tar files and completed strict-QC alpha/beta/cis/mediation re-estimation as a sensitivity-only extension; they do not backfill the frozen 25-protein primary panel."],
+        ["prespecified_five_protein_crosswalk_extension_completed", "5", "assays", "BCAM, CD55, LILRB1, LILRB5 and SCARA5 have complete readable provider-authorized assay archives and completed strict-QC alpha/beta/cis/mediation re-estimation as a sensitivity-only extension; they do not backfill the prespecified 25-protein primary panel."],
     ], columns=flow.columns)
     flow = pd.concat([flow[~flow["stage"].isin(extra["stage"])], extra], ignore_index=True)
     flow.to_csv(flow_path, sep="\t", index=False)

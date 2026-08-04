@@ -1,6 +1,6 @@
-# Independent deCODE SomaScan sensitivity
+# deCODE SomaScan independent-platform sensitivity
 
-This module contains the same-platform deCODE SomaScan sensitivity analysis for eight genes excluded from the primary UKB-PPP Olink mediation panel.
+This module contains an independent-platform, same-assay deCODE SomaScan sensitivity analysis for eight genes excluded from the primary UKB-PPP Olink mediation panel.
 
 The frozen branch evaluates nine exact aptamers and 72 two-step mediation paths. It remains separate from the 25-protein Olink panel and is not included in the primary aggregate mediation estimate.
 

@@ -1,18 +1,25 @@
 # ============================================================
-# D_nvmr_ukbppp.R
-# NVMR mediation decomposition: rs429358 -> protein -> outcome
+# Biology-guided two-step mediation sensitivity analysis
+# rs429358 -> protein -> outcome
 # α = rs429358->protein (single-SNP), β = protein->outcome (IVW)
 # Mediation = α × β, SE via Delta method
 # ============================================================
 
 library(data.table)
 
-RESULTS_DIR <- "results"
-dir.create(RESULTS_DIR, showWarnings = FALSE, recursive = TRUE)
+script_arg <- grep("^--file=", commandArgs(trailingOnly = FALSE), value = TRUE)
+if (!length(script_arg)) stop("Run this file with Rscript.")
+script_path <- normalizePath(sub("^--file=", "", script_arg[1]), winslash = "/", mustWork = TRUE)
+SCRIPT_DIR <- dirname(script_path)
+PROJECT_ROOT <- normalizePath(file.path(SCRIPT_DIR, ".."), winslash = "/", mustWork = TRUE)
+INPUT_DIR <- file.path(PROJECT_ROOT, "04_protein_mr", "results")
+if (!file.exists(file.path(INPUT_DIR, "C6_rs429358_effects.csv"))) {
+  INPUT_DIR <- file.path(PROJECT_ROOT, "04_protein_mr")
+}
 
 # ---- Load data ----
-alpha <- fread(file.path(RESULTS_DIR, "C6_rs429358_effects.csv"))  # rs429358 -> protein
-beta  <- fread(file.path(RESULTS_DIR, "C6_ukbppp_mr_all.csv"))     # protein -> outcome
+alpha <- fread(file.path(INPUT_DIR, "C6_rs429358_effects.csv"))  # rs429358 -> protein
+beta  <- fread(file.path(INPUT_DIR, "C6_ukbppp_mr_all.csv"))     # protein -> outcome
 
 # Only IVW for beta
 beta <- beta[method == "Inverse variance weighted", ]
@@ -22,11 +29,11 @@ alpha <- alpha[Gene != "APOE", ]
 beta  <- beta[exposure != "APOE", ]
 cat(sprintf("Excluded APOE: %d proteins remain\n", nrow(alpha)))
 
-# ---- NVMR: α × β with Delta method CI ----
-cat("=== NVMR Mediation Decomposition ===\n\n")
+# ---- Two-step product-of-coefficients analysis ----
+cat("=== Biology-guided two-step mediation sensitivity ===\n\n")
 
-# Pathway definitions
-pathways <- list(
+# Author-defined biology categories
+biology_categories <- list(
   Complement   = c("C1QA","C2","C3","C5","CFB","CFD","CFH","CFI","CFP","SERPING1"),
   Inflammatory = c("CSF1","IFNG","IL10","IL18","IL1B","IL6","TGFB1","TNF"),
   Chemokine    = c("CCL2","CCL5","CX3CL1","CXCL10","CXCL12"),
@@ -79,7 +86,7 @@ for (out in outcomes) {
 }
 
 nv <- rbindlist(results)
-fwrite(nv, file.path(RESULTS_DIR, "D_nvmr_mediation_all.csv"))
+fwrite(nv, file.path(SCRIPT_DIR, "D_two_step_mediation_all.csv"))
 cat(sprintf("\nDone: %d mediation paths\n", nrow(nv)))
 
 # ---- Significant mediators ----
@@ -94,21 +101,21 @@ for (out in outcomes) {
   }
 }
 
-# ---- Pathway-level summary ----
-cat("\n\n=== Pathway-level mediation summary ===\n")
+# ---- Biology-category descriptive summary ----
+cat("\n\n=== Biology-category mediation summary ===\n")
 
-# Total rs429358 effect (from Article 1: AD->Any_AMD Wald ratio ≈ -0.18)
-total_effect <- c(AD = -1.1275, Dry_AMD = -0.2109, Wet_AMD = -0.2216, Any_AMD = -0.2031)
+# Total rs429358-C effects on the log-odds scale.
+total_effect <- c(AD = 1.1275, Dry_AMD = -0.2109, Wet_AMD = -0.2216, Any_AMD = -0.2031)
 
 for (out in outcomes) {
   cat(sprintf("\n--- %s (total effect ≈ %.4f) ---\n", out, total_effect[out]))
 
-  for (pw_name in names(pathways)) {
-    pw_genes <- pathways[[pw_name]]
+  for (pw_name in names(biology_categories)) {
+    pw_genes <- biology_categories[[pw_name]]
     pw <- nv[outcome == out & gene %in% pw_genes, ]
     if (nrow(pw) == 0) next
 
-    # Sum mediation within pathway
+    # Descriptive sum within an author-defined biology category.
     pw_sum <- sum(pw$mediation, na.rm = TRUE)
     # SE via pooled variance (sum of squared SEs)
     pw_se <- sqrt(sum(pw$se_med^2, na.rm = TRUE))
@@ -134,4 +141,4 @@ for (out in outcomes) {
       residual, residual/total_effect[out]*100))
 }
 
-cat("\nD_NVMR complete.\n")
+cat("\nBiology-guided two-step mediation sensitivity complete.\n")

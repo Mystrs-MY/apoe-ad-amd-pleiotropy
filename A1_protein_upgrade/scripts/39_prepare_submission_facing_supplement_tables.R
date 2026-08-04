@@ -20,9 +20,9 @@ clean_text <- function(x) {
   if (!is.character(x)) return(x)
   x <- gsub("PWAS5", "five_protein_crosswalk", x, fixed = TRUE)
   x <- gsub("frozen_primary", "prespecified_primary", x, fixed = TRUE)
-  x <- gsub("frozen 25-protein", "prespecified 25-protein", x, fixed = TRUE)
+  x <- gsub("prespecified 25-protein", "prespecified 25-protein", x, fixed = TRUE)
   x <- gsub("frozen", "prespecified", x, fixed = TRUE)
-  x <- gsub("not_reported_in_prespecified_local_crosswalk", "not_reported", x, fixed = TRUE)
+  x <- gsub("not_reported_in_prespecified_crosswalk", "not_reported", x, fixed = TRUE)
   x
 }
 
@@ -51,8 +51,8 @@ s29 <- data.table(
   displayed_content = c(
     "APOE variant-to-protein alpha versus protein-to-outcome beta linkage map",
     "Protein-level indirect effects and mediated proportions",
-    "Literature-prioritized versus legacy panel boundary comparison",
-    "Literature-prioritized versus legacy panel membership"
+    "Literature-prioritized versus biology-guided panel boundary comparison",
+    "Literature-prioritized versus biology-guided panel membership"
   ),
   primary_evidence_tables = c(
     "Tables S22, S23",
@@ -204,7 +204,32 @@ redact_local_paths <- function(dt) {
     values <- dt[[column]]
     if (!is.character(values)) next
     local_path <- !is.na(values) & grepl("^[A-Za-z]:[\\\\/]", values)
-    values[local_path] <- basename(gsub("\\\\", "/", values[local_path]))
+    resource_placeholder <- !is.na(values) & grepl(
+      "^<(external_resource_root|project_root)>",
+      values,
+      ignore.case = TRUE
+    )
+    redact <- local_path | resource_placeholder
+    normalized_paths <- gsub("\\\\", "/", values[redact])
+    values[redact] <- sub("^.*/", "", normalized_paths)
+    set(dt, j = column, value = values)
+  }
+  dt
+}
+
+is_p_value_column <- function(column) {
+  normalized <- tolower(gsub("[. ]", "_", column))
+  normalized %in% c("p", "p_value", "pvalue") ||
+    grepl("(^p_|_p$|_p_value$|_pvalue$)", normalized)
+}
+
+format_underflow_p_values <- function(dt) {
+  zero_tokens <- c("0", "0.0", "0.00", "0e+00", "0.00e+00")
+  for (column in names(dt)) {
+    if (!is_p_value_column(column)) next
+    values <- as.character(dt[[column]])
+    underflow <- !is.na(values) & trimws(values) %in% zero_tokens
+    values[underflow] <- "<1e-300"
     set(dt, j = column, value = values)
   }
   dt
@@ -220,10 +245,11 @@ path_redaction_tables <- c(
 
 for (file in path_redaction_tables) {
   source <- file.path(submission_dir, file)
-  if (!file.exists(source)) {
-    packaged_source <- file.path(upgrade_table_dir, file)
-    if (!file.exists(packaged_source)) stop(sprintf("Missing packaged table: %s", packaged_source))
+  packaged_source <- file.path(upgrade_table_dir, file)
+  if (file.exists(packaged_source)) {
     file.copy(packaged_source, source, overwrite = TRUE)
+  } else if (!file.exists(source)) {
+    stop(sprintf("Missing packaged and submission table: %s", file))
   }
   if (!file.exists(source)) stop(sprintf("Missing submission table: %s", source))
   submission_table <- redact_local_paths(fread(source, na.strings = c("", "NA")))
@@ -233,4 +259,23 @@ for (file in path_redaction_tables) {
   if (file.exists(root_copy)) file.copy(source, root_copy, overwrite = TRUE)
 }
 
-cat("Submission-facing Tables S19, S22, S25-S26, and S29-S32 prepared.\n")
+# A numerical P value cannot equal zero. Preserve analytic source tables and
+# format underflow only in the submission-facing copies.
+submission_files <- list.files(
+  submission_dir,
+  pattern = "\\.(tsv|csv)$",
+  full.names = TRUE,
+  ignore.case = TRUE
+)
+for (source in submission_files) {
+  separator <- if (grepl("\\.tsv$", source, ignore.case = TRUE)) "\t" else ","
+  submission_table <- format_underflow_p_values(
+    fread(source, sep = separator, na.strings = c("", "NA"))
+  )
+  fwrite(submission_table, source, sep = separator, na = "NA")
+
+  root_copy <- file.path(submission_root, basename(source))
+  if (file.exists(root_copy)) file.copy(source, root_copy, overwrite = TRUE)
+}
+
+cat("Submission-facing Tables S18-S39 prepared; exact-zero P values were formatted as <1e-300.\n")

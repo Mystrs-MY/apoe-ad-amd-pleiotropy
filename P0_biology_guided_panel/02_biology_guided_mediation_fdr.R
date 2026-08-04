@@ -1,8 +1,16 @@
-# Quick mediation FDR integration
+# FDR sensitivity for two-step mediation in the biology-guided panel.
 library(data.table)
 
-alpha <- fread("../04_protein_mr/C6_rs429358_effects.csv")
-beta <- fread("../04_protein_mr/C6_ukbppp_mr_all.csv")
+script_arg <- grep("^--file=", commandArgs(trailingOnly = FALSE), value = TRUE)
+if (!length(script_arg)) stop("Run this file with Rscript.")
+script_path <- normalizePath(sub("^--file=", "", script_arg[1]), winslash = "/", mustWork = TRUE)
+module_dir <- dirname(script_path)
+project_root <- normalizePath(file.path(module_dir, ".."), winslash = "/", mustWork = TRUE)
+result_dir <- file.path(module_dir, "results")
+dir.create(result_dir, recursive = TRUE, showWarnings = FALSE)
+
+alpha <- fread(file.path(project_root, "04_protein_mr", "C6_rs429358_effects.csv"))[Gene != "APOE"]
+beta <- fread(file.path(project_root, "04_protein_mr", "C6_ukbppp_mr_all.csv"))
 beta <- beta[method == "Inverse variance weighted", ]
 
 # Rename for merge
@@ -38,5 +46,6 @@ print(med[order(med_p)][1:min(5, nrow(med)),
 cat(sprintf("\nTotal paths: %d, Nominal P<0.05: %d, FDR<0.05: %d\n",
   nrow(med), sum(med$med_p < 0.05), sum(med$med_fdr < 0.05, na.rm = TRUE)))
 
-fwrite(med, "./results/mediation_with_fdr.csv")
-cat("[Done] Saved to ./results/mediation_with_fdr.csv\n")
+output <- file.path(result_dir, "biology_guided_mediation_with_fdr.csv")
+fwrite(med, output)
+cat("[Done] Saved to ", output, "\n", sep = "")

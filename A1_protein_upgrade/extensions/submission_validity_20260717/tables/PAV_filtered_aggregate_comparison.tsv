@@ -1,4 +1,4 @@
-variant	outcome	current_number_of_proteins	current_mediated_proportion	current_CI_lower	current_CI_upper	filtered_number_of_proteins	filtered_mediated_proportion	filtered_CI_lower	filtered_CI_upper	mediated_proportion_absolute_difference
+variant	outcome	unfiltered_number_of_proteins	unfiltered_mediated_proportion	unfiltered_CI_lower	unfiltered_CI_upper	filtered_number_of_proteins	filtered_mediated_proportion	filtered_CI_lower	filtered_CI_upper	mediated_proportion_absolute_difference
 "rs429358"	"AD"	25	0.014704287011826	0.0023813143303238	0.0277989656363493	25	0.0165637205480149	0.00418730758285223	0.0297371974355288	0.00185943353618887
 "rs429358"	"any_AMD"	25	0.0615797205311314	-0.0985123540458255	0.226306952338761	25	0.0648376889540404	-0.121407015563412	0.259166537207146	0.00325796842290896
 "rs429358"	"dry_AMD"	25	0.0303025836692689	-0.130004061595655	0.191203604189591	25	0.0367241754686617	-0.157823468922847	0.235570600544837	0.00642159179939278

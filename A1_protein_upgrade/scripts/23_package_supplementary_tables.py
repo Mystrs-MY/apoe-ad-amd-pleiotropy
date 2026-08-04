@@ -23,7 +23,9 @@ COPIES = {
     "TableS24_APOE_Linkable_Eligibility_Flow.tsv": ROOT / "tables" / "APOE_linkable_subset_flow.tsv",
     "TableS25_Expanded_Primary_Two_Step_Mediation.tsv": ROOT / "tables" / "APOE_linkable_two_step_mediation.tsv",
     "TableS26_Cis_Only_Two_Step_Mediation.tsv": ROOT / "tables" / "APOE_linkable_two_step_mediation_cis_sensitivity.tsv",
-    "TableS27_Expanded_Strict_Legacy_Comparison.tsv": ROOT / "tables" / "new_vs_legacy_panel_comparison.tsv",
+    "TableS27_Literature_vs_Biology_Guided_Comparison.tsv": (
+        ROOT / "tables" / "literature_vs_biology_guided_panel_comparison.tsv"
+    ),
     "TableS28_Excluded_Name_Matched_Panel_Genes.tsv": ROOT / "tables" / "name_matched_panel_excluded_genes.tsv",
 }
 

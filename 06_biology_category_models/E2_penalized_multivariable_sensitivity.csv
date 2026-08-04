@@ -1,4 +1,4 @@
-pathway,outcome,gene,n_snps,n_proteins,beta_ridge,se_ridge,pval_ridge,lambda
+biology_category,outcome,gene,n_snps,n_proteins,penalized_coefficient,bootstrap_se,nominal_p_value,lambda
 Complement,AD,C1QA,29,10,-0.000256072464171758,0.000362967575121299,0.480501120230542,76.0308426986793
 Complement,AD,C2,29,10,0,0,,76.0308426986793
 Complement,AD,C3,29,10,0,0,,76.0308426986793

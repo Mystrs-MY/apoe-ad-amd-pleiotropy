@@ -103,7 +103,7 @@ empty_result <- function(gene, outcome, status, reason, n_iv = 0L) {
     planned_family_size = planned_family_size, observed_primary_tests_in_family = NA_integer_,
     P_FDR_observed_reestimated = NA_real_, P_Bonferroni_planned_family = NA_real_,
     corrected_significance_FDR_observed = NA, corrected_significance_Bonferroni_planned = NA,
-    beta_status = status, exclusion_reason = reason, beta_source = "current_A1_reestimated"
+    beta_status = status, exclusion_reason = reason, beta_source = "primary_analysis_reestimated"
   )
 }
 
@@ -220,7 +220,7 @@ for (gene in names(clumped_by_gene)) {
       corrected_significance_Bonferroni_planned = NA,
       beta_status = "reestimated",
       exclusion_reason = "NA",
-      beta_source = "current_A1_reestimated"
+      beta_source = "primary_analysis_reestimated"
     )]
     setnames(estimates, c("b", "se", "pval", "Q", "Q_pval"),
              c("beta", "SE", "P_value", "Cochran_Q", "Q_P"), skip_absent = TRUE)

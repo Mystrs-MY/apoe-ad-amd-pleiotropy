@@ -1,4 +1,4 @@
-outcome	pathway	mediation	pct
+outcome	biology_category	mediation	pct
 AD	Complement	-0.00150449321115826	-0.133436204980777
 AD	Chemokine	-0.00534868004392704	-0.474384039372687
 AD	Immune	0.010276400938049	0.911432455702795

@@ -20,7 +20,7 @@ CONFIG = yaml.safe_load((ROOT / "config" / "resources.yml").read_text(encoding="
 RESOURCE_DIRS = [Path(path) for path in CONFIG["paths"]["ukb_ppp_tar_dirs"]]
 PROVENANCE = ROOT / "tables" / "Table_Literature_Prioritized_Protein_Provenance.tsv"
 OUTPUT = ROOT / "tables" / "APOE_variant_to_literature_proteins_alpha.tsv"
-MANIFEST = ROOT / "data_processed" / "ukbppp_local_assay_manifest.tsv"
+MANIFEST = ROOT / "data_processed" / "ukbppp_assay_manifest.tsv"
 TARGET_MAPPING = ROOT / "tables" / "APOE_linkable_target_assay_mapping.tsv"
 
 VARIANTS = {
@@ -50,7 +50,7 @@ def build_manifest() -> pd.DataFrame:
             "gene_symbol": values["gene"].upper(), "UniProt_ID": values["uniprot"].upper(),
             "Olink_target_ID": values["oid"].upper(), "assay_version": f"v{values['version']}",
             "Olink_panel": values["panel"], "tar_path": str(path), "mapping_status": "parsed_from_source_filename",
-            "resource_scope": "synapse_primary_panel_download" if "syn51365303" in str(path) else "legacy_local_resource",
+            "resource_scope": "synapse_primary_panel_download" if "syn51365303" in str(path) else "provider_authorized_project_resource",
         })
     manifest = pd.DataFrame(rows)
     duplicated = manifest.loc[
@@ -102,88 +102,6 @@ def p_from_log10(value: str) -> float:
     return 0.0 if log10p > 323 else 10 ** (-log10p)
 
 
-def verified_values(values: pd.Series) -> set[str]:
-    invalid = {"", "NA", "NOT_REPORTED", "MAPPING_UNRESOLVED"}
-    return {str(value).strip().upper() for value in values if str(value).strip().upper() not in invalid}
-
-
-def build_target_mapping(evidence: pd.DataFrame, manifest_by_gene: dict[str, pd.Series]) -> pd.DataFrame:
-    primary = evidence[evidence["inclusion_status"] == "primary_high_confidence_panel"].copy()
-    key_columns = ["gene_symbol", "protein_name", "protein_form_or_isoform"]
-    targets = primary[key_columns].drop_duplicates().sort_values(key_columns).reset_index(drop=True)
-    rows = []
-    for index, target in targets.iterrows():
-        mask = np.logical_and.reduce([primary[column].eq(target[column]) for column in key_columns])
-        source = primary.loc[mask]
-        gene = target["gene_symbol"]
-        assay = manifest_by_gene.get(gene)
-        source_oids = verified_values(source["assay_target_ID"])
-        source_uniprots = verified_values(source["UniProt_ID"])
-        source_platforms = ";".join(sorted(verified_values(source["proteomic_platform"])))
-        isoform_specific = "isoform" in (
-            f"{target['protein_name']} {target['protein_form_or_isoform']}".lower()
-        )
-        canonical_target = str(target["protein_name"]).strip().upper() == gene
-        if assay is None:
-            status = "assay_unavailable"
-            confidence = "not_mapped"
-            basis = "no_exact_gene_prefix_Olink_assay"
-            eligible = False
-        else:
-            local_oid = str(assay["Olink_target_ID"]).upper()
-            local_uniprot = str(assay["UniProt_ID"]).upper()
-            exact_oid = local_oid in source_oids
-            exact_uniprot = local_uniprot in source_uniprots
-            same_olink_platform = any("OLINK" in value for value in verified_values(source["proteomic_platform"]))
-            if isoform_specific:
-                status = "mapping_unresolved_isoform_specific"
-                confidence = "not_mapped"
-                basis = "local_Olink_assay_is_not_isoform_specific"
-                eligible = False
-            elif exact_oid:
-                status = "eligible_exact_Olink_target_ID"
-                confidence = "high"
-                basis = "exact_OID_match"
-                eligible = True
-            elif exact_uniprot and canonical_target:
-                status = "eligible_exact_UniProt_cross_platform"
-                confidence = "moderate"
-                basis = "exact_UniProt_and_canonical_protein;platform_heterogeneity_retained"
-                eligible = True
-            elif same_olink_platform and canonical_target:
-                status = "eligible_same_Olink_platform_canonical_target"
-                confidence = "moderate"
-                basis = "same_Olink_platform_and_canonical_target;source_assay_ID_not_OID"
-                eligible = True
-            else:
-                status = "mapping_unresolved_cross_platform"
-                confidence = "not_mapped"
-                basis = "gene_symbol_only_or_source_assay_identity_unresolved"
-                eligible = False
-        rows.append({
-            "target_entry_id": f"L2T{index + 1:03d}",
-            "gene_symbol": gene,
-            "protein_name": target["protein_name"],
-            "protein_form_or_isoform": target["protein_form_or_isoform"],
-            "source_record_ids": ";".join(sorted(set(source["record_id"]))),
-            "source_PMIDs": ";".join(sorted(verified_values(source["PMID"]))),
-            "source_platforms": source_platforms,
-            "source_assay_target_IDs": ";".join(sorted(source_oids)) or "not_reported",
-            "source_UniProt_IDs": ";".join(sorted(source_uniprots)) or "not_reported",
-            "local_Olink_target_ID": assay["Olink_target_ID"] if assay is not None else "mapping_unresolved",
-            "local_Olink_UniProt_ID": assay["UniProt_ID"] if assay is not None else "mapping_unresolved",
-            "local_Olink_panel": assay["Olink_panel"] if assay is not None else "mapping_unresolved",
-            "mapping_status": status,
-            "mapping_confidence": confidence,
-            "mapping_basis": basis,
-            "eligible_for_alpha_beta_triangulation": str(eligible).lower(),
-            "manual_verification_status": "rule_based_mapping_verified_from_provenance_and_synapse_filename" if eligible else "requires_manual_assay_review",
-        })
-    mapping = pd.DataFrame(rows)
-    mapping.to_csv(TARGET_MAPPING, sep="\t", index=False)
-    return mapping
-
-
 def main() -> None:
     if not MANIFEST.exists() or not TARGET_MAPPING.exists():
         raise FileNotFoundError("Run 21_build_name_matched_mapping.py before alpha extraction.")
@@ -223,8 +141,8 @@ def main() -> None:
         for rsid, specification in VARIANTS.items():
             source = extracted_by_gene.get(gene, {}).get(rsid)
             if assay is None:
-                status = "alpha_unavailable_local_UKB_PPP_subset"
-                reason = "No exact gene-prefix Olink assay was available in the verified local and Synapse-selected UKB-PPP resources."
+                status = "alpha_unavailable_in_verified_UKB_PPP_resources"
+                reason = "No exact gene-prefix Olink assay was available among the verified UKB-PPP resources."
             elif source is None:
                 status = "direct_variant_absent_in_assay_GWAS"
                 reason = f"{rsid} was not found at the verified hg19 position in the assay chr19 file."
@@ -294,7 +212,7 @@ def main() -> None:
                 "linked_Layer2_target_entry_IDs": target_entry_ids,
                 "target_mapping_status": mapping_statuses,
                 "target_mapping_confidence": mapping_confidence,
-                "manual_verification_status": "direct_hg19_ID_and_hg38_GENPOS_coordinates_plus_alleles_verified_against_local_chr19_rsid_map" if source is not None else "not_available",
+                "manual_verification_status": "direct_hg19_ID_and_hg38_GENPOS_coordinates_plus_alleles_verified_against_chr19_rsid_reference" if source is not None else "not_available",
             })
 
     output = pd.DataFrame(rows).replace({np.nan: "NA"})
@@ -303,7 +221,7 @@ def main() -> None:
     print(f"Primary protein target entries: {len(target_mapping)}")
     print(f"Primary unique genes: {len(panel_genes)}")
     print(f"Direct alpha rows: {(output['availability_status'] == 'direct_variant_available').sum()}")
-    print(f"Genes with any local assay: {output.loc[output['assay_target_ID'] != 'mapping_unresolved', 'gene_symbol'].nunique()}")
+    print(f"Genes with an available verified assay: {output.loc[output['assay_target_ID'] != 'mapping_unresolved', 'gene_symbol'].nunique()}")
     print(f"Genes with eligible target-to-assay mapping: {output.loc[output['eligible_for_two_step_mapping'] == 'true', 'gene_symbol'].nunique()}")
     print(f"Output: {OUTPUT}")
 

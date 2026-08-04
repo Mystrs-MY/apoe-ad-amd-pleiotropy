@@ -115,14 +115,14 @@ for assay in sorted(assays, key=lambda row: (row["gene_symbol"], row["SomaScan_S
         row[f"{prefix}_full_GWAS_SE"] = direct["alpha_SE"] if direct else "NA"
         row[f"{prefix}_full_GWAS_P"] = direct["alpha_P"] if direct else "NA"
         row[f"{prefix}_full_GWAS_N"] = direct["alpha_N"] if direct else "NA"
-    local_complete = all((row["SomaScan_SeqId"], variant) in full_alpha for variant in ("rs429358", "rs7412"))
+    archive_complete = all((row["SomaScan_SeqId"], variant) in full_alpha for variant in ("rs429358", "rs7412"))
     beta_complete = beta_counts.get(row["SomaScan_SeqId"], 0) == 4
     row.update(
         {
-            "complete_aptamer_GWAS_available_locally": str(local_complete).lower(),
+            "complete_aptamer_GWAS_available_in_authorized_archive": str(archive_complete).lower(),
             "same_platform_beta_reestimation_ready": str(beta_complete).lower(),
-            "full_summary_data_requirement": "satisfied_local_SMP_full_GWAS" if local_complete else "pending",
-            "current_gate_status": "same_platform_alpha_beta_mediation_complete" if local_complete and beta_complete else "incomplete",
+            "full_summary_data_requirement": "satisfied_provider_authorized_SMP_full_GWAS" if archive_complete else "pending",
+            "gate_status": "same_platform_alpha_beta_mediation_complete" if archive_complete and beta_complete else "incomplete",
             "reestimated_outcome_beta_count": str(beta_counts.get(row["SomaScan_SeqId"], 0)),
             "absence_interpretation": "full_GWAS_direct_alpha_extracted_without_significance_selection",
             "source_file": SOURCE.name,

@@ -12,7 +12,7 @@ upgrade_root <- normalizePath(file.path(extension_root, "..", ".."), winslash = 
 
 alpha <- fread(file.path(extension_root, "tables", "PWAS5_APOE_alpha.tsv"), na.strings = c("NA", ""))
 members <- fread(file.path(extension_root, "config", "PWAS5_frozen_members.tsv"), na.strings = c("NA", ""))
-totals <- fread(file.path(upgrade_root, "tables", "APOE_variant_total_effects_current_A1.tsv"), na.strings = c("NA", ""))
+totals <- fread(file.path(upgrade_root, "tables", "APOE_variant_total_effects_primary_analysis.tsv"), na.strings = c("NA", ""))
 planned_family <- 5L * 2L * 4L
 
 total_use <- totals[availability_status == "direct_variant_available",
@@ -125,7 +125,7 @@ run_set <- function(label, beta_file, beta_status_required, strict_mapping = FAL
     out[estimable, corrected_significance_Bonferroni_planned_40 := indirect_P_Bonferroni_planned_40 < 0.05]
   }
   out[, interpretation_boundary := paste(
-    "Pre-specified five-protein cross-platform extension sensitivity; not a replacement for the frozen 25-protein primary analysis.",
+    "Pre-specified five-protein cross-platform extension sensitivity; not a replacement for the prespecified 25-protein primary analysis.",
     "Independent normal alpha/beta bootstrap excludes selection uncertainty, winner's curse, outcome reuse and empirical cross-protein covariance."
   )]
   setorder(out, variant, outcome, gene_symbol)

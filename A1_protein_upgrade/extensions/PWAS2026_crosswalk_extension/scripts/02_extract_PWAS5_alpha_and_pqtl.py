@@ -278,7 +278,7 @@ def main() -> None:
     }).copy()
     crosswalk["candidate_assay_count"] = 1
     crosswalk["protein_form"] = "circulating_plasma_protein; platform-specific binding assay"
-    crosswalk["cross_platform_correlation"] = "not_reported_in_frozen_local_crosswalk"
+    crosswalk["cross_platform_correlation"] = "not_reported_in_prespecified_crosswalk"
     crosswalk["exact_assay_replication"] = False
     crosswalk["interpretation_boundary"] = (
         "Gene/protein-level cross-platform crosswalk; not exact SomaScan aptamer replication by Olink."

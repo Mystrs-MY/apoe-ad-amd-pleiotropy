@@ -60,7 +60,7 @@ $luSummary = Read-Tsv 'Lu2026_exact_assay_run_summary.tsv'
 $kPrimaryBeta = @($kBeta | Where-Object { $_.method_role -eq 'primary' })
 $kProteinMediation = @($kMediation | Where-Object { $_.row_type -eq 'protein' })
 Add-Check 'Kunkle protein coverage rows' ($kCoverage.Count -eq 25) $kCoverage.Count '25'
-Add-Check 'Kunkle prespecified instrument-pair total' ((($kCoverage | Measure-Object frozen_pairs -Sum).Sum) -eq 409) (($kCoverage | Measure-Object frozen_pairs -Sum).Sum) '409'
+Add-Check 'Kunkle prespecified instrument-pair total' ((($kCoverage | Measure-Object prespecified_instrument_pairs -Sum).Sum) -eq 409) (($kCoverage | Measure-Object prespecified_instrument_pairs -Sum).Sum) '409'
 Add-Check 'Kunkle instrument pairs present in outcome' ((($kCoverage | Measure-Object present_in_Kunkle -Sum).Sum) -eq 385) (($kCoverage | Measure-Object present_in_Kunkle -Sum).Sum) '385'
 Add-Check 'Kunkle instruments retained after harmonization' ((($kCoverage | Measure-Object retained_after_harmonization -Sum).Sum) -eq 335) (($kCoverage | Measure-Object retained_after_harmonization -Sum).Sum) '335'
 Add-Check 'Kunkle primary protein beta rows' ($kPrimaryBeta.Count -eq 25) $kPrimaryBeta.Count '25'

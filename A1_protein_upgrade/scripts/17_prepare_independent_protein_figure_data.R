@@ -17,7 +17,10 @@ beta <- fread(file.path(root, "tables", "literature_panel_beta_results.tsv"), na
 med_main <- fread(file.path(root, "tables", "APOE_linkable_two_step_mediation.tsv"), na.strings = c("NA", ""))
 med_cis <- fread(file.path(root, "tables", "APOE_linkable_two_step_mediation_cis_sensitivity.tsv"), na.strings = c("NA", ""))
 med_strict <- fread(file.path(root, "tables", "APOE_linkable_two_step_mediation_strict_sensitivity.tsv"), na.strings = c("NA", ""))
-comparison <- fread(file.path(root, "tables", "new_vs_legacy_panel_comparison.tsv"), na.strings = c("NA", ""))
+comparison <- fread(
+  file.path(root, "tables", "literature_vs_biology_guided_panel_comparison.tsv"),
+  na.strings = c("NA", "")
+)
 
 final_n <- uniqueN(med_main[row_type == "protein", gene_symbol])
 stopifnot(final_n == 25L, med_main[row_type == "protein", .N] == final_n * 2L * 4L)
@@ -84,8 +87,8 @@ boundary <- rbindlist(list(
   total_from_mediation(med_main, "Genome-wide pQTL"),
   total_from_mediation(med_cis, "Cis-only"),
   total_from_mediation(med_strict, "Strict annotation"),
-  comparison[record_type == "total_mediation" & panel == "legacy", .(
-    panel = "Legacy biology-guided", instrument_set = "Legacy rs429358",
+  comparison[record_type == "total_mediation" & panel == "biology_guided", .(
+    panel = "Biology-guided candidate panel", instrument_set = "rs429358",
     variant, outcome, n = as.integer(n), mediated_percent = 100 * as.numeric(value),
     CI_lower_percent = NA_real_, CI_upper_percent = NA_real_, CI_available = FALSE
   )]

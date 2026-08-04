@@ -37,7 +37,7 @@
 | APOE variant-to-protein alpha | `07_extract_apoe_alpha.py` | `APOE_variant_to_literature_proteins_alpha.tsv` |
 | Protein-to-outcome beta | `09_reestimate_literature_panel_beta.R` | `literature_panel_beta_results.tsv` |
 | Two-step mediation | `11_two_step_mediation.R` | `APOE_linkable_two_step_mediation.tsv` and sensitivity variants |
-| Panel finalization and comparison | `12_finalize_panel_tables.py` | `new_vs_legacy_panel_comparison.tsv` and exclusion tables |
+| Panel finalization and comparison | `12_finalize_panel_tables.py` | `literature_vs_biology_guided_panel_comparison.tsv` and exclusion tables |
 | deCODE same-platform extension | `A1_dual_scale_mediation/scripts/04_*` to `18_*` | deCODE alpha, beta, mediation, PAV, and shared-instrument tables |
 
-The original biology-guided panel remains under `04_protein_mr/`, `05_mediation/`, `06_pathway_mvmr/`, and `P0_proteome/` as a frozen sensitivity analysis. Historical filenames do not imply a de novo proteome-wide scan.
+The exploratory biology-guided panel remains under `04_protein_mr/`, `05_mediation/`, `06_biology_category_models/`, and `P0_biology_guided_panel/` as a sensitivity analysis. It is an author-defined candidate panel and does not imply a de novo proteome-wide scan.

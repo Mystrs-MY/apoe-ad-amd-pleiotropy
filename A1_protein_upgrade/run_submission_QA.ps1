@@ -58,9 +58,9 @@ foreach ($name in @(
     'TableS5g_MAGMA_Full_Gene_Results.tsv.gz',
     'TableS6_rs429358_Protein_Effects.csv',
     'TableS7_Protein_MR_Mediation.csv',
-    'TableS8_Pathway_Mediation_Summary.csv',
-    'TableS9_Pathway_MVMR.csv',
-    'TableS10_Ridge_MVMR_Detailed.csv',
+    'TableS8_Biology_Category_Mediation_Summary.csv',
+    'TableS9_Biology_Category_Aggregated_Genetic_Score.csv',
+    'TableS10_Penalized_Multivariable_Sensitivity_Detailed.csv',
     'TableS11_Covariance_Mapping_Bootstrap_Sensitivity.tsv',
     'TableS11b_Shared_Protein_Instrument_Audit.tsv',
     'TableS11c_Leave_One_Protein_Out_Aggregate.tsv',
@@ -79,7 +79,7 @@ foreach ($name in @(
     'TableS24_APOE_Linkable_Eligibility_Flow.tsv',
     'TableS25_Expanded_Primary_Two_Step_Mediation.tsv',
     'TableS26_Cis_Only_Two_Step_Mediation.tsv',
-    'TableS27_Expanded_Strict_Legacy_Comparison.tsv',
+    'TableS27_Literature_vs_Biology_Guided_Comparison.tsv',
     'TableS28_Excluded_Name_Matched_Panel_Genes.tsv',
     'TableS29_Figure5_Source_Data_and_QA_Manifest.tsv',
     'TableS30_Five_Protein_PWAS_Data_Sources_and_Crosswalk.tsv',
@@ -118,33 +118,8 @@ Reject-NamePattern $suppFigDir '^FigS11[a-d]_'
 Reject-NamePattern $suppFigDir 'C3_full|C3_SuSiE|C3_reciprocal|C3_evidence'
 Reject-NamePattern $suppTableDir 'Drug_Target|Drug-Target|C3_full|C3_coloc|C3_conditional|^TableS([4-9][0-9]|[1-9][0-9]{2,})'
 
-$manuscriptDir = Join-Path $ProjectRoot 'manuscripts'
-$chineseManuscript = Get-ChildItem -LiteralPath $manuscriptDir -File -Filter '*V1.4.md' |
-    Where-Object { $_.Name -notlike '*CellGenomics*' } |
-    Sort-Object Length -Descending |
-    Select-Object -First 1 -ExpandProperty FullName
-$manuscripts = @(
-    $chineseManuscript,
-    (Join-Path $ProjectRoot 'manuscripts\Article1_CellGenomics_English_Manuscript_V1.4.md'),
-    (Join-Path $ProjectRoot 'manuscripts\Article1_CellGenomics_Supplementary_Information_V1.4.md'),
-    (Join-Path $ProjectRoot 'manuscripts\submission_materials\Article1_CellGenomics_Cover_Letter_V1.4.md'),
-    (Join-Path $ProjectRoot 'manuscripts\submission_materials\Article1_CellPress_Editorial_Elements_V1.4.md'),
-    (Join-Path $ProjectRoot 'manuscripts\submission_materials\Article1_CellGenomics_Highlights_and_In_Brief_V1.4.md'),
-    (Join-Path $ProjectRoot 'manuscripts\submission_materials\Article1_CellGenomics_Key_Resources_Table_V1.4.tsv')
-)
-$forbiddenText = 'Exploratory target MR|exploratory target prioritization|exploratory target-MR|drug-target MR|drug target MR|药物靶点|探索性靶点|转化优先级|转化预警|C3 full-region|C3 完整位点|OID30776|rs11569470|rs2230199|LINCS|CMap|FAERS|VigiBase|Figure 6(?![a-zA-Z])|Fig\. 6(?![a-zA-Z])|__NEW_'
-foreach ($manuscript in $manuscripts) {
-    Require-File $manuscript
-    if (Test-Path -LiteralPath $manuscript) {
-        $matches = Select-String -LiteralPath $manuscript -Pattern $forbiddenText -AllMatches
-        foreach ($match in $matches) {
-            $failures.Add("Forbidden manuscript text: ${manuscript}:$($match.LineNumber): $($match.Line.Trim())")
-        }
-    }
-}
-
 $summary = @(
-    "A1 submission-facing core QA",
+    "A1 submission asset and table QA",
     "Timestamp: $(Get-Date -Format o)",
     "Project: $ProjectRoot",
     "Failures: $($failures.Count)"

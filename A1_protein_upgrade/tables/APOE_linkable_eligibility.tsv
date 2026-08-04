@@ -1,4 +1,4 @@
-gene_symbol	protein_name	protein_form_or_isoform	local_Olink_target_ID	target_assay_mapping_status	target_assay_mapping_confidence	target_assay_mapping_eligible	local_Olink_assay_available	rs429358_alpha_available	rs7412_alpha_available	beta_reestimated_current_A1	eligible_for_two_step_MR	exclusion_reason
+gene_symbol	protein_name	protein_form_or_isoform	local_Olink_target_ID	target_assay_mapping_status	target_assay_mapping_confidence	target_assay_mapping_eligible	local_Olink_assay_available	rs429358_alpha_available	rs7412_alpha_available	beta_reestimated_primary_analysis	eligible_for_two_step_MR	exclusion_reason
 "ACE"	"ACE"	"not_reported"	"OID30696"	"name_matched_moderate"	"moderate"	TRUE	TRUE	TRUE	TRUE	TRUE	TRUE	"NA"
 "BLNK"	"BLNK"	"UniProt-mapped protein"	"OID30541"	"name_matched_high"	"high"	TRUE	TRUE	TRUE	TRUE	TRUE	TRUE	"NA"
 "BLNK"	"BLNK"	"assay_specific_target"	"OID30541"	"name_matched_high"	"high"	TRUE	TRUE	TRUE	TRUE	TRUE	TRUE	"NA"
