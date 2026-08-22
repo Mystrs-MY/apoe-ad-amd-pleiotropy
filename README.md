@@ -20,7 +20,7 @@ The code supports four linked evidence layers:
 1. Systematic review and meta-analysis of the association between AMD and subsequent AD or dementia.
 2. Genome-wide and local genetic architecture analyses using LDSC, HDL, MiXeR, LAVA, HyPrColoc, and MAGMA.
 3. APOE anchoring through rs429358-C and rs7412-T, genome-wide bidirectional MR, APOE-region exclusion, and approximate conditional analysis.
-4. Targeted triangulation of a literature-prioritized circulating-protein panel, followed by a deCODE SomaScan independent-platform, same-assay sensitivity analysis for excluded genes.
+4. Targeted triangulation of a literature-prioritized circulating-protein panel, followed by a non-UKB deCODE SomaScan same-platform coverage sensitivity analysis for excluded genes.
 
 The protein layer is **not** a de novo proteome-wide discovery scan. Published proteome-wide MR or PWAS results define an enriched candidate set. Only proteins with both an APOE variant-to-protein estimate (alpha) and a protein-to-outcome estimate (beta) enter two-step mediation.
 
@@ -44,9 +44,9 @@ The committed result tables permit numerical and graphical verification even whe
 | `P0_isoform/` | rs429358/rs7412 isoform-defining variant contrasts |
 | `P0_finemap/` | GCTA-COJO approximate conditional analysis and source data |
 | `A1_protein_upgrade/` | Literature-prioritized Olink panel, alpha/beta separation, mediation, provenance, and sensitivity analyses |
-| `A1_dual_scale_mediation/` | deCODE SomaScan independent-platform, same-assay sensitivity branch only |
+| `A1_dual_scale_mediation/` | deCODE SomaScan non-UKB, same-platform coverage sensitivity branch only; not an independent replication |
 | `04_protein_mr/`, `05_mediation/`, `06_biology_category_models/`, `P0_biology_guided_panel/` | Exploratory biology-guided panel sensitivity analyses |
-| `figures_submission/code/` | Standalone quantitative plotting scripts and compact panel data; flowchart and multi-panel assembly code is excluded |
+| `figures_submission/code/` | Standalone quantitative plotting scripts and compact panel data; flowchart and multi-panel assembly code is excluded, including the S4/S5 composite layouts |
 | `figures_submission/source_data/` | Figure-level source-data tables |
 | `workflow/` | Public-release validation and convenience entry points |
 | `environment/` | Package lists and recorded R session information |

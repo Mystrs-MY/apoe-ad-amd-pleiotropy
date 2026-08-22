@@ -56,7 +56,7 @@ flow_long <- melt(flow, id.vars = c("gene_symbol", "mapping_confidence", "frozen
                   measure.vars = c("stage1", "stage2", "stage3"), variable.name = "stage", value.name = "label")
 flow_long[, stage := factor(stage, levels = c("stage1", "stage2", "stage3"),
                             labels = c("Literature candidate", "UKB-PPP assay", "Mapping boundary"))]
-fwrite(flow_long, file.path(source_dir, "FigS11a_PWAS5_crosswalk_source_data.tsv"), sep = "\t")
+fwrite(flow_long, file.path(source_dir, "FigS7a_PWAS5_crosswalk_source_data.tsv"), sep = "\t")
 
 p12a <- ggplot(flow_long, aes(stage, gene_symbol, group = gene_symbol, color = gene_symbol)) +
   geom_line(linewidth = 0.75, alpha = 0.75) +
@@ -65,14 +65,14 @@ p12a <- ggplot(flow_long, aes(stage, gene_symbol, group = gene_symbol, color = g
   scale_color_manual(values = palette) +
   labs(x = NULL, y = NULL) +
   theme_a1() + theme(legend.position = "none", axis.ticks.x = element_blank())
-export_plot(p12a, "FigS11a_PWAS5_frozen_crosswalk", 7.0, 3.4)
+export_plot(p12a, "FigS7a_PWAS5_frozen_crosswalk", 7.0, 3.4)
 
 alpha <- fread(file.path(table_dir, "PWAS5_APOE_alpha.tsv"))
 alpha <- alpha[, .(gene_symbol, variant, beta, SE, P_value)]
 alpha[, `:=`(lower = beta - 1.96 * SE, upper = beta + 1.96 * SE)]
 alpha[, gene_symbol := factor(gene_symbol, levels = rev(c("BCAM", "CD55", "LILRB1", "LILRB5", "SCARA5")))]
 alpha[, variant := factor(variant, levels = c("rs429358", "rs7412"), labels = c("APOE rs429358", "APOE rs7412"))]
-fwrite(alpha, file.path(source_dir, "FigS11b_PWAS5_APOE_alpha_source_data.tsv"), sep = "\t")
+fwrite(alpha, file.path(source_dir, "FigS7b_PWAS5_APOE_alpha_source_data.tsv"), sep = "\t")
 
 p12b <- ggplot(alpha, aes(beta, gene_symbol, color = gene_symbol)) +
   geom_vline(xintercept = 0, linewidth = 0.45, color = "#777777") +
@@ -82,7 +82,7 @@ p12b <- ggplot(alpha, aes(beta, gene_symbol, color = gene_symbol)) +
   scale_color_manual(values = palette) +
   labs(x = "APOE allele effect on Olink protein (SD units)", y = NULL) +
   theme_a1() + theme(legend.position = "none")
-export_plot(p12b, "FigS11b_PWAS5_APOE_alpha_forest", 6.8, 3.15)
+export_plot(p12b, "FigS7b_PWAS5_APOE_alpha_forest", 6.8, 3.15)
 
 main <- fread(file.path(table_dir, "PWAS5_beta_main.tsv"))
 cis <- fread(file.path(table_dir, "PWAS5_beta_cis.tsv"))
@@ -96,7 +96,7 @@ beta[, `:=`(lower = beta - 1.96 * SE, upper = beta + 1.96 * SE)]
 beta[, gene_symbol := factor(gene_symbol, levels = rev(c("BCAM", "CD55", "LILRB1", "LILRB5", "SCARA5")))]
 beta[, outcome := factor(outcome, levels = c("AD", "dry_AMD", "wet_AMD", "any_AMD"),
                          labels = c("AD", "Dry AMD", "Wet AMD", "Any AMD"))]
-fwrite(beta, file.path(source_dir, "FigS11c_PWAS5_beta_source_data.tsv"), sep = "\t")
+fwrite(beta, file.path(source_dir, "FigS7c_PWAS5_beta_source_data.tsv"), sep = "\t")
 
 p12c <- ggplot(beta, aes(beta, gene_symbol, color = gene_symbol, shape = analysis_set)) +
   geom_vline(xintercept = 0, linewidth = 0.45, color = "#777777") +
@@ -107,7 +107,7 @@ p12c <- ggplot(beta, aes(beta, gene_symbol, color = gene_symbol, shape = analysi
   scale_color_manual(values = palette) +
   labs(x = "Protein effect on outcome (log-odds scale)", y = NULL) +
   theme_a1() + theme(legend.position = "top")
-export_plot(p12c, "FigS11c_PWAS5_main_and_cis_beta_forest", 7.0, 5.6)
+export_plot(p12c, "FigS7c_PWAS5_main_and_cis_beta_forest", 7.0, 5.6)
 
 agg <- fread(file.path(table_dir, "PWAS5_incremental_aggregate_mediation.tsv"))
 agg <- agg[analysis_set == "main" & mapping_scope == "expanded" &
@@ -119,7 +119,7 @@ agg[, outcome := factor(outcome, levels = c("AD", "dry_AMD", "wet_AMD", "any_AMD
                         labels = c("AD", "Dry AMD", "Wet AMD", "Any AMD"))]
 agg[, rho_label := factor(sprintf("rho = %.2f", assumed_common_error_correlation),
                           levels = sprintf("rho = %.2f", c(0, 0.25, 0.5, 0.75)))]
-fwrite(agg, file.path(source_dir, "FigS11d_PWAS5_aggregate_mediation_source_data.tsv"), sep = "\t")
+fwrite(agg, file.path(source_dir, "FigS7d_PWAS5_aggregate_mediation_source_data.tsv"), sep = "\t")
 
 p12d <- ggplot(agg, aes(mediated_proportion, rho_label, color = panel_label, shape = panel_label)) +
   geom_vline(xintercept = 0, linewidth = 0.45, color = "#777777") +
@@ -130,6 +130,6 @@ p12d <- ggplot(agg, aes(mediated_proportion, rho_label, color = panel_label, sha
   scale_color_manual(values = c("Frozen 25-protein panel" = "#3C5488", "Panel plus PWAS5 crosswalk" = "#E64B35")) +
   labs(x = "Aggregate mediated proportion (sensitivity estimate)", y = "Assumed common error correlation") +
   theme_a1() + theme(legend.position = "top", axis.text.y = element_text(size = 7.2))
-export_plot(p12d, "FigS11d_PWAS5_incremental_aggregate_sensitivity", 7.4, 6.2)
+export_plot(p12d, "FigS7d_PWAS5_incremental_aggregate_sensitivity", 7.4, 6.2)
 
-message("PWAS5 figure assets exported: FigS11a-FigS11d")
+message("PWAS5 figure assets exported: FigS7a-FigS7d")

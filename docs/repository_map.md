@@ -27,7 +27,7 @@
 | rs429358 and rs7412 contrasts | `03_causal_lock/02_wald_ratio.R`, `P0_isoform/01_rs7412_wald.R` | Variant-effect tables under each module's `results/` |
 | Genome-wide bidirectional MR | `03_causal_lock/03_gw_bidirectional.R` | Summary tables under `03_causal_lock/results/` |
 | APOE-region exclusion | `03_causal_lock/04_apoe_exclusion.R` | `table2_with_vs_without_apoe.csv` |
-| Approximate conditional analysis | `P0_finemap/04_gcta_cojo_apoe_conditional.R` | COJO outputs and `FigS10_GCTA_COJO_source_data.tsv` |
+| Approximate conditional analysis | `P0_finemap/04_gcta_cojo_apoe_conditional.R` | COJO outputs and `FigS6_GCTA_COJO_source_data.tsv` |
 
 ## Circulating-protein layer
 

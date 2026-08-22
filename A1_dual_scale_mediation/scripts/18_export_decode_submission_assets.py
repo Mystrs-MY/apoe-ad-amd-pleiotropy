@@ -240,6 +240,6 @@ flow = pd.DataFrame(
 )
 source_dir = ROOT / "figures_submission" / "source_data"
 source_dir.mkdir(parents=True, exist_ok=True)
-flow.to_csv(source_dir / "FigS12_deCODE_extension_flow.tsv", sep="\t", index=False)
+flow.to_csv(source_dir / "FigS8_deCODE_extension_flow.tsv", sep="\t", index=False)
 
 print("Exported Table S28 and deCODE Tables S37-S39 to all submission table locations.")

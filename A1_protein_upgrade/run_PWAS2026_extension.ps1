@@ -41,7 +41,7 @@ Invoke-LoggedStep '03 protein-to-outcome main instruments' $Rscript @((Join-Path
 Invoke-LoggedStep '04 protein-to-outcome cis instruments' $Rscript @((Join-Path $ScriptRoot '04_run_PWAS5_beta_cis.R'))
 Invoke-LoggedStep '05 two-step mediation' $Rscript @((Join-Path $ScriptRoot '05_run_PWAS5_mediation.R'))
 Invoke-LoggedStep '06 incremental aggregate sensitivity' $Rscript @((Join-Path $ScriptRoot '06_run_PWAS5_incremental_aggregate.R'))
-Invoke-LoggedStep '07 plot source panels for composite Fig. S11' $Rscript @((Join-Path $ScriptRoot '07_plot_PWAS5_extension.R'), $ProjectRoot)
+Invoke-LoggedStep '07 plot source panels for composite Fig. S7' $Rscript @((Join-Path $ScriptRoot '07_plot_PWAS5_extension.R'), $ProjectRoot)
 
 "[$(Get-Date -Format o)] PIPELINE COMPLETE" | Add-Content -LiteralPath $RunLog -Encoding UTF8
 Write-Host "PWAS5 pipeline complete. Log: $RunLog"

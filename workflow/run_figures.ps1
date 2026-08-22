@@ -27,7 +27,7 @@ if (-not $SkipMain) {
 }
 
 if (-not $SkipSupplementary) {
-    Invoke-RFigure 'figures_submission\code\FigS8_LeaveOneOut.R'
+    Write-Host 'Supplementary multi-panel layout scripts are intentionally excluded; use the committed source-data tables for numerical verification.' -ForegroundColor DarkGray
 }
 
 Write-Host 'Figure workflow completed.' -ForegroundColor Green

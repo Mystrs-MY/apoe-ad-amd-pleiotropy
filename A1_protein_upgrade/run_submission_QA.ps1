@@ -27,10 +27,69 @@ function Reject-NamePattern {
 
 $mainDir = Join-Path $ProjectRoot 'figures_submission\main'
 $suppFigDir = Join-Path $ProjectRoot 'figures_submission\supplementary_figures'
+$figureSourceDir = Join-Path $ProjectRoot 'figures_submission\source_data'
 $suppTableDir = Join-Path $ProjectRoot 'tables_submission\supplementary_tables'
 $mainTableDir = Join-Path $ProjectRoot 'tables_submission\main_tables'
 
 # Submission artwork is maintained outside the minimal public code package.
+
+if (-not (Test-Path -LiteralPath $mainTableDir -PathType Container)) {
+    foreach ($name in @(
+        'TableS19_Protein_Provenance_Master.tsv',
+        'TableS22_APOE_Variant_to_Protein_Alpha.tsv',
+        'TableS25_Expanded_Primary_Two_Step_Mediation.tsv',
+        'TableS26_Cis_Only_Two_Step_Mediation.tsv',
+        'TableS28_Excluded_Name_Matched_Panel_Genes.tsv',
+        'TableS29_Figure5_Source_Data_and_QA_Manifest.tsv',
+        'TableS30_Five_Protein_PWAS_Data_Sources_and_Crosswalk.tsv',
+        'TableS31_Five_Protein_PWAS_APOE_Alpha_and_Beta.tsv',
+        'TableS32_Five_Protein_PWAS_Mediation_and_Aggregate_Sensitivity.tsv',
+        'TableS37a_deCODE_Exact_Assay_Gate.tsv',
+        'TableS37b_deCODE_APOE_Alpha.tsv',
+        'TableS38a_deCODE_Genome_Wide_Two_Step_Mediation.tsv',
+        'TableS38b_deCODE_Cis_Only_Two_Step_Mediation.tsv',
+        'TableS38c_deCODE_Cis_PAV_Filtered_Two_Step_Mediation.tsv',
+        'TableS39a_deCODE_Shared_Instrument_Audit.tsv',
+        'TableS39b_deCODE_PAV_Epitope_Audit.tsv',
+        'TableS39c_deCODE_Raw_Normalization_Sensitivity.tsv',
+        'TableS39d_deCODE_File_Integrity_and_Validation.tsv'
+    )) {
+        Require-File (Join-Path $suppTableDir $name)
+    }
+
+    foreach ($name in @(
+        'FigS4_Subgroup_Composite_source_data.tsv',
+        'FigS5a_Funnel_source_data.tsv',
+        'FigS5b_Baujat_source_data.tsv',
+        'FigS5c_LeaveOneOut_source_data.tsv',
+        'FigS6_GCTA_COJO_source_data.tsv',
+        'FigS7a_PWAS5_crosswalk_source_data.tsv',
+        'FigS7b_PWAS5_APOE_alpha_source_data.tsv',
+        'FigS7c_PWAS5_beta_source_data.tsv',
+        'FigS7d_PWAS5_aggregate_mediation_source_data.tsv',
+        'FigS8_deCODE_extension_flow.tsv'
+    )) {
+        Require-File (Join-Path $figureSourceDir $name)
+    }
+
+    Reject-NamePattern $figureSourceDir '^FigS(8_LeaveOneOut|9_|10_|11|12_)'
+    Reject-NamePattern (Join-Path $ProjectRoot 'figures_submission\code') 'compose|flowchart|graphical_abstract|Figure_5a'
+
+    $summary = @(
+        'A1 minimal public-package QA',
+        "Timestamp: $(Get-Date -Format o)",
+        "Project: $ProjectRoot",
+        "Failures: $($failures.Count)"
+    )
+    $summary | Set-Content -LiteralPath $RunLog -Encoding UTF8
+    $failures | Add-Content -LiteralPath $RunLog -Encoding UTF8
+    if ($failures.Count -gt 0) {
+        $failures | ForEach-Object { Write-Host $_ -ForegroundColor Red }
+        throw "Public-package QA failed with $($failures.Count) issue(s). See $RunLog"
+    }
+    Write-Host "Public-package QA passed. Log: $RunLog" -ForegroundColor Green
+    return
+}
 
 foreach ($name in @('Table1_APOE_Isoform_Defining_Variant_Effects.csv', 'Table2_APOE_Exclusion_MR.csv')) {
     Require-File (Join-Path $mainTableDir $name)
@@ -114,7 +173,8 @@ foreach ($name in @(
 
 Reject-NamePattern $mainDir '^Figure_6\.'
 Reject-NamePattern $suppFigDir '^FigS3[a-d]_'
-Reject-NamePattern $suppFigDir '^FigS11[a-d]_'
+Reject-NamePattern $suppFigDir '^FigS7[a-d]_'
+Reject-NamePattern $suppFigDir '^FigS(4_Subgroup_Setting|5_Subgroup_Region|6_Funnel|7_Baujat|8_LeaveOneOut|9_Excluding_Keenan|10_|11_|12_)'
 Reject-NamePattern $suppFigDir 'C3_full|C3_SuSiE|C3_reciprocal|C3_evidence'
 Reject-NamePattern $suppTableDir 'Drug_Target|Drug-Target|C3_full|C3_coloc|C3_conditional|^TableS([4-9][0-9]|[1-9][0-9]{2,})'
 
