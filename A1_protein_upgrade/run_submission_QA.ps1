@@ -31,6 +31,20 @@ $figureSourceDir = Join-Path $ProjectRoot 'figures_submission\source_data'
 $suppTableDir = Join-Path $ProjectRoot 'tables_submission\supplementary_tables'
 $mainTableDir = Join-Path $ProjectRoot 'tables_submission\main_tables'
 
+$provenancePath = Join-Path $suppTableDir 'TableS19_Protein_Provenance_Master.tsv'
+if (Test-Path -LiteralPath $provenancePath) {
+    $provenance = @(Import-Csv -LiteralPath $provenancePath -Delimiter "`t")
+    $tier1 = @($provenance | Where-Object { $_.evidence_tier -eq 'Tier1' }).Count
+    $tier2 = @($provenance | Where-Object { $_.evidence_tier -eq 'Tier2' }).Count
+    $priorityPmids = @('34381170', '40397384', '40452368', '42384774')
+    $priorityRows = @($provenance | Where-Object { $_.PMID -in $priorityPmids }).Count
+    $duplicateIds = @($provenance | Group-Object record_id | Where-Object { $_.Count -ne 1 })
+    if ($provenance.Count -ne 345) { $failures.Add("Table S19 row count is $($provenance.Count); expected 345") }
+    if ($tier1 -ne 52 -or $tier2 -ne 293) { $failures.Add("Table S19 tier counts are Tier1=$tier1, Tier2=$tier2; expected 52 and 293") }
+    if ($priorityRows -ne 61) { $failures.Add("Table S19 priority-study subset has $priorityRows rows; expected 61") }
+    if ($duplicateIds.Count -ne 0) { $failures.Add("Table S19 contains $($duplicateIds.Count) duplicated record_id values") }
+}
+
 # Submission artwork is maintained outside the minimal public code package.
 
 if (-not (Test-Path -LiteralPath $mainTableDir -PathType Container)) {

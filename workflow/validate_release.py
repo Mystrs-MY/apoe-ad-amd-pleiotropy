@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import csv
 import re
 import subprocess
 import sys
@@ -131,6 +132,24 @@ def main() -> int:
     for relative in required:
         if not (ROOT / relative).exists():
             failures.append(f"required release asset missing: {relative}")
+
+    provenance_path = ROOT / "A1_protein_upgrade/tables/Table_Literature_Prioritized_Protein_Provenance.tsv"
+    if provenance_path.exists():
+        with provenance_path.open(encoding="utf-8-sig", newline="") as handle:
+            provenance = list(csv.DictReader(handle, delimiter="\t"))
+        tier1 = sum(row.get("evidence_tier") == "Tier1" for row in provenance)
+        tier2 = sum(row.get("evidence_tier") == "Tier2" for row in provenance)
+        priority_pmids = {"34381170", "40397384", "40452368", "42384774"}
+        priority_rows = sum(row.get("PMID") in priority_pmids for row in provenance)
+        record_ids = [row.get("record_id", "") for row in provenance]
+        if len(provenance) != 345:
+            failures.append(f"provenance row count is {len(provenance)}; expected 345")
+        if (tier1, tier2) != (52, 293):
+            failures.append(f"provenance tiers are Tier1={tier1}, Tier2={tier2}; expected 52 and 293")
+        if priority_rows != 61:
+            failures.append(f"priority-study provenance subset is {priority_rows}; expected 61")
+        if len(set(record_ids)) != len(record_ids) or not all(record_ids):
+            failures.append("provenance record_id values must be non-empty and unique")
 
     if failures:
         print("Release validation FAILED")

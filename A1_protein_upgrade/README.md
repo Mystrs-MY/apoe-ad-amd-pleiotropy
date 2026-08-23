@@ -24,7 +24,7 @@ The five-protein PWAS crosswalk (BCAM, CD55, LILRB1, LILRB5, and SCARA5) is a pr
 
 ## Stable Results
 
-- The provenance master contains 69 structured positive records.
+- The integrated provenance master contains 345 row-level positive evidence records: 52 Tier 1 and 293 Tier 2. The four newly verified priority studies contribute 61 of the Tier 2 records.
 - Layer 2 contains 41 protein-evidence entries representing 33 genes.
 - Twenty-seven name-matched Olink assays have direct rs429358-C and rs7412-T alpha estimates.
 - Twenty-five assays have both alpha and re-estimated beta and define 200 formal mediation paths.

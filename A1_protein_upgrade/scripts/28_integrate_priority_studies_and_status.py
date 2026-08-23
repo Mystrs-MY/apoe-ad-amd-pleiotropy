@@ -14,6 +14,10 @@ ROOT = Path(__file__).resolve().parents[1]
 SUPP = ROOT / "literature" / "fulltext_supplements"
 TABLE_DIR = ROOT / "tables" / "supplementary_name_match_revision"
 SCIENCE = ROOT / "data_processed" / "priority_study_supplements" / "PMID42384774" / "adx4852_tables_s1_to_s30.xlsx"
+PRIORITY_PMIDS = {"34381170", "40397384", "40452368", "42384774"}
+EXPECTED_BASE_ROWS = 284
+EXPECTED_PRIORITY_ROWS = 61
+EXPECTED_TOTAL_ROWS = 345
 
 
 def sha256(path: Path) -> str:
@@ -88,6 +92,14 @@ def append_provenance() -> None:
     path = TABLE_DIR / "TableS19_Protein_Provenance_Master.tsv"
     master = pd.read_csv(path, sep="\t", dtype=str).fillna("")
     columns = master.columns.tolist()
+    if "record_id" not in columns or "PMID" not in columns or "evidence_tier" not in columns:
+        raise RuntimeError("Table S19 is missing required provenance fields")
+    master = master[~master["PMID"].isin(PRIORITY_PMIDS)].copy()
+    if len(master) != EXPECTED_BASE_ROWS:
+        raise RuntimeError(f"Expected {EXPECTED_BASE_ROWS} base evidence rows, found {len(master)}")
+    if not master["record_id"].is_unique:
+        duplicated = master.loc[master["record_id"].duplicated(keep=False), "record_id"].unique()[:10]
+        raise RuntimeError(f"Base provenance record_id values are not unique: {duplicated.tolist()}")
     new_rows: list[dict[str, object]] = []
 
     pwas = pd.read_excel(SCIENCE, sheet_name="ST 1. AD PWAS Results", skiprows=6)
@@ -227,9 +239,26 @@ def append_provenance() -> None:
             })
             new_rows.append(rec)
 
-    combined = pd.concat([master, pd.DataFrame(new_rows, columns=columns)], ignore_index=True)
-    combined = combined.drop_duplicates("record_id", keep="last")
+    priority = pd.DataFrame(new_rows, columns=columns)
+    if len(priority) != EXPECTED_PRIORITY_ROWS:
+        raise RuntimeError(f"Expected {EXPECTED_PRIORITY_ROWS} priority-study rows, found {len(priority)}")
+    if set(priority["PMID"]) != PRIORITY_PMIDS:
+        raise RuntimeError(f"Unexpected priority-study PMIDs: {sorted(set(priority['PMID']))}")
+    if not priority["record_id"].is_unique:
+        duplicated = priority.loc[priority["record_id"].duplicated(keep=False), "record_id"].unique()[:10]
+        raise RuntimeError(f"Priority-study record_id values are not unique: {duplicated.tolist()}")
+
+    combined = pd.concat([master, priority], ignore_index=True)
+    if len(combined) != EXPECTED_TOTAL_ROWS or not combined["record_id"].is_unique:
+        raise RuntimeError("Integrated provenance failed the 345-row unique-record assertion")
+    tier_counts = combined["evidence_tier"].value_counts().to_dict()
+    if tier_counts.get("Tier1", 0) != 52 or tier_counts.get("Tier2", 0) != 293:
+        raise RuntimeError(f"Unexpected evidence-tier counts: {tier_counts}")
+    combined = combined.sort_values(
+        ["disease", "disease_subtype", "gene_symbol", "PMID", "assay_target_ID", "record_id"]
+    ).reset_index(drop=True)
     combined.to_csv(path, sep="\t", index=False)
+    combined.to_csv(ROOT / "tables" / "Table_Literature_Prioritized_Protein_Provenance.tsv", sep="\t", index=False)
 
 
 def write_crosswalk_and_boundaries() -> None:

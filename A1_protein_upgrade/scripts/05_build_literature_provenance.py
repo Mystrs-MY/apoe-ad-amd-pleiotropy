@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import math
 import re
 from pathlib import Path
@@ -616,6 +617,32 @@ def build_summary(frame: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(summaries)
 
 
+def assign_evidence_record_ids(frame: pd.DataFrame) -> pd.DataFrame:
+    """Create stable row-level IDs while retaining PMID as the study identifier."""
+    key_columns = [
+        "PMID", "source_table_file", "source_sheet", "source_row",
+        "gene_symbol", "assay_target_ID", "disease_subtype",
+    ]
+    canonical = frame[key_columns].fillna("NA").astype(str).agg("\x1f".join, axis=1)
+    duplicated = canonical.duplicated(keep=False)
+    if duplicated.any():
+        examples = frame.loc[duplicated, key_columns].head(10).to_dict("records")
+        raise RuntimeError(f"Non-unique source evidence rows detected: {examples}")
+
+    frame = frame.reset_index(drop=True).copy()
+    canonical = canonical.reset_index(drop=True)
+    record_ids = []
+    for index in frame.index:
+        pmid = re.sub(r"[^A-Za-z0-9]+", "", str(frame.at[index, "PMID"])) or "NA"
+        gene = re.sub(r"[^A-Za-z0-9]+", "_", str(frame.at[index, "gene_symbol"])).strip("_") or "NA"
+        digest = hashlib.sha256(canonical.at[index].encode("utf-8")).hexdigest()[:12]
+        record_ids.append(f"EVID_{pmid}_{gene}_{digest}")
+    frame["record_id"] = record_ids
+    if not frame["record_id"].is_unique:
+        raise RuntimeError("Generated evidence record IDs are not unique")
+    return frame
+
+
 def main() -> None:
     extractors = [extract_pu, extract_belbasis, extract_zhan, extract_zhou, extract_hou, extract_li_ocular, extract_chen, extract_zhao, extract_yang]
     rows: list[dict[str, object]] = []
@@ -629,7 +656,10 @@ def main() -> None:
             frame[column] = "NA"
     frame = frame[REQUIRED_COLUMNS + EXTRA_COLUMNS]
     frame = frame.replace({np.nan: "NA", "": "NA"})
-    frame = frame.sort_values(["disease", "disease_subtype", "gene_symbol", "PMID", "assay_target_ID"])
+    frame = frame.sort_values(
+        ["disease", "disease_subtype", "gene_symbol", "PMID", "assay_target_ID", "source_sheet", "source_row"]
+    ).reset_index(drop=True)
+    frame = assign_evidence_record_ids(frame)
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     frame.to_csv(OUTPUT, sep="\t", index=False)
     summary = build_summary(frame)
