@@ -1,5 +1,5 @@
 parameter	value	status	rationale
-source_platform	deCODE_SomaScan_v4	frozen	Independent same-platform plasma sensitivity extension
+source_platform	deCODE_SomaScan_v4	frozen	Non-UKB same-platform plasma coverage sensitivity extension; not an independent replication
 source_genome_build	GRCh38_hg38	frozen	Declared in deCODE bucket README
 primary_normalization	smp	frozen	Manufacturer-recommended median-adjusted data used for the source article main results
 sensitivity_normalization	raw	frozen	Non-normalized source data retained as a separate sensitivity

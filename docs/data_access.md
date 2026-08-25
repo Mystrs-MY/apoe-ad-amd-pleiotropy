@@ -17,7 +17,7 @@ Expected harmonized filenames are listed in `A1_protein_upgrade/config/outcomes.
 | Resource | Analysis role | Access route |
 |---|---|---|
 | UKB-PPP European discovery | Primary Olink alpha and beta estimation | [Synapse syn51365303](https://www.synapse.org/Synapse%3Asyn51365303); provider approval is required |
-| deCODE SomaScan | Independent same-platform sensitivity for excluded genes | Provider-authorized S3 distribution associated with Eldjarn et al., Nature 2023, DOI `10.1038/s41586-023-06563-x` |
+| deCODE SomaScan | Non-UKB same-platform coverage sensitivity for excluded genes; not an independent replication | Provider-authorized S3 distribution associated with Eldjarn et al., Nature 2023, DOI `10.1038/s41586-023-06563-x` |
 
 UKB-PPP scripts read `SYNAPSE_AUTH_TOKEN` from the process environment. deCODE scripts use an AWS-compatible named profile (default `decode-download`) configured outside the repository. Neither workflow writes credentials into code or result tables.
 

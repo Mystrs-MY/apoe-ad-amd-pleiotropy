@@ -4,12 +4,11 @@ This repository contains the analysis code and compact derived source data for a
 
 ## Repository status
 
-This is a **pre-submission private repository**. The intended release sequence is:
-
-1. Keep the repository private while the manuscript and code are frozen.
-2. Create a versioned GitHub release at submission.
-3. Make the repository public when disclosure is appropriate for the target journal.
-4. Archive the release in Zenodo or another DOI-granting repository after the final public snapshot is verified.
+This is the **public version 1.0.0 reproducibility release**, frozen for the
+initial manuscript submission. The immutable release is available from the
+[`v1.0.0` GitHub tag](https://github.com/Mystrs-MY/apoe-ad-amd-pleiotropy/releases/tag/v1.0.0).
+Subsequent corrections or extensions will be issued as new versioned releases
+and will not replace this snapshot.
 
 No manuscript text, participant-level data, controlled summary statistics, access credentials, or third-party software bundles are stored here.
 
@@ -68,6 +67,8 @@ python -m pip install -r environment/python-requirements.txt
 ```
 
 Install the R packages listed in `environment/R-packages.txt`. Exact package versions for completed analyses are recorded under `environment/session_info/` where available.
+The final public-package validation environment is recorded in
+`environment/release_environment_1.0.0.txt`.
 
 To regenerate quantitative figures whose plotting code is included:
 
@@ -110,7 +111,8 @@ Code is released under the MIT License. Derived source-data tables are provided 
 
 ## Citation
 
-Use the metadata in `CITATION.cff`. A DOI and final manuscript citation will be added when the public release is archived.
+Use the metadata in `CITATION.cff`. The version-specific Zenodo DOI is reported
+on the GitHub release page and in the Zenodo record after archival.
 
 ## Contact
 

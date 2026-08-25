@@ -12,6 +12,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MAX_FILE_BYTES = 50 * 1024 * 1024
+RELEASE_VERSION = "1.0.0"
+RELEASE_DATE = "2026-08-26"
 SKIP_DIRECTORIES = {
     ".git", "__pycache__", "main", "previews", "supplementary_figures",
     "_Figure_4_panels", "grouped_supplementary_panel_assets",
@@ -123,6 +125,7 @@ def main() -> int:
 
     required = [
         "README.md", "LICENSE", "CITATION.cff", "NOTICE.md",
+        "environment/release_environment_1.0.0.txt",
         "A1_protein_upgrade/tables/Table_Literature_Prioritized_Protein_Provenance.tsv",
         "A1_protein_upgrade/tables/APOE_linkable_two_step_mediation.tsv",
         "A1_dual_scale_mediation/tables/decode_smp_two_step_mediation.tsv",
@@ -132,6 +135,47 @@ def main() -> int:
     for relative in required:
         if not (ROOT / relative).exists():
             failures.append(f"required release asset missing: {relative}")
+
+    citation_path = ROOT / "CITATION.cff"
+    if citation_path.exists():
+        citation = citation_path.read_text(encoding="utf-8-sig")
+        expected_citation_fields = {
+            "version": RELEASE_VERSION,
+            "date-released": RELEASE_DATE,
+            "repository-code": "https://github.com/Mystrs-MY/apoe-ad-amd-pleiotropy",
+            "repository-artifact": (
+                "https://github.com/Mystrs-MY/apoe-ad-amd-pleiotropy/releases/tag/v1.0.0"
+            ),
+            "license": "MIT",
+        }
+        for field, expected in expected_citation_fields.items():
+            pattern = re.compile(
+                rf"(?m)^{re.escape(field)}:\s*[\"']?{re.escape(expected)}[\"']?\s*$"
+            )
+            if not pattern.search(citation):
+                failures.append(
+                    f"CITATION.cff {field} does not match release value {expected}"
+                )
+
+    readme_path = ROOT / "README.md"
+    if readme_path.exists():
+        readme = readme_path.read_text(encoding="utf-8-sig")
+        if "public version 1.0.0 reproducibility release" not in readme:
+            failures.append("README.md does not declare the public v1.0.0 release")
+        if "pre-submission private repository" in readme:
+            failures.append("README.md retains the obsolete private-repository status")
+
+    decode_boundary_files = [
+        ROOT / "docs/data_access.md",
+        ROOT / "A1_dual_scale_mediation/config/decode_extension_parameters.tsv",
+    ]
+    for path in decode_boundary_files:
+        if path.exists():
+            boundary_text = path.read_text(encoding="utf-8-sig")
+            if re.search(r"Independent same-platform", boundary_text, re.I):
+                failures.append(
+                    f"deCODE extension is incorrectly labelled independent: {path.relative_to(ROOT)}"
+                )
 
     provenance_path = ROOT / "A1_protein_upgrade/tables/Table_Literature_Prioritized_Protein_Provenance.tsv"
     if provenance_path.exists():
