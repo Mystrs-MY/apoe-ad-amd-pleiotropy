@@ -146,6 +146,7 @@ def main() -> int:
             "repository-artifact": (
                 "https://github.com/Mystrs-MY/apoe-ad-amd-pleiotropy/releases/tag/v1.0.0"
             ),
+            "doi": "10.5281/zenodo.22102006",
             "license": "MIT",
         }
         for field, expected in expected_citation_fields.items():
@@ -164,6 +165,8 @@ def main() -> int:
             failures.append("README.md does not declare the public v1.0.0 release")
         if "pre-submission private repository" in readme:
             failures.append("README.md retains the obsolete private-repository status")
+        if "10.5281/zenodo.22102006" not in readme:
+            failures.append("README.md does not report the version-specific Zenodo DOI")
 
     decode_boundary_files = [
         ROOT / "docs/data_access.md",

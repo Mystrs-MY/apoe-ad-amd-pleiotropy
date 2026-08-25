@@ -1,5 +1,7 @@
 # APOE isoform-defining variants, AD-AMD pleiotropy, and circulating-protein mediation
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22102006.svg)](https://doi.org/10.5281/zenodo.22102006)
+
 This repository contains the analysis code and compact derived source data for a manuscript examining opposing genetic effects of APOE isoform-defining variants in Alzheimer's disease (AD) and age-related macular degeneration (AMD), together with the detectable limits of circulating-protein mediation.
 
 ## Repository status
@@ -111,8 +113,15 @@ Code is released under the MIT License. Derived source-data tables are provided 
 
 ## Citation
 
-Use the metadata in `CITATION.cff`. The version-specific Zenodo DOI is reported
-on the GitHub release page and in the Zenodo record after archival.
+Use the metadata in `CITATION.cff` and cite the immutable version-specific DOI:
+
+> Yang, Z., & Chen, J. (2026). *Code and source data for APOE isoform-defining
+> variant analyses of AD-AMD opposing pleiotropy* (Version v1.0.0) [Computer
+> software]. Zenodo. https://doi.org/10.5281/zenodo.22102006
+
+The all-versions DOI, `10.5281/zenodo.22102005`, resolves to the latest archived
+release. Use the version-specific DOI above when citing the analysis snapshot
+supporting the manuscript.
 
 ## Contact
 
