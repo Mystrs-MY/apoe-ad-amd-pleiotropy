@@ -160,7 +160,7 @@ def main() -> int:
             "repository-artifact": (
                 "https://github.com/Mystrs-MY/apoe-ad-amd-pleiotropy/releases/tag/v1.0.0"
             ),
-            "doi": "10.5281/zenodo.22102005",
+            "doi": "10.5281/zenodo.22384994",
             "license": "MIT",
         }
         for field, expected in expected_citation_fields.items():
@@ -181,6 +181,8 @@ def main() -> int:
             failures.append("README.md retains the obsolete private-repository status")
         if "10.5281/zenodo.22102005" not in readme:
             failures.append("README.md does not report the all-versions Zenodo DOI")
+        if "10.5281/zenodo.22384994" not in readme:
+            failures.append("README.md does not report the version-specific Zenodo DOI")
         if "Exact snapshots should therefore be identified by DOI and commit hash" not in readme:
             failures.append("README.md does not distinguish same-version archival snapshots")
 

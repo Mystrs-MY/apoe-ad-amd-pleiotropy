@@ -124,10 +124,10 @@ archived release:
 
 > Yang, Z., & Chen, J. (2026). *Code and source data for APOE isoform-defining
 > variant analyses of AD-AMD opposing pleiotropy* (Version v1.0.0) [Computer
-> software]. Zenodo. https://doi.org/10.5281/zenodo.22102005
+> software]. Zenodo. https://doi.org/10.5281/zenodo.22384994
 
-After Zenodo mints the version-specific DOI for the corrected v1.0.0 archive, that identifier takes
-precedence over the all-versions DOI for exact snapshot citation.
+The version-specific DOI above identifies the corrected v1.0.0 archive. The
+concept DOI `10.5281/zenodo.22102005` resolves to the latest archived version.
 
 ## Contact
 
