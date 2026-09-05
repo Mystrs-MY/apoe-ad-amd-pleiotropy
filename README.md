@@ -1,18 +1,16 @@
 # APOE isoform-defining variants, AD-AMD pleiotropy, and circulating-protein mediation
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22102006.svg)](https://doi.org/10.5281/zenodo.22102006)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22102005.svg)](https://doi.org/10.5281/zenodo.22102005)
 
 This repository contains the analysis code and compact derived source data for a manuscript examining opposing genetic effects of APOE isoform-defining variants in Alzheimer's disease (AD) and age-related macular degeneration (AMD), together with the detectable limits of circulating-protein mediation.
 
 ## Repository status
 
-The **public version 1.0.0 reproducibility release** is frozen and remains
-available from the
-[`v1.0.0` GitHub tag](https://github.com/Mystrs-MY/apoe-ad-amd-pleiotropy/releases/tag/v1.0.0).
-The current `main` branch contains a post-v1.0 technical correction to GWAS
-sample-size semantics and the affected genetic-architecture outputs. It does
-not alter the immutable v1.0.0 tag or its Zenodo record. A future versioned
-release will archive the corrected branch after manuscript synchronization.
+The **public version 1.1.0 correction release** freezes the analysis snapshot
+used by the EJHG submission. It is available from the
+[`v1.1.0` GitHub tag](https://github.com/Mystrs-MY/apoe-ad-amd-pleiotropy/releases/tag/v1.1.0).
+The earlier `v1.0.0` tag and its Zenodo record remain immutable historical
+artifacts.
 
 The correction distinguishes total analysed sample size (`N_TOTAL`) from
 case-control effective sample size (`N_EFFECTIVE`). LAVA and MAGMA use
@@ -118,15 +116,16 @@ Code is released under the MIT License. Derived source-data tables are provided 
 
 ## Citation
 
-Use the metadata in `CITATION.cff` and cite the immutable version-specific DOI:
+Use the metadata in `CITATION.cff` and cite the version 1.1.0 release supporting
+the manuscript. The all-versions DOI below resolves to the latest archived
+release:
 
 > Yang, Z., & Chen, J. (2026). *Code and source data for APOE isoform-defining
-> variant analyses of AD-AMD opposing pleiotropy* (Version v1.0.0) [Computer
-> software]. Zenodo. https://doi.org/10.5281/zenodo.22102006
+> variant analyses of AD-AMD opposing pleiotropy* (Version v1.1.0) [Computer
+> software]. Zenodo. https://doi.org/10.5281/zenodo.22102005
 
-The all-versions DOI, `10.5281/zenodo.22102005`, resolves to the latest archived
-release. Use the version-specific DOI above when citing the analysis snapshot
-supporting the manuscript.
+After Zenodo mints the version-specific DOI for v1.1.0, that identifier takes
+precedence over the all-versions DOI for exact snapshot citation.
 
 ## Contact
 

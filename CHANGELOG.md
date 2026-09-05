@@ -1,9 +1,10 @@
 # Changelog
 
-## Unreleased post-v1.0 correction - 2026-09-05
+## v1.1.0 - 2026-09-06
 
-This correction is present on `main` and does not replace the immutable
-`v1.0.0` release or its Zenodo record.
+This correction release freezes the code and derived outputs used by the EJHG
+submission. It does not replace the immutable `v1.0.0` release or its Zenodo
+record.
 
 ### Corrected
 
@@ -18,6 +19,11 @@ This correction is present on `main` and does not replace the immutable
   claims are not retained.
 - Updated compact figure source data and provenance records to point to the
   corrected output snapshots.
+- Replaced the previous asymmetric MiXeR reporting field with the symmetric
+  Dice overlap, while retaining explicitly labelled trait-specific shared
+  fractions and recording that single-fit uncertainty intervals are unavailable.
+- Removed the inferential field `apoe_is_sole_causal_hub`; APOE-region exclusion
+  is now reported through neutral attenuation and nominal-support diagnostics.
 - Replaced machine-specific paths in public scripts and manifests with
   environment variables, logical resource identifiers, or project-relative
   paths.

@@ -13,8 +13,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MAX_FILE_BYTES = 50 * 1024 * 1024
-RELEASE_VERSION = "1.0.0"
-RELEASE_DATE = "2026-08-26"
+RELEASE_VERSION = "1.1.0"
+RELEASE_DATE = "2026-09-06"
 CORRECTED_RUN_TAG = "correctedN_20260903"
 SKIP_DIRECTORIES = {
     ".git", "__pycache__", "main", "previews", "supplementary_figures",
@@ -132,7 +132,7 @@ def main() -> int:
 
     required = [
         "README.md", "CHANGELOG.md", "LICENSE", "CITATION.cff", "NOTICE.md",
-        "environment/release_environment_1.0.0.txt",
+        "environment/release_environment_1.1.0.txt",
         "02_genetic_arch/LAVA/0_prepare_LAVA_totalN_inputs.R",
         "02_genetic_arch/LAVA/1.LAVA.R",
         "02_genetic_arch/MiXeR/prepare_mixer_inputs.R",
@@ -158,9 +158,9 @@ def main() -> int:
             "date-released": RELEASE_DATE,
             "repository-code": "https://github.com/Mystrs-MY/apoe-ad-amd-pleiotropy",
             "repository-artifact": (
-                "https://github.com/Mystrs-MY/apoe-ad-amd-pleiotropy/releases/tag/v1.0.0"
+                "https://github.com/Mystrs-MY/apoe-ad-amd-pleiotropy/releases/tag/v1.1.0"
             ),
-            "doi": "10.5281/zenodo.22102006",
+            "doi": "10.5281/zenodo.22102005",
             "license": "MIT",
         }
         for field, expected in expected_citation_fields.items():
@@ -175,14 +175,14 @@ def main() -> int:
     readme_path = ROOT / "README.md"
     if readme_path.exists():
         readme = readme_path.read_text(encoding="utf-8-sig")
-        if "public version 1.0.0 reproducibility release" not in readme:
-            failures.append("README.md does not declare the public v1.0.0 release")
+        if "public version 1.1.0 correction release" not in readme:
+            failures.append("README.md does not declare the public v1.1.0 release")
         if "pre-submission private repository" in readme:
             failures.append("README.md retains the obsolete private-repository status")
-        if "10.5281/zenodo.22102006" not in readme:
-            failures.append("README.md does not report the version-specific Zenodo DOI")
-        if "current `main` branch contains a post-v1.0 technical correction" not in readme:
-            failures.append("README.md does not distinguish corrected main from immutable v1.0.0")
+        if "10.5281/zenodo.22102005" not in readme:
+            failures.append("README.md does not report the all-versions Zenodo DOI")
+        if "earlier `v1.0.0` tag" not in readme:
+            failures.append("README.md does not preserve the immutable v1.0.0 history")
 
     def read_csv_rows(relative: str) -> list[dict[str, str]]:
         with (ROOT / relative).open(encoding="utf-8-sig", newline="") as handle:
@@ -227,9 +227,9 @@ def main() -> int:
         assert_close(f"HDL AD-{outcome} SE", float(row["se"]), expected_se)
 
     expected_mixer = {
-        "AMD_Dry": (52.5924987238301, -0.651768119418754),
-        "AMD_Wet": (2.47775918736052, -0.321797019048213),
-        "AMD_Any": (20.9145657945658, -0.852595482028776),
+        "AMD_Dry": (27.6865547905718, -0.651768119418754),
+        "AMD_Wet": (2.12039076864115, -0.321797019048213),
+        "AMD_Any": (12.2622397022131, -0.852595482028776),
     }
     mixer_rows = read_csv_rows("02_genetic_arch/MiXeR/MiXeR_bivariate_results.csv")
     mixer = {row["Trait2"]: row for row in mixer_rows}
@@ -240,7 +240,7 @@ def main() -> int:
             continue
         if row.get("analysis_run_tag") != CORRECTED_RUN_TAG:
             failures.append(f"MiXeR {outcome} run tag is stale")
-        assert_close(f"MiXeR {outcome} overlap", float(row["Overlap_pct"]), expected_overlap)
+        assert_close(f"MiXeR {outcome} Dice overlap", float(row["Dice_overlap_pct"]), expected_overlap)
         assert_close(f"MiXeR {outcome} rho_beta", float(row["rho_beta"]), expected_rho)
 
     lava_files = {

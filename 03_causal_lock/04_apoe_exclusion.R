@@ -124,8 +124,12 @@ table2 <- merge(
 cat("\n==================== Table 2: With vs Without APOE ====================\n")
 print(table2)
 
-# 解读：如果 Without APOE 的 IVW P > 0.05 → 所有因果信号集中在 APOE
-table2$apoe_is_sole_causal_hub <- table2$ivw_pval_without > 0.05
+# Neutral diagnostics. Loss of nominal support after regional exclusion is
+# evidence of region dependence in this MR setup, not proof of a sole causal hub.
+table2$apoe_region_exclusion_attenuation_observed <-
+  abs(table2$ivw_beta_without) < abs(table2$ivw_beta_with)
+table2$nominal_support_lost_after_exclusion <-
+  table2$ivw_pval_with < 0.05 & table2$ivw_pval_without >= 0.05
 
 # ---- 保存 ----
 fwrite(table2, paste0(OUT_DIR, "table2_with_vs_without_apoe.csv"))
@@ -135,10 +139,10 @@ cat("\n[Done] Table 2 saved to", paste0(OUT_DIR, "table2_with_vs_without_apoe.cs
 
 # 关键结论
 cat("\n==================== KEY FINDING ====================\n")
-n_significant_without <- sum(!table2$apoe_is_sole_causal_hub, na.rm = TRUE)
+n_significant_without <- sum(table2$ivw_pval_without < 0.05, na.rm = TRUE)
 cat(sprintf("  Without APOE: %d/%d pairs significant at P<0.05\n",
     n_significant_without, nrow(table2)))
 if (n_significant_without == 0) {
-  cat("  ==> APOE is the SOLE genome-wide causal hub for the brain-eye axis.\n")
-  cat("  ==> All causal signals beyond APOE are cancelled by mixed-direction pleiotropy.\n")
+  cat("  ==> No direction retained nominal IVW support after the prespecified APOE-region exclusion.\n")
+  cat("  ==> This pattern supports region dependence but does not establish APOE as a sole causal hub.\n")
 }

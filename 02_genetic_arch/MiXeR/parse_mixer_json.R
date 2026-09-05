@@ -83,7 +83,11 @@ for (f in biv_files) {
   pi_vec <- p$pi
   pi1  <- pi_vec[1]; pi2 <- pi_vec[2]; pi12 <- pi_vec[3]
 
-  overlap_pct <- pi12 / min(pi1, pi2) * 100
+  dice <- if (!is.null(js$ci$dice$point_estimate)) {
+    js$ci$dice$point_estimate
+  } else {
+    2 * pi12 / (pi1 + pi2 + 2 * pi12)
+  }
 
   # 尝试从文件名推断 trait 名称
   fname <- gsub("\\.json$", "", f)
@@ -123,7 +127,13 @@ for (f in biv_files) {
     pi1          = pi1,
     pi2          = pi2,
     pi12         = pi12,
-    Overlap_pct  = round(overlap_pct, 1),
+    Dice_overlap_pct = 100 * dice,
+    Trait1_shared_fraction_pct = 100 * pi12 / (pi1 + pi12),
+    Trait2_shared_fraction_pct = 100 * pi12 / (pi2 + pi12),
+    Dice_overlap_SE = NA_real_,
+    Dice_overlap_CI_lower = NA_real_,
+    Dice_overlap_CI_upper = NA_real_,
+    overlap_uncertainty_status = "not estimated from single-fit output",
     rho_beta     = p$rho_beta,
     rho_zero     = p$rho_zero,
     AIC          = if (is.null(aic)) NA else aic,
@@ -152,7 +162,7 @@ if (nrow(univ_df) > 0) {
 }
 if (nrow(biv_df) > 0) {
   cat("\n--- Bivariate ---\n")
-  print(biv_df[, c("Comparison","Overlap_pct","rho_beta","rho_zero")], row.names=FALSE)
+  print(biv_df[, c("Comparison","Dice_overlap_pct","rho_beta","rho_zero")], row.names=FALSE)
 }
 
 cat("\nDone. MiXeR machine-readable summaries are ready.\n")
