@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use this code, please cite the accompanying manuscript and this software release."
 title: "Code and source data for APOE isoform-defining variant analyses of AD-AMD opposing pleiotropy"
 type: software
-version: 1.1.0
+version: 1.0.0
 date-released: 2026-09-06
 authors:
   - family-names: Yang
@@ -12,7 +12,7 @@ authors:
     given-names: Jinlei
     affiliation: "First School of Clinical Medicine, Guangdong Medical University"
 repository-code: "https://github.com/Mystrs-MY/apoe-ad-amd-pleiotropy"
-repository-artifact: "https://github.com/Mystrs-MY/apoe-ad-amd-pleiotropy/releases/tag/v1.1.0"
+repository-artifact: "https://github.com/Mystrs-MY/apoe-ad-amd-pleiotropy/releases/tag/v1.0.0"
 doi: "10.5281/zenodo.22102005"
 abstract: >-
   Reproducibility package containing analysis code, configuration files,

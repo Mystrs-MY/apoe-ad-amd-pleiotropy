@@ -13,7 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MAX_FILE_BYTES = 50 * 1024 * 1024
-RELEASE_VERSION = "1.1.0"
+RELEASE_VERSION = "1.0.0"
 RELEASE_DATE = "2026-09-06"
 CORRECTED_RUN_TAG = "correctedN_20260903"
 SKIP_DIRECTORIES = {
@@ -132,7 +132,7 @@ def main() -> int:
 
     required = [
         "README.md", "CHANGELOG.md", "LICENSE", "CITATION.cff", "NOTICE.md",
-        "environment/release_environment_1.1.0.txt",
+        "environment/release_environment_1.0.0.txt",
         "02_genetic_arch/LAVA/0_prepare_LAVA_totalN_inputs.R",
         "02_genetic_arch/LAVA/1.LAVA.R",
         "02_genetic_arch/MiXeR/prepare_mixer_inputs.R",
@@ -158,7 +158,7 @@ def main() -> int:
             "date-released": RELEASE_DATE,
             "repository-code": "https://github.com/Mystrs-MY/apoe-ad-amd-pleiotropy",
             "repository-artifact": (
-                "https://github.com/Mystrs-MY/apoe-ad-amd-pleiotropy/releases/tag/v1.1.0"
+                "https://github.com/Mystrs-MY/apoe-ad-amd-pleiotropy/releases/tag/v1.0.0"
             ),
             "doi": "10.5281/zenodo.22102005",
             "license": "MIT",
@@ -175,14 +175,14 @@ def main() -> int:
     readme_path = ROOT / "README.md"
     if readme_path.exists():
         readme = readme_path.read_text(encoding="utf-8-sig")
-        if "public version 1.1.0 correction release" not in readme:
-            failures.append("README.md does not declare the public v1.1.0 release")
+        if "public version 1.0.0 release" not in readme:
+            failures.append("README.md does not declare the public v1.0.0 release")
         if "pre-submission private repository" in readme:
             failures.append("README.md retains the obsolete private-repository status")
         if "10.5281/zenodo.22102005" not in readme:
             failures.append("README.md does not report the all-versions Zenodo DOI")
-        if "earlier `v1.0.0` tag" not in readme:
-            failures.append("README.md does not preserve the immutable v1.0.0 history")
+        if "Exact snapshots should therefore be identified by DOI and commit hash" not in readme:
+            failures.append("README.md does not distinguish same-version archival snapshots")
 
     def read_csv_rows(relative: str) -> list[dict[str, str]]:
         with (ROOT / relative).open(encoding="utf-8-sig", newline="") as handle:

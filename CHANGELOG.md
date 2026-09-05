@@ -1,10 +1,11 @@
 # Changelog
 
-## v1.1.0 - 2026-09-06
+## v1.0.0 - 2026-09-06
 
-This correction release freezes the code and derived outputs used by the EJHG
-submission. It does not replace the immutable `v1.0.0` release or its Zenodo
-record.
+This release freezes the correction-aligned code and derived outputs used by
+the EJHG submission. It supersedes the preliminary pre-submission archive that
+carried the same version label; exact archives are distinguished by DOI and
+commit hash.
 
 ### Corrected
 

@@ -1,4 +1,4 @@
-# v1.1.0 correction release
+# v1.0.0 correction-aligned release
 
 This release freezes the correction-aligned reproducibility snapshot used by
 the European Journal of Human Genetics submission.
@@ -22,6 +22,12 @@ the European Journal of Human Genetics submission.
 The release does not alter the clinical meta-analysis pooled estimate, direct
 rs429358/rs7412 effects, conventional MR estimates, or the primary Olink and
 deCODE two-step mediation estimates.
+
+## Version history
+
+This final pre-submission archive supersedes the preliminary archive that used
+the same `1.0.0` software label. Cite the corrected archive by its
+version-specific DOI and commit hash.
 
 ## Data boundary
 

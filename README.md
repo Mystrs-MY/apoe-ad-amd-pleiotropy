@@ -6,11 +6,13 @@ This repository contains the analysis code and compact derived source data for a
 
 ## Repository status
 
-The **public version 1.1.0 correction release** freezes the analysis snapshot
-used by the EJHG submission. It is available from the
-[`v1.1.0` GitHub tag](https://github.com/Mystrs-MY/apoe-ad-amd-pleiotropy/releases/tag/v1.1.0).
-The earlier `v1.0.0` tag and its Zenodo record remain immutable historical
-artifacts.
+The **public version 1.0.0 release** freezes the correction-aligned analysis
+snapshot used by the EJHG submission. It is available from the
+[`v1.0.0` GitHub tag](https://github.com/Mystrs-MY/apoe-ad-amd-pleiotropy/releases/tag/v1.0.0).
+This final pre-submission archive supersedes the earlier preliminary archive
+that carried the same software version. The version remains `1.0.0` because no
+manuscript or stable software interface had yet been released for downstream
+use. Exact snapshots should therefore be identified by DOI and commit hash.
 
 The correction distinguishes total analysed sample size (`N_TOTAL`) from
 case-control effective sample size (`N_EFFECTIVE`). LAVA and MAGMA use
@@ -116,15 +118,15 @@ Code is released under the MIT License. Derived source-data tables are provided 
 
 ## Citation
 
-Use the metadata in `CITATION.cff` and cite the version 1.1.0 release supporting
-the manuscript. The all-versions DOI below resolves to the latest archived
-release:
+Use the metadata in `CITATION.cff` and cite the final version 1.0.0 release
+supporting the manuscript. The all-versions DOI below resolves to the latest
+archived release:
 
 > Yang, Z., & Chen, J. (2026). *Code and source data for APOE isoform-defining
-> variant analyses of AD-AMD opposing pleiotropy* (Version v1.1.0) [Computer
+> variant analyses of AD-AMD opposing pleiotropy* (Version v1.0.0) [Computer
 > software]. Zenodo. https://doi.org/10.5281/zenodo.22102005
 
-After Zenodo mints the version-specific DOI for v1.1.0, that identifier takes
+After Zenodo mints the version-specific DOI for the corrected v1.0.0 archive, that identifier takes
 precedence over the all-versions DOI for exact snapshot citation.
 
 ## Contact
