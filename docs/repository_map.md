@@ -30,10 +30,10 @@
 | Approximate conditional analysis | `P0_finemap/04_gcta_cojo_apoe_conditional.R` | COJO outputs and `FigS6_GCTA_COJO_source_data.tsv`; uses `N_EFFECTIVE` |
 
 The corrected genetic-architecture outputs are tagged `correctedN_20260903`.
-The LAVA scan evaluates 2,495 prespecified loci per comparison and retains
-estimable bivariate rows in the committed result files. Only locus 2351, which
-contains APOE, passes the prespecified `0.05/2495` threshold in all three
-AD-AMD comparisons.
+The LAVA scan attempted 2,495 prespecified loci per comparison. The committed
+tables retain 2,029, 2,036, and 2,086 estimable AD-dry, AD-wet, and AD-any AMD
+rows, respectively. Only locus 2351, which contains APOE, passes the
+prespecified `0.05/2495` threshold in all three comparisons.
 
 ## Circulating-protein layer
 
