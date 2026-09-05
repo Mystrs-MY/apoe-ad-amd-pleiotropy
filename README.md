@@ -6,11 +6,20 @@ This repository contains the analysis code and compact derived source data for a
 
 ## Repository status
 
-This is the **public version 1.0.0 reproducibility release**, frozen for the
-initial manuscript submission. The immutable release is available from the
+The **public version 1.0.0 reproducibility release** is frozen and remains
+available from the
 [`v1.0.0` GitHub tag](https://github.com/Mystrs-MY/apoe-ad-amd-pleiotropy/releases/tag/v1.0.0).
-Subsequent corrections or extensions will be issued as new versioned releases
-and will not replace this snapshot.
+The current `main` branch contains a post-v1.0 technical correction to GWAS
+sample-size semantics and the affected genetic-architecture outputs. It does
+not alter the immutable v1.0.0 tag or its Zenodo record. A future versioned
+release will archive the corrected branch after manuscript synchronization.
+
+The correction distinguishes total analysed sample size (`N_TOTAL`) from
+case-control effective sample size (`N_EFFECTIVE`). LAVA and MAGMA use
+`N_TOTAL`; LDSC, HDL, MiXeR, and GCTA-COJO use `N_EFFECTIVE`. The primary AD
+input is the public European-ancestry GCST013196 subset excluding UK Biobank
+and 23andMe, with variant-specific sample sizes up to 398,058 participants.
+See `CHANGELOG.md` and `docs/data_access.md`.
 
 No manuscript text, participant-level data, controlled summary statistics, access credentials, or third-party software bundles are stored here.
 
@@ -29,7 +38,7 @@ The protein layer is **not** a de novo proteome-wide discovery scan. Published p
 
 | Level | What can be reproduced | Additional access required |
 |---|---|---|
-| A | Included standalone quantitative figures from committed source-data tables | R/Python packages only |
+| A | Numerical verification from committed source-data tables | R/Python packages only |
 | B | Meta-analysis, literature provenance, MAGMA summaries, and selected result audits | Public input files listed in `docs/data_access.md` |
 | C | Full protein MR, deCODE sensitivity, conditional analysis, and genome-wide architecture workflows | Controlled or provider-authorized pQTL data, GWAS files, LD reference files, and external executables |
 
@@ -47,7 +56,7 @@ The committed result tables permit numerical and graphical verification even whe
 | `A1_protein_upgrade/` | Literature-prioritized Olink panel, alpha/beta separation, mediation, provenance, and sensitivity analyses |
 | `A1_dual_scale_mediation/` | deCODE SomaScan non-UKB, same-platform coverage sensitivity branch only; not an independent replication |
 | `04_protein_mr/`, `05_mediation/`, `06_biology_category_models/`, `P0_biology_guided_panel/` | Exploratory biology-guided panel sensitivity analyses |
-| `figures_submission/code/` | Standalone quantitative plotting scripts and compact panel data; flowchart and multi-panel assembly code is excluded, including the S4/S5 composite layouts |
+| `figures_submission/code/` | Compact panel data retained for audit; plotting and assembly scripts are excluded |
 | `figures_submission/source_data/` | Figure-level source-data tables |
 | `workflow/` | Public-release validation and convenience entry points |
 | `environment/` | Package lists and recorded R session information |
@@ -72,13 +81,9 @@ Install the R packages listed in `environment/R-packages.txt`. Exact package ver
 The final public-package validation environment is recorded in
 `environment/release_environment_1.0.0.txt`.
 
-To regenerate quantitative figures whose plotting code is included:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File workflow/run_figures.ps1
-```
-
-Some figure scripts require licensed fonts or external system libraries for PDF/TIFF export. The SVG output is the primary vector artifact.
+Plotting, flowchart, graphical-abstract, and multi-panel assembly scripts are
+not part of this minimal public package. Figure source data remain available
+for independent numerical review.
 
 ## External resources
 
@@ -102,8 +107,8 @@ Detailed access instructions and filenames are in `docs/data_access.md`.
 - Full authorized-data protein workflow: `A1_protein_upgrade/run_all.ps1`
 - Submission sensitivity QA: `A1_protein_upgrade/run_submission_QA.ps1`
 - deCODE same-platform sensitivity: `A1_dual_scale_mediation/run_decode_same_platform_extension.ps1`
-- Quantitative main and supplementary figure export: `workflow/run_figures.ps1`
 - Public package validation: `workflow/validate_release.py`
+- Corrected LDSC/HDL/LAVA/MiXeR/MAGMA entry points: see `docs/repository_map.md`
 
 The workflows use deterministic seeds where stochastic procedures are required. Missing values are not treated as zero, and assay/proteoform mappings are not inferred from gene symbols alone.
 

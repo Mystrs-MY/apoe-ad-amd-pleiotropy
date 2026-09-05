@@ -3,18 +3,22 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
-RESOURCE="${A1_RESOURCE_ROOT_WSL:-/mnt/d/AD_AMD/Resource}"
-MAGMA="$ROOT/A1_protein_upgrade/tools/magma_v1.10/extracted/magma"
-GENE_LOC="$ROOT/A1_protein_upgrade/tools/magma_v1.10/gene_location/Rev.NCBI37.3.gene.loc"
+RESOURCE="${A1_RESOURCE_ROOT_WSL:-$ROOT/data/external}"
+MAGMA="${MAGMA_BIN:-magma}"
+GENE_LOC="${A1_MAGMA_GENE_LOC:-$ROOT/data/external/Rev.NCBI37.3.gene.loc}"
 LD_PREFIX="$RESOURCE/EUR/EUR"
 OUT="$ROOT/02_genetic_arch/MAGMA"
-INPUT_DIR="$OUT/input"
-RESULT_DIR="$OUT/results"
-LOG_DIR="$OUT/logs"
+RUN_TAG="${A1_MAGMA_RUN_TAG:-correctedN_20260903}"
+INPUT_DIR="$OUT/input${RUN_TAG:+_$RUN_TAG}"
+RESULT_DIR="$OUT/results${RUN_TAG:+_$RUN_TAG}"
+LOG_DIR="$OUT/logs${RUN_TAG:+_$RUN_TAG}"
 ANNOT_PREFIX="$OUT/NCBI37_3_EUR_window35_10"
 
 mkdir -p "$INPUT_DIR" "$RESULT_DIR" "$LOG_DIR"
 
+if [[ "$MAGMA" != */* ]]; then
+  MAGMA="$(command -v "$MAGMA" || true)"
+fi
 for file in "$MAGMA" "$GENE_LOC" "$LD_PREFIX.bed" "$LD_PREFIX.bim" "$LD_PREFIX.fam"; do
   if [[ ! -s "$file" ]]; then
     echo "Missing required input: $file" >&2
@@ -51,27 +55,34 @@ for trait in AD Dry_AMD Wet_AMD Any_AMD; do
     exit 1
   fi
 
-  if [[ ! -s "$pval" ]]; then
+  # Rebuild a cached MAGMA input whenever its corrected GWAS source is newer.
+  if [[ ! -s "$pval" || "$gwas" -nt "$pval" ]]; then
     tmp="$pval.tmp"
     gzip -dc "$gwas" | awk -F '\t' 'BEGIN {OFS="\t"}
       NR==1 {
-        sub(/\r$/, "", $10);
-        if ($1!="SNP" || $9!="P" || $10!="N") {
-          print "Unexpected GWAS columns: expected SNP in column 1, P in column 9, N in column 10" > "/dev/stderr";
+        for (i=1; i<=NF; i++) {
+          h=$i; sub(/\r$/, "", h);
+          if (h=="SNP") snp_col=i;
+          if (h=="P") p_col=i;
+          if (h=="N_TOTAL") n_col=i;
+        }
+        if (!snp_col || !p_col || !n_col) {
+          print "Unexpected GWAS columns: SNP, P, and N_TOTAL are required" > "/dev/stderr";
           exit 2
         }
         print "SNP", "P", "N";
         next
       }
       {
-        sub(/\r$/, "", $10);
-        if ($1!="" && $9!="" && $10!="") print $1, $9, $10;
+        snp=$snp_col; p=$p_col; n=$n_col; sub(/\r$/, "", n);
+        if (snp!="" && p!="" && n!="") print snp, p, n;
       }
     ' > "$tmp"
     mv "$tmp" "$pval"
   fi
 
-  if [[ ! -s "$prefix.genes.out" ]]; then
+  # A gene result is reusable only when it is newer than the exact p-value input.
+  if [[ ! -s "$prefix.genes.out" || "$pval" -nt "$prefix.genes.out" ]]; then
     "$MAGMA" \
       --bfile "$LD_PREFIX" \
       --gene-annot "$ANNOT_PREFIX.genes.annot" \
@@ -84,15 +95,21 @@ for trait in AD Dry_AMD Wet_AMD Any_AMD; do
 done
 
 {
-  printf 'sha256\tpath\n'
-  sha256sum \
-    "$MAGMA" "$GENE_LOC" \
-    "$LD_PREFIX.bed" "$LD_PREFIX.bim" "$LD_PREFIX.fam" \
-    "$RESOURCE/GWAS/AD_Wightman_cleaned_hg19.tsv.gz" \
-    "$RESOURCE/GWAS/AMD_Dry_R12_cleaned_hg19.tsv.gz" \
-    "$RESOURCE/GWAS/AMD_Wet_R12_cleaned_hg19.tsv.gz" \
-    "$RESOURCE/GWAS/AMD_H7_R12_cleaned_hg19.tsv.gz" \
-    | awk 'BEGIN {OFS="\t"} {hash=$1; $1=""; sub(/^  /, ""); print hash, $0}'
+  printf 'resource_id\tsha256\n'
+  printf 'MAGMA_binary\t%s\n' "$(sha256sum "$MAGMA" | awk '{print $1}')"
+  printf 'NCBI37_3_gene_location\t%s\n' "$(sha256sum "$GENE_LOC" | awk '{print $1}')"
+  printf '1000G_EUR_bed\t%s\n' "$(sha256sum "$LD_PREFIX.bed" | awk '{print $1}')"
+  printf '1000G_EUR_bim\t%s\n' "$(sha256sum "$LD_PREFIX.bim" | awk '{print $1}')"
+  printf '1000G_EUR_fam\t%s\n' "$(sha256sum "$LD_PREFIX.fam" | awk '{print $1}')"
+  for trait in AD_Wightman AMD_Dry_R12 AMD_Wet_R12 AMD_H7_R12; do
+    case "$trait" in
+      AD_Wightman) file="$RESOURCE/GWAS/AD_Wightman_cleaned_hg19.tsv.gz" ;;
+      AMD_Dry_R12) file="$RESOURCE/GWAS/AMD_Dry_R12_cleaned_hg19.tsv.gz" ;;
+      AMD_Wet_R12) file="$RESOURCE/GWAS/AMD_Wet_R12_cleaned_hg19.tsv.gz" ;;
+      AMD_H7_R12) file="$RESOURCE/GWAS/AMD_H7_R12_cleaned_hg19.tsv.gz" ;;
+    esac
+    printf '%s\t%s\n' "$trait" "$(sha256sum "$file" | awk '{print $1}')"
+  done
 } > "$LOG_DIR/input_sha256.tsv"
 
 cat > "$LOG_DIR/run_manifest.tsv" <<EOF
@@ -105,7 +122,8 @@ gene_location	Rev.NCBI37.3.gene.loc
 gene_location_source	STAR_Protocols_MAGMA_analysis_protocol
 gene_window	upstream_35kb_downstream_10kb
 gene_model	snp-wise_mean
-sample_size_mode	per_variant_N_column
+sample_size_mode	per_variant_total_analysed_sample_size
+sample_size_source_column	N_TOTAL
 duplicate_SNP_policy	error
 EOF
 

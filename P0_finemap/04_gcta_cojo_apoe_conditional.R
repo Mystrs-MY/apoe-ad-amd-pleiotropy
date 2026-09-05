@@ -18,7 +18,13 @@ RESOURCE_ROOT <- Sys.getenv("A1_RESOURCE_ROOT", unset = file.path(PROJECT_ROOT, 
 GWAS_DIR <- file.path(RESOURCE_ROOT, "GWAS")
 LD_PREFIX <- Sys.getenv("A1_LD_PREFIX", unset = file.path(RESOURCE_ROOT, "EUR", "EUR"))
 GCTA_BIN <- Sys.getenv("GCTA_BIN", unset = "gcta64")
-OUT_DIR <- file.path(PROJECT_ROOT, "P0_finemap", "results", "gcta_cojo_apoe")
+RUN_TAG <- Sys.getenv("A1_COJO_RUN_TAG", unset = "correctedN_20260903")
+FORCE_RERUN <- tolower(Sys.getenv("A1_COJO_FORCE", unset = "false")) %in%
+  c("1", "true", "yes")
+OUT_DIR <- file.path(
+  PROJECT_ROOT, "P0_finemap", "results",
+  paste0("gcta_cojo_apoe_", RUN_TAG)
+)
 dir.create(OUT_DIR, recursive = TRUE, showWarnings = FALSE)
 
 gcta_resolved <- if (file.exists(GCTA_BIN)) GCTA_BIN else Sys.which(GCTA_BIN)
@@ -89,7 +95,7 @@ harmonize_to_reference <- function(gwas, trait_id) {
 
 run_gcta <- function(ma_file, condition_file, prefix) {
   cma_file <- paste0(prefix, ".cma.cojo")
-  if (file.exists(cma_file) && file.info(cma_file)$size > 0) {
+  if (!FORCE_RERUN && file.exists(cma_file) && file.info(cma_file)$size > 0) {
     message("Reusing completed GCTA output: ", cma_file)
     return(cma_file)
   }
@@ -143,7 +149,7 @@ for (i in seq_len(nrow(traits))) {
   for (scenario_name in names(scenarios)) {
     condition_snps <- scenarios[[scenario_name]]
     condition_file <- file.path(OUT_DIR, paste0("condition_", scenario_name, ".txt"))
-    if (!file.exists(condition_file)) writeLines(condition_snps, condition_file)
+    writeLines(condition_snps, condition_file)
 
     prefix <- file.path(OUT_DIR, paste0(trait$trait_id, "_cond_", scenario_name))
     cma_file <- run_gcta(ma_file, condition_file, prefix)
@@ -161,7 +167,9 @@ for (i in seq_len(nrow(traits))) {
       ld_reference = "1000_Genomes_EUR",
       ld_reference_n = REFERENCE_N,
       reference_panel_limited_sensitivity = TRUE,
-      gcta_version = "1.95.1"
+      sample_size_field = "N_EFFECTIVE",
+      gcta_version = "1.95.1",
+      analysis_run_tag = RUN_TAG
     )]
     all_results[[length(all_results) + 1L]] <- cma
 
@@ -192,10 +200,10 @@ for (i in seq_len(nrow(traits))) {
     command_manifest[[length(command_manifest) + 1L]] <- data.table(
       trait = trait$trait_label,
       scenario = scenario_name,
-      gwas = normalizePath(gwas_path, winslash = "/"),
-      ma_file = normalizePath(ma_file, winslash = "/"),
-      condition_file = normalizePath(condition_file, winslash = "/"),
-      output_prefix = normalizePath(prefix, winslash = "/", mustWork = FALSE)
+      gwas_resource = file.path("data/external/GWAS", trait$file_name),
+      ma_file = file.path("P0_finemap/results", basename(OUT_DIR), basename(ma_file)),
+      condition_file = file.path("P0_finemap/results", basename(OUT_DIR), basename(condition_file)),
+      output_prefix = file.path("P0_finemap/results", basename(OUT_DIR), basename(prefix))
     )
   }
 }
@@ -208,6 +216,19 @@ fwrite(results, file.path(OUT_DIR, "APOE_COJO_conditional_source.tsv"), sep = "\
 fwrite(summary, file.path(OUT_DIR, "APOE_COJO_conditional_summary.tsv"), sep = "\t", na = "NA")
 fwrite(manifest, file.path(OUT_DIR, "APOE_COJO_run_manifest.tsv"), sep = "\t", na = "NA")
 writeLines(capture.output(sessionInfo()), file.path(OUT_DIR, "sessionInfo.txt"))
+writeLines(
+  c(
+    paste0("analysis_run_tag=", RUN_TAG),
+    paste0("force_rerun=", FORCE_RERUN),
+    "gwas_directory=data/external/GWAS",
+    "ld_reference=data/external/EUR/EUR",
+    paste0("ld_reference_n=", REFERENCE_N)
+    ,"sample_size_field=N (explicit copy of N_EFFECTIVE)"
+    ,"AD_N_definition=variant-specific_N_effective supplied by GCST013196"
+    ,"AMD_N_definition=4/(1/N_cases+1/N_controls) from final FinnGen R12 counts"
+  ),
+  file.path(OUT_DIR, "run_metadata.txt")
+)
 
 cat("GCTA-COJO APOE conditional sensitivity completed.\n")
 print(summary)

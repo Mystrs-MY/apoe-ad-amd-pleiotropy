@@ -59,13 +59,6 @@ if (-not $SkipSubmissionValidityExtension) {
     }
 }
 
-$deCODEExportScript = Join-Path $ProjectRoot 'A1_dual_scale_mediation\scripts\18_export_decode_submission_assets.py'
-if (Test-Path -LiteralPath $deCODEExportScript) {
-    Invoke-Checked 'Sanitized deCODE submission tables and source data' {
-        & py -3.12 $deCODEExportScript
-    }
-}
-
 Invoke-Checked 'Submission consistency QA' {
     & powershell -ExecutionPolicy Bypass -File (Join-Path $UpgradeRoot 'run_submission_QA.ps1')
 }

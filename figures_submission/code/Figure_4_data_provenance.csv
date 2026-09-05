@@ -1,5 +1,5 @@
 "data_file","source"
-"Figure_4a_MiXeR_bivariate.csv","TableS3b_MiXeR_Bivariate.csv"
+"Figure_4a_MiXeR_bivariate.csv","02_genetic_arch/MiXeR/MiXeR_bivariate_results.csv"
 "Figure_4b_LAVA_fullscan.csv","Three LAVA_FullScan_AD_vs_*AMD_Final.csv files"
 "Figure_4b_LAVA_axis.csv","Derived chromosome centers from LAVA full scan"
 "Figure_4c_HyPrColoc_rs429358.csv","HyPrColoc_SNP_Level_Data_FullLAVA.csv; rs429358 only"

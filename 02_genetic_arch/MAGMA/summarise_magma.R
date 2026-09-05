@@ -2,27 +2,24 @@
 
 rm(list = ls())
 
-required <- c("data.table", "ggplot2", "svglite", "ragg")
+required <- c("data.table")
 missing <- required[!vapply(required, requireNamespace, logical(1), quietly = TRUE)]
 if (length(missing)) stop("Missing R package(s): ", paste(missing, collapse = ", "))
 
 suppressPackageStartupMessages({
   library(data.table)
-  library(ggplot2)
 })
 
 script_arg <- commandArgs(trailingOnly = FALSE)
 script_file <- sub("^--file=", "", script_arg[grepl("^--file=", script_arg)][1])
 MAGMA_ROOT <- dirname(normalizePath(script_file, winslash = "/", mustWork = TRUE))
 ROOT <- normalizePath(file.path(MAGMA_ROOT, "..", ".."), winslash = "/", mustWork = TRUE)
-RESULT_DIR <- file.path(MAGMA_ROOT, "results")
+RUN_TAG <- Sys.getenv("A1_MAGMA_RUN_TAG", unset = "correctedN_20260903")
+RESULT_DIR <- file.path(MAGMA_ROOT, paste0("results_", RUN_TAG))
+LAVA_RESULT_DIR <- file.path(ROOT, "02_genetic_arch", "LAVA", paste0("results_", RUN_TAG))
 TABLE_DIR <- file.path(ROOT, "tables_submission", "supplementary_tables")
-FIG_DIR <- file.path(ROOT, "figures_submission", "supplementary_figures")
-PREVIEW_DIR <- file.path(ROOT, "figures_submission", "previews")
 SOURCE_DIR <- file.path(ROOT, "figures_submission", "source_data")
 dir.create(TABLE_DIR, recursive = TRUE, showWarnings = FALSE)
-dir.create(FIG_DIR, recursive = TRUE, showWarnings = FALSE)
-dir.create(PREVIEW_DIR, recursive = TRUE, showWarnings = FALSE)
 dir.create(SOURCE_DIR, recursive = TRUE, showWarnings = FALSE)
 
 traits <- data.table(
@@ -30,16 +27,33 @@ traits <- data.table(
   trait = c("AD", "Dry AMD", "Wet AMD", "Any AMD")
 )
 
-loci <- data.table(
-  locus = c("APOE", "IGH", "chr2", "chr20"),
-  chromosome = c(19L, 14L, 2L, 20L),
-  locus_start_bp = c(45040933L, 105091341L, 44104111L, 51533751L),
-  locus_end_bp = c(45893307L, 106347143L, 45189468L, 52411532L),
-  locus_source = c(
-    "LAVA locus 2351", "LAVA locus 2031",
-    "LAVA locus 249", "LAVA locus 2415"
+lava_files <- file.path(
+  LAVA_RESULT_DIR,
+  paste0(
+    "LAVA_FullScan_AD_vs_", c("DryAMD", "WetAMD", "AnyAMD"),
+    "_", RUN_TAG, ".csv"
   )
 )
+if (!all(file.exists(lava_files))) {
+  stop("Missing corrected LAVA full-scan output(s): ",
+       paste(lava_files[!file.exists(lava_files)], collapse = ", "))
+}
+lava <- rbindlist(lapply(lava_files, fread), fill = TRUE)
+lava[, p := suppressWarnings(as.numeric(p))]
+lava_significant <- unique(
+  lava[is.finite(p) & p < 0.05 / 2495,
+       .(locus_id = as.integer(locus), chromosome = as.integer(CHR),
+         locus_start_bp = as.integer(START), locus_end_bp = as.integer(STOP))]
+)
+if (!nrow(lava_significant)) stop("No corrected LAVA locus passed 0.05/2495.")
+loci <- copy(lava_significant)
+loci[, locus := fifelse(
+  chromosome == 19L & locus_start_bp <= 45411941L & locus_end_bp >= 45411941L,
+  "APOE", paste0("LAVA_", locus_id)
+)]
+loci[, locus_source := paste0("Corrected LAVA locus ", locus_id)]
+setorder(loci, chromosome, locus_start_bp, locus_id)
+if (anyDuplicated(loci$locus)) stop("Non-unique corrected LAVA locus labels.")
 
 gene_results <- list()
 for (i in seq_len(nrow(traits))) {
@@ -117,79 +131,8 @@ fwrite(summary, summary_file, bom = TRUE, na = "NA")
 source_file <- file.path(SOURCE_DIR, "FigS2_MAGMA_source_data.tsv")
 fwrite(summary, source_file, sep = "\t", na = "NA")
 
-palette <- c(
-  "APOE" = "#C82433",
-  "IGH" = "#4C78A8",
-  "chr2" = "#59A14F",
-  "chr20" = "#F28E2B"
-)
-strict_threshold <- min(summary$bonferroni_threshold)
-plot_data <- copy(summary)
-plot_data[, sig_label := fifelse(
-  bonferroni_significant_genes_in_locus > 0,
-  paste0("n=", bonferroni_significant_genes_in_locus),
-  ""
-)]
-
-p <- ggplot(plot_data, aes(x = trait, y = max_log10P, fill = locus)) +
-  geom_col(position = position_dodge(width = 0.78), width = 0.72) +
-  geom_hline(
-    yintercept = -log10(strict_threshold),
-    color = "#A61B29", linetype = "dashed", linewidth = 0.55
-  ) +
-  geom_text(
-    aes(label = sig_label),
-    position = position_dodge(width = 0.78),
-    vjust = -0.35, size = 3.1, fontface = "bold", color = "#333333"
-  ) +
-  annotate(
-    "text", x = 4.42, y = -log10(strict_threshold) + 0.25,
-    label = "Bonferroni", color = "#A61B29", hjust = 1,
-    size = 3.2
-  ) +
-  scale_fill_manual(values = palette, drop = FALSE) +
-  scale_y_continuous(
-    expand = expansion(mult = c(0, 0.08)),
-    limits = c(0, max(plot_data$max_log10P) * 1.10)
-  ) +
-  labs(
-    x = NULL,
-    y = expression(-log[10](P[max])),
-    fill = "Locus"
-  ) +
-  theme_bw(base_family = "Arial") +
-  theme(
-    panel.grid.minor = element_blank(),
-    panel.grid.major.x = element_blank(),
-    panel.grid.major.y = element_line(color = "#E4E4E4", linewidth = 0.28),
-    panel.border = element_rect(color = "#333333", fill = NA, linewidth = 0.75),
-    axis.text = element_text(color = "#333333", size = 10),
-    axis.title.y = element_text(size = 11),
-    legend.position = "bottom",
-    legend.direction = "horizontal",
-    legend.title = element_text(face = "bold", size = 10),
-    legend.text = element_text(size = 10),
-    legend.key.height = grid::unit(0.34, "cm"),
-    legend.key.width = grid::unit(0.52, "cm"),
-    plot.margin = margin(8, 12, 4, 10)
-  )
-
-pdf_file <- file.path(FIG_DIR, "FigS2_MAGMA_Bar.pdf")
-svg_file <- file.path(FIG_DIR, "FigS2_MAGMA_Bar.svg")
-tiff_file <- file.path(FIG_DIR, "FigS2_MAGMA_Bar.tiff")
-preview_file <- file.path(PREVIEW_DIR, "FigS2_MAGMA_Bar.png")
-
-ggsave(pdf_file, p, width = 9.2, height = 5.6, device = cairo_pdf, family = "Arial")
-ggsave(svg_file, p, width = 9.2, height = 5.6, device = svglite::svglite)
-ggsave(
-  tiff_file, p, width = 9.2, height = 5.6, units = "in", dpi = 600,
-  device = ragg::agg_tiff, compression = "lzw"
-)
-ggsave(
-  preview_file, p, width = 9.2, height = 5.6, units = "in", dpi = 180,
-  device = ragg::agg_png
-)
-
-writeLines(capture.output(sessionInfo()), file.path(MAGMA_ROOT, "logs", "summary_plot_sessionInfo.txt"))
-cat("MAGMA summary, full table, source data and Fig. S2 exported.\n")
+tagged_log_dir <- file.path(MAGMA_ROOT, paste0("logs_", RUN_TAG))
+dir.create(tagged_log_dir, recursive = TRUE, showWarnings = FALSE)
+writeLines(capture.output(sessionInfo()), file.path(tagged_log_dir, "summary_sessionInfo.txt"))
+cat("MAGMA full table, locus summary, and source data exported.\n")
 print(summary)

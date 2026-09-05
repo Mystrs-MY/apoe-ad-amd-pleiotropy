@@ -1,129 +1,126 @@
-# =====================================================================
-# 脚本名称: 0.LDSC_Ultimate_Upgrade.R
-# 核心功能: 执行宏观全基因组遗传相关性分析 (AD vs AMD 亚型)
-# 架构特点:
-#   1. 完美对接 "数据工厂" 生成的底层清洁数据 (Wightman 2021 + FinnGen R12)
-#   2. 精准适配自定义的 LDscore 文件夹层级与无 MHC 权重
-#   3. 绝对保留原有输出接口，保障下游可视化代码的平滑运行
-# =====================================================================
+#!/usr/bin/env Rscript
 
-# ---------------------------------------------------------------------
-# 模块一: 环境准备与 GenomicSEM 引擎加载
-# ---------------------------------------------------------------------
-message("==================================================")
-message("🌐 模块一: 初始化 LDSC 引擎与全局参数...")
+# Global genetic correlation using GenomicSEM LDSC.
+# The corrected GWAS files contain variant-specific N_effective for AD and
+# case-control effective sample sizes for FinnGen R12 AMD. Results are written to a tagged
+# directory so legacy outputs cannot be silently reused.
 
-# 加载必要的包
-if (!require("data.table")) install.packages("data.table")
-if (!require("dplyr")) install.packages("dplyr")
-# 确保你已经安装了 GenomicSEM: devtools::install_github("GenomicSEM/GenomicSEM")
-library(GenomicSEM)
-library(data.table)
-library(dplyr)
+rm(list = ls())
 
-# ---------------------------------------------------------------------
-# 模块二: 数据 Munge (格式化为 LDSC 专用 sumstats 格式)
-# ---------------------------------------------------------------------
-message("\n==================================================")
-message("🚀 模块二: 启动多路并行 Munge 数据洗脱...")
+required <- c("GenomicSEM", "data.table", "gdata")
+missing <- required[!vapply(required, requireNamespace, logical(1), quietly = TRUE)]
+if (length(missing)) stop("Missing R package(s): ", paste(missing, collapse = ", "))
 
-# 声明输入文件路径 (直接读取我们上一轮跑出来的清洁版 .tsv.gz)
-input_files <- c(
-  "../GWAS数据/AD_Wightman_cleaned_hg19.tsv.gz",
-  "../GWAS数据/AMD_Dry_R12_cleaned_hg19.tsv.gz",
-  "../GWAS数据/AMD_Wet_R12_cleaned_hg19.tsv.gz",
-  "../GWAS数据/AMD_H7_R12_cleaned_hg19.tsv.gz"
-)
+suppressPackageStartupMessages({
+  library(GenomicSEM)
+  library(data.table)
+})
 
-# 声明输出的后缀名 (供 LDSC 引擎识别)
-trait_names <- c("AD", "Dry_AMD", "Wet_AMD", "H7_AMD")
+set.seed(20260902)
+script_arg <- commandArgs(trailingOnly = FALSE)
+script_file <- sub("^--file=", "", script_arg[grepl("^--file=", script_arg)][1])
+SCRIPT_DIR <- dirname(normalizePath(script_file, winslash = "/", mustWork = TRUE))
+PROJECT_ROOT <- normalizePath(file.path(SCRIPT_DIR, "..", ".."), winslash = "/", mustWork = TRUE)
+RESOURCE_ROOT <- Sys.getenv("A1_RESOURCE_ROOT", unset = file.path(PROJECT_ROOT, "data", "external"))
+RUN_TAG <- Sys.getenv("A1_LDSC_RUN_TAG", unset = "correctedN_20260903")
+GWAS_DIR <- file.path(RESOURCE_ROOT, "GWAS")
+OUT_DIR <- file.path(SCRIPT_DIR, paste0("results_", RUN_TAG))
+LD_DIR <- Sys.getenv("A1_LDSC_LD_DIR", unset = file.path(SCRIPT_DIR, "LDscore"))
+WEIGHT_DIR <- Sys.getenv("A1_LDSC_WEIGHT_DIR", unset = file.path(SCRIPT_DIR, "1000G_Phase3_weights_hm3_no_MHC"))
+dir.create(OUT_DIR, recursive = TRUE, showWarnings = FALSE)
 
-# 【核心机制说明】
-# 由于我们在上一轮的“数据工厂”中，已经极其严谨地计算并保留了每一个 SNP 的
-# 真实有效样本量 (N_effective 列，简写为 N)，
-# 这里的 Munge 引擎将自动读取数据表中的 N 列，无需我们再手动输入粗略的常量。
-# 这种 SNP-level 的样本量计算方式，能极大提升 LDSC 截距估算与遗传相关性的精度！
+input_files <- file.path(GWAS_DIR, c(
+  "AD_Wightman_cleaned_hg19.tsv.gz",
+  "AMD_Dry_R12_cleaned_hg19.tsv.gz",
+  "AMD_Wet_R12_cleaned_hg19.tsv.gz",
+  "AMD_H7_R12_cleaned_hg19.tsv.gz"
+))
+trait_names <- c("AD", "Dry_AMD", "Wet_AMD", "Any_AMD")
+required_files <- c(input_files, file.path(LD_DIR, "w_hm3.snplist"))
+if (any(!file.exists(required_files))) {
+  stop("Missing required file(s):\n", paste(required_files[!file.exists(required_files)], collapse = "\n"))
+}
+if (!dir.exists(WEIGHT_DIR)) stop("Missing LDSC weight directory: ", WEIGHT_DIR)
+
+old_wd <- getwd()
+on.exit(setwd(old_wd), add = TRUE)
+setwd(OUT_DIR)
+
+log_file <- file.path(OUT_DIR, "LDSC_run_console.log")
+log_connection <- file(log_file, open = "at", encoding = "UTF-8")
+sink(log_connection, split = TRUE)
+sink(log_connection, type = "message")
+on.exit({
+  try(sink(type = "message"), silent = TRUE)
+  try(sink(), silent = TRUE)
+  try(close(log_connection), silent = TRUE)
+}, add = TRUE)
 
 munge(
-  files = input_files,
-  hm3 = "LDscore/w_hm3.snplist",
+  files = normalizePath(input_files, winslash = "/"),
+  hm3 = normalizePath(file.path(LD_DIR, "w_hm3.snplist"), winslash = "/"),
   trait.names = trait_names,
   info.filter = 0.9,
   maf.filter = 0.01,
   column.names = list(
-    SNP    = "SNP",
-    A1     = "A1",
-    A2     = "A2",
-    effect = "BETA",
-    P      = "P",     # <--- 修正处：这里必须是大写的 P
-    N      = "N"      # 删去了原本数据中没有的 Z，让引擎自动完美推算
+    SNP = "SNP", A1 = "A1", A2 = "A2", effect = "BETA",
+    P = "P", N = "N"
   )
 )
 
-message("   ✅ 所有 GWAS 摘要数据已成功 Munge 为 .sumstats.gz 格式！")
+sumstats_files <- file.path(OUT_DIR, paste0(trait_names, ".sumstats.gz"))
+if (any(!file.exists(sumstats_files))) stop("GenomicSEM munge did not produce all expected files.")
 
-# ---------------------------------------------------------------------
-# 模块三: 执行核心 LD 遗传相关性推断
-# ---------------------------------------------------------------------
-message("\n==================================================")
-message("🧬 模块三: 执行全基因组遗传相关性 (rg) 推断...")
-
-# 指定 Munge 生成的标准化文件
-traits <- c("AD.sumstats.gz", "Dry_AMD.sumstats.gz", "Wet_AMD.sumstats.gz", "H7_AMD.sumstats.gz")
-
-# 配置 LD 与权重路径 (严格遵循你的目录结构)
-# ld_path 通常包含用来计算 LD 得分的参考文件
-ld_path <- "LDscore/"
-# w_path 指定回归权重，此处你聪明地使用了 no_MHC 版本，这能避免庞大复杂的 HLA 区域干扰整体回归斜率
-w_path  <- "LDscore/1000G_Phase3_weights_hm3_no_MHC/"
-
-# 启动引擎
 ldsc_results <- ldsc(
-  traits = traits,
-  sample.prev = c(NA, NA, NA, NA),   # 连续型变量或已校正 Liability 的数据置 NA 即可
-  population.prev = c(NA, NA, NA, NA),
-  ld = ld_path,
-  wld = w_path,
-  trait.names = trait_names
+  traits = normalizePath(sumstats_files, winslash = "/"),
+  sample.prev = rep(NA_real_, length(trait_names)),
+  population.prev = rep(NA_real_, length(trait_names)),
+  ld = normalizePath(LD_DIR, winslash = "/"),
+  wld = normalizePath(WEIGHT_DIR, winslash = "/"),
+  trait.names = trait_names,
+  stand = TRUE
 )
+if (is.null(ldsc_results$S_Stand) || is.null(ldsc_results$V_Stand)) {
+  stop("Standardized LDSC output is unavailable; inspect the LDSC log.")
+}
 
-message("   ✅ 核心分析完成！请仔细查看上方控制台打印出的 rg 矩阵！")
+r <- length(trait_names)
+se_stand <- matrix(NA_real_, r, r)
+se_stand[lower.tri(se_stand, diag = TRUE)] <- sqrt(diag(ldsc_results$V_Stand))
+se_stand[upper.tri(se_stand)] <- t(se_stand)[upper.tri(se_stand)]
+rownames(se_stand) <- colnames(se_stand) <- trait_names
+rg_mat <- ldsc_results$S_Stand
+rownames(rg_mat) <- colnames(rg_mat) <- trait_names
 
-# ---------------------------------------------------------------------
-# 模块四: 下游图表数据对接准备 (原样保留接口)
-# ---------------------------------------------------------------------
-message("\n==================================================")
-message("📊 模块四: 数据封装与下游可视化交接")
-
-# 🚨🚨🚨 【极其关键的操作预警】 🚨🚨🚨
-# 机器无法自动为你填入准确的统计结果。
-# 请你在运行完上述代码后，仔细阅读 R 控制台 (Console) 打印出的 Genetic Correlation (rg) 矩阵。
-# 然后【手动更新】下面 `rg` (相关系数) 和 `se` (标准误，通常在括号内) 的 6 个真实数值！
-# 更新完毕后，再运行下面的保存代码，喂给你的出图脚本。
-
-ldsc_plot_data <- data.frame(
-  p1 = c("AD", "AD", "AD", "Dry_AMD", "Dry_AMD", "Wet_AMD"),
-  p2 = c("Dry_AMD", "Wet_AMD", "H7_AMD", "Wet_AMD", "H7_AMD", "H7_AMD"),
-
-  # 你跑出的真实 rg 值
-  rg = c(-0.0878, 0.0251, 0.0003, 0.8705, 0.9502, 0.9705),
-
-  # 你跑出的真实 se (标准误) 值
-  se = c(0.1241, 0.1144, 0.1159, 0.4895, 0.5855, 0.4954)
-)
-
-# 自动计算统计学显著性与可信区间
-ldsc_plot_data <- ldsc_plot_data %>%
-  mutate(
+pairs <- t(combn(seq_along(trait_names), 2L))
+formatted <- rbindlist(lapply(seq_len(nrow(pairs)), function(i) {
+  a <- pairs[i, 1]
+  b <- pairs[i, 2]
+  rg <- rg_mat[b, a]
+  se <- se_stand[b, a]
+  data.table(
+    p1 = trait_names[a], p2 = trait_names[b], rg = rg, se = se,
     z_score = rg / se,
-    p_value = 2 * pnorm(abs(z_score), lower.tail = FALSE),
+    p_value = 2 * pnorm(abs(rg / se), lower.tail = FALSE),
     ci_lower = rg - 1.96 * se,
-    ci_upper = rg + 1.96 * se
+    ci_upper = rg + 1.96 * se,
+    analysis_run_tag = RUN_TAG
   )
+}))
 
-# 输出为标准的下游对接文件
-fwrite(ldsc_plot_data, "LDSC_Results_Formatted.csv", sep = ",")
+fwrite(formatted, file.path(OUT_DIR, "LDSC_Results_Formatted.csv"))
+saveRDS(ldsc_results, file.path(OUT_DIR, "LDSC_full_result.rds"))
+writeLines(capture.output(sessionInfo()), file.path(OUT_DIR, "sessionInfo.txt"))
+writeLines(
+  c(
+    paste0("analysis_run_tag=", RUN_TAG),
+    "sample_size_field=N (explicit copy of N_EFFECTIVE)",
+    "AD_N_definition=variant-specific_N_effective supplied by GCST013196",
+    "AMD_N_definition=4/(1/N_cases+1/N_controls) from final FinnGen R12 counts",
+    paste0("GWAS_directory=", normalizePath(GWAS_DIR, winslash = "/"))
+  ),
+  file.path(OUT_DIR, "run_metadata.txt")
+)
 
-message("\n🏆 LDSC 流程全部跑通！")
-message("   文件已保存为 LDSC_Results_Formatted.csv。")
-message("   【请务必在运行绘图脚本前，检查 CSV 文件内的 rg 和 se 是否已被你替换为真实数值！】")
+print(formatted)
+message("LDSC completed: ", file.path(OUT_DIR, "LDSC_Results_Formatted.csv"))

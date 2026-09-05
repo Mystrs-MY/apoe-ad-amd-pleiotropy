@@ -75,6 +75,5 @@ Invoke-Step 'Finalize provenance and comparisons' { & $Python "$Root\scripts\12_
 Invoke-Step 'Name-matched panel QA' { & $Python "$Root\scripts\22_validate_name_matched_panel.py" }
 Invoke-Step 'Materialize Supplementary Tables S18-S29' { & $Python "$Root\scripts\23_package_supplementary_tables.py" }
 Invoke-Step 'Integrate four verified priority studies' { & $Python "$Root\scripts\28_integrate_priority_studies_and_status.py" }
-Invoke-Step 'Prepare quantitative figure source data' { & $Rscript "$Root\scripts\17_prepare_independent_protein_figure_data.R" }
 
 Write-Host "`nA1 protein upgrade completed." -ForegroundColor Green

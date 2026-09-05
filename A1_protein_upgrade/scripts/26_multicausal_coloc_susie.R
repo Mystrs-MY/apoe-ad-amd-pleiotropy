@@ -19,6 +19,8 @@ dir.create(log_dir, recursive = TRUE, showWarnings = FALSE)
 project_root <- normalizePath(file.path(root, ".."), winslash = "/", mustWork = TRUE)
 resource_root <- Sys.getenv("A1_RESOURCE_ROOT", unset = file.path(project_root, "data", "external"))
 plink <- Sys.getenv("PLINK_BIN", unset = "plink")
+plink <- if (file.exists(plink)) plink else Sys.which(plink)
+if (!nzchar(plink)) stop("PLINK binary not found. Set PLINK_BIN or add plink to PATH.")
 bfile <- Sys.getenv("A1_LD_PREFIX", unset = file.path(resource_root, "EUR", "EUR"))
 bim <- fread(paste0(bfile, ".bim"), header = FALSE,
              col.names = c("CHR", "ref_snp", "CM", "BP", "ref_A1", "ref_A2"))
@@ -74,9 +76,14 @@ read_gwas <- function(gene, outcome, ref) {
   x <- fread(path)
   if (!nrow(x)) return(NULL)
   x <- x[is.finite(BETA) & is.finite(SE) & SE > 0]
+  required_n <- c("N_TOTAL", "CASE_FRACTION")
+  if (!all(required_n %in% names(x))) {
+    stop("GWAS regional extract lacks explicit total-N/case-fraction fields: ", path)
+  }
   x <- x[, .(BP = as.integer(BP), gwas_snp = SNP, gwas_A1 = A1,
              gwas_A2 = A2, gwas_freq = FREQ, gwas_beta = BETA,
-             gwas_se = SE, gwas_N = N)]
+             gwas_se = SE, gwas_N_total = N_TOTAL,
+             gwas_case_fraction = CASE_FRACTION)]
   x <- merge(x, ref, by = "BP", allow.cartesian = TRUE)
   x <- orient_to_reference(x, "gwas_A1", "gwas_A2", "gwas_beta", "gwas_freq", "gwas")
   x[gwas_freq_ref >= 0.01 & gwas_freq_ref <= 0.99]
@@ -184,8 +191,13 @@ for (i in seq_len(nrow(genes))) {
       next
     }
     prev <- outcomes$prevalence[outcomes$outcome == outcome]
+    observed_case_fraction <- median(odat$gwas_case_fraction, na.rm = TRUE)
+    if (!is.finite(observed_case_fraction) || observed_case_fraction <= 0 || observed_case_fraction >= 1) {
+      stop("Invalid case fraction for ", g$gene, " / ", outcome)
+    }
     d2 <- list(beta = odat$gwas_beta_ref, varbeta = odat$gwas_se^2, snp = common,
-               position = odat$BP, type = "cc", s = prev, N = median(odat$gwas_N, na.rm = TRUE),
+               position = odat$BP, type = "cc", s = observed_case_fraction,
+               N = median(odat$gwas_N_total, na.rm = TRUE),
                MAF = odat$gwas_freq_ref, LD = ld$R)
     s2 <- tryCatch(runsusie(d2, L = 3, maxit = 50, coverage = 0.95), error = identity)
     if (inherits(s1, "error") || inherits(s2, "error")) {
@@ -205,6 +217,8 @@ for (i in seq_len(nrow(genes))) {
     }
     summary <- as.data.table(coloc_result$summary)
     summary[, `:=`(gene = g$gene, outcome = outcome, n_common = length(common),
+                   gwas_N_definition = "per-variant total analysed N",
+                   gwas_case_fraction = observed_case_fraction,
                    SNP_selection = selection_method, high_complexity = g$high_complexity)]
     signal_rows[[length(signal_rows) + 1L]] <- summary
     status_rows[[length(status_rows) + 1L]] <- data.table(gene = g$gene, outcome = outcome,

@@ -17,7 +17,7 @@ dir.create(OUT_DIR, showWarnings = FALSE)
 source("./utils/mr_helpers.R")
 
 # ---- 加载格式化 GWAS ----
-gwases <- readRDS(paste0(OUT_DIR, "gwas_formatted.rds"))
+gwases <- readRDS(file.path(OUT_DIR, "gwas_formatted.rds"))
 
 # ============================================================
 # Wald Ratio: AD → 3 AMD
@@ -78,10 +78,10 @@ for (i in 1:nrow(wald_all)) {
 }
 
 # ---- 保存 ----
-fwrite(wald_all, paste0(OUT_DIR, "table1_wald_ratio.csv"))
+fwrite(wald_all, file.path(OUT_DIR, "table1_wald_ratio.csv"))
 saveRDS(list(wald_ad_dry = wald_ad_dry, wald_ad_wet = wald_ad_wet,
              wald_ad_any = wald_ad_any, wald_dry_ad = wald_dry_ad,
              wald_wet_ad = wald_wet_ad, wald_any_ad = wald_any_ad),
-        paste0(OUT_DIR, "wald_ratio_results.rds"))
+        file.path(OUT_DIR, "wald_ratio_results.rds"))
 
-cat("\n[Done] Table 1 saved to", paste0(OUT_DIR, "table1_wald_ratio.csv"), "\n")
+cat("\n[Done] Table 1 saved to", file.path(OUT_DIR, "table1_wald_ratio.csv"), "\n")

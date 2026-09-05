@@ -7,5 +7,6 @@ gene_location	Rev.NCBI37.3.gene.loc
 gene_location_source	STAR_Protocols_MAGMA_analysis_protocol
 gene_window	upstream_35kb_downstream_10kb
 gene_model	snp-wise_mean
-sample_size_mode	per_variant_N_column
+sample_size_mode	per_variant_total_analysed_sample_size
+sample_size_source_column	N_TOTAL
 duplicate_SNP_policy	error

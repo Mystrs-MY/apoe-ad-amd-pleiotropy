@@ -25,17 +25,22 @@ library(plinkbinr)
 library(ggplot2)
 library(ggsci)
 
-# ---- 路径设置 ----
-GWAS_DIR <- "../../Resource/GWAS/"
-RES_DIR  <- "../../Resource/"
-OUT_DIR  <- "./results/"
+# ---- Reproducible paths ----
+script_arg <- commandArgs(trailingOnly = FALSE)
+script_file <- sub("^--file=", "", script_arg[grepl("^--file=", script_arg)][1])
+SCRIPT_DIR <- dirname(normalizePath(script_file, winslash = "/", mustWork = TRUE))
+PROJECT_ROOT <- normalizePath(file.path(SCRIPT_DIR, ".."), winslash = "/", mustWork = TRUE)
+RESOURCE_ROOT <- Sys.getenv("A1_RESOURCE_ROOT", unset = file.path(PROJECT_ROOT, "data", "external"))
+GWAS_DIR <- file.path(RESOURCE_ROOT, "GWAS")
+RES_DIR  <- RESOURCE_ROOT
+OUT_DIR  <- file.path(SCRIPT_DIR, "results")
 dir.create(OUT_DIR, showWarnings = FALSE, recursive = TRUE)
-dir.create("./figures/", showWarnings = FALSE)
-dir.create("./tables/", showWarnings = FALSE)
+dir.create(file.path(SCRIPT_DIR, "figures"), showWarnings = FALSE)
+dir.create(file.path(SCRIPT_DIR, "tables"), showWarnings = FALSE)
 
 # PLINK
 PLINK_BIN <- plinkbinr::get_plink_exe()
-LD_REF <- "../../Resource/EUR/EUR"
+LD_REF <- file.path(RESOURCE_ROOT, "EUR", "EUR")
 
 cat("PLINK binary:", PLINK_BIN, "\n")
 cat("LD reference:", LD_REF, "\n")
@@ -43,7 +48,7 @@ cat("GWAS dir:", normalizePath(GWAS_DIR), "\n")
 cat("Output dir:", normalizePath(OUT_DIR), "\n")
 
 # ---- 加载工具函数 ----
-source("./utils/mr_helpers.R")
+source(file.path(SCRIPT_DIR, "utils", "mr_helpers.R"))
 
 # ============================================================
 # 加载 4 个 GWAS
@@ -52,22 +57,22 @@ source("./utils/mr_helpers.R")
 cat("\n==================== Loading GWAS ====================\n")
 
 ad_gwas <- load_local_gwas(
-  paste0(GWAS_DIR, "AD_Wightman_cleaned_hg19.tsv.gz"),
+  file.path(GWAS_DIR, "AD_Wightman_cleaned_hg19.tsv.gz"),
   "AD"
 )
 
 dry_gwas <- load_local_gwas(
-  paste0(GWAS_DIR, "AMD_Dry_R12_cleaned_hg19.tsv.gz"),
+  file.path(GWAS_DIR, "AMD_Dry_R12_cleaned_hg19.tsv.gz"),
   "Dry_AMD"
 )
 
 wet_gwas <- load_local_gwas(
-  paste0(GWAS_DIR, "AMD_Wet_R12_cleaned_hg19.tsv.gz"),
+  file.path(GWAS_DIR, "AMD_Wet_R12_cleaned_hg19.tsv.gz"),
   "Wet_AMD"
 )
 
 any_gwas <- load_local_gwas(
-  paste0(GWAS_DIR, "AMD_H7_R12_cleaned_hg19.tsv.gz"),
+  file.path(GWAS_DIR, "AMD_H7_R12_cleaned_hg19.tsv.gz"),
   "Any_AMD"
 )
 
@@ -102,8 +107,8 @@ cat(sprintf("  Common SNPs across all 4 GWAS: %d\n", length(common_snps)))
 cat(sprintf("  rs429358 in common: %s\n", "rs429358" %in% common_snps))
 
 # 4. 保存
-saveRDS(gwases, paste0(OUT_DIR, "gwas_formatted.rds"))
-cat("\n[Done] Saved to", paste0(OUT_DIR, "gwas_formatted.rds"), "\n")
+saveRDS(gwases, file.path(OUT_DIR, "gwas_formatted.rds"))
+cat("\n[Done] Saved to", file.path(OUT_DIR, "gwas_formatted.rds"), "\n")
 
 # ---- 环境变量（供后续脚本使用）----
 cat("\n==================== Environment Ready ====================\n")
